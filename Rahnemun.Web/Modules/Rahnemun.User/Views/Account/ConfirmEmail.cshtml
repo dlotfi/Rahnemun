@@ -1,0 +1,14 @@
+﻿@model EmailViewModel
+
+@{
+    Layout = "<EmailLayout>";
+}
+
+@section ContentBody {
+    <h2>@Model.FullName عزیز!</h2>
+
+    <p style="margin-bottom: 30px">یک حساب کاربری در وب سایت رهنمون با موفقیت برای شما ایجاد شده است. لطفاً برای تایید ایمیل خود روی لینک زیر کلیک کنید:</p>
+    <a style="text-align: center; background-color: #3989c9; color: #fff; padding: 15px 30px; border-radius: 5px; text-decoration: none; display: inline-block; margin-bottom: 30px" href="@Url.ConvertToAbsoluteUrl(Model.Url)" target="_blank" title="برای تایید ایمیل خود کلیک کنید.">تایید ایمیل</a>
+
+    <p style="margin-bottom: 30px">چنانچه شما در سایت رهنمون ثبت نام نکرده اید و این ایمیل به اشتباه برای شما ارسال شده است نیازی نیست کاری انجام دهید.</p>
+}

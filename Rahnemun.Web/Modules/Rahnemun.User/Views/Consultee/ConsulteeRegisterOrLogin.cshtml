@@ -1,0 +1,126 @@
+﻿@using Rahnemun.HomeContracts
+@using Rahnemun.UIContracts
+@using Rahnemun.UserContracts
+
+@model ConsulteeRegisterOrLoginModel
+
+@{
+    this.SetUIInfo(new UIInfo
+    {
+        NavigationId = "ConsulteeRegisterOrLogin",
+        PageTitle = "ورود به رهنمون",
+        PageSubtitle = "ورود یا تشکیل پرونده"
+    });
+    this.SetContentInfo(new ContentInfo
+    {
+        Title = "ورود یا تشکیل پرونده",
+        Description = "ورود به رهنمون یا تشکیل پرونده",
+        Url = Url.Route<IConsulteeRegisterOrLoginRoute>().Get(null)
+    });
+
+    RequireScript("jQuery-Validation-All");
+}
+
+@section ContentBody {
+
+    <div class="register megapanel container">
+        
+        <section class="@(Model.IsRegisterMode ? "panel collapsed" : "panel")">
+            <header class="header"><h3>عضو سایت هستید؟</h3></header>
+
+            <div class="contents">
+
+                <div class="two-column">
+                    <div class="container">
+                        
+                        <div class="column">
+                            @using (Html.BeginForm("Login", "Consultee", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal" }))
+                            {
+                                <fieldset>
+                                    <legend>ورود به رهنمون</legend>
+
+                                    @if (!Model.IsRegisterMode)
+                                    {
+                                        @Html.ValidationSummaryBox(true)
+                                    }
+
+                                    @Html.HiddenFor(m => m.LoginViewModel.ReturnUrl)
+                                    @Html.FullEditorFor(m => m.LoginViewModel.Email)
+                                    @Html.FullEditorFor(m => m.LoginViewModel.Password)
+                                    @Html.FullEditorFor(m => m.LoginViewModel.RememberMe)
+
+                                    <button class="button default" type="submit">ورود به رهنمون</button>
+
+                                </fieldset>
+                            }
+                        </div>
+                        
+                        <div class="column">
+
+                            <h2>خوش آمدید!</h2>
+                            <p class="tip">پس از ورود به سایت اطلاعات جلسات مشاوره شما در صفحه کاربری قابل مشاهده است.</p>
+                            <p class="tip"><a href="@(Url.Route<IConfirmEmailRequestRoute>().Get())">ایمیل تایید را دریافت نکرده ام.</a></p>
+                            <p class="tip"><a href="@(Url.Route<IPasswordResetRequestRoute>().Get())">کلمه عبورم را فراموش کرده ام.</a></p>
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+
+        <section class="@(Model.IsRegisterMode ? "panel" : "panel collapsed")">
+            <header class="header"><h3>این اولین مراجعه شما به رهنمون است؟</h3></header>
+
+            <div class="contents">
+
+                <div class="two-column">
+                    <div class="container">
+                        
+                        <div class="column">
+                            @using (Html.BeginForm("Register", "Consultee", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal" }))
+                            {
+                                <fieldset>
+                                    <legend>حساب کاربری</legend>
+
+                                    @if (Model.IsRegisterMode)
+                                    {
+                                        @Html.ValidationSummaryBox(true)
+                                    }
+
+                                    @Html.HiddenFor(m => m.RegisterViewModel.ReturnUrl)
+                                    @Html.FullEditorFor(m => m.RegisterViewModel.FirstName)
+                                    @Html.FullEditorFor(m => m.RegisterViewModel.Email)
+                                    @Html.FullEditorFor(m => m.RegisterViewModel.Password)
+                                    @Html.FullEditorFor(m => m.RegisterViewModel.ConfirmPassword)
+                                    @Html.FullEditorFor(m => m.RegisterViewModel.Captcha, new { CaptchaId = Model.RegisterViewModel.CaptchaId, CaptchaIdName = "RegisterViewModel.CaptchaId" })
+                                    @Html.FullEditorFor(m => m.RegisterViewModel.SubscribedToNewsletter)
+                                    @Html.FullEditorFor(m => m.RegisterViewModel.Disclaimer, new { Toggle = "#register-submit;icon-warning;برای عضویت تایید شرایط و قوانین رهنمون الزامی است" })
+
+                                    <button id="register-submit" class="button default" type="submit">تشکیل پرونده</button>
+
+                                </fieldset>
+                            }
+                        </div>
+                        
+                        <div class="column">
+
+                            <h2>سیاست های حفظ حریم خصوصی رهنمون</h2>
+                            <p class="tip">
+                                <a class="external" title="سیاست های حفظ حریم خصوصی رهنمون" href="@(Url.Route<IPrivacyRoute>().Get())">حریم خصوصی شما</a>
+                                برای رهنمون در اولویت اول است. اطلاعات شخصی و ایمیل شما نزد رهنمون محفوظ خواهند بود.
+                            </p>
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+
+    </div>
+}

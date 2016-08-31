@@ -1,0 +1,55 @@
+﻿@using Rahnemun.UIContracts
+
+@model ConsultantPreliminaryRegisterViewModel
+
+@{
+    this.SetUIInfo(new UIInfo
+    {
+        NavigationId = "ConsultantPreliminaryRegister",
+        PageTitle = "تشکیل پرونده"
+    });
+    this.SetContentInfo(new ContentInfo
+    {
+        Title = "تشکیل پرونده",
+        Description = "تشکیل پرونده اولیه مشاور",
+        //Url = Url.Route<IConsultantPreliminaryRegisterRoute>().Get(null)
+    });
+
+    RequireScript("jQuery-Validation-All");
+}
+
+@section ContentBody {
+
+    <div class="register two-column">
+        <div class="container">
+            <div class="column">
+                @using (Html.BeginForm("", FormMethod.Post, new {enctype = "multipart/form-data", @class = "form-horizontal"}))
+                {
+                    <fieldset>
+                        <legend>استخدام در رهنمون</legend>
+
+                        @Html.ValidationSummaryBox(true)
+
+                        @Html.FullEditorFor(m => m.FirstName)
+                        @Html.FullEditorFor(m => m.LastName)
+                        @Html.FullEditorFor(m => m.Email)
+                        @Html.FullEditorFor(m => m.Password)
+                        @Html.FullEditorFor(m => m.ConfirmPassword)
+                        @Html.FullEditorFor(m => m.Captcha, new {CaptchaId = Model.CaptchaId, CaptchaIdName = "CaptchaId"})
+                        @Html.FullEditorFor(m => m.SubscribedToNewsletter)
+                        @Html.FullEditorFor(m => m.Disclaimer)
+
+                        <button class="button default" type="submit">ثبت</button>
+                    </fieldset>
+                }
+            </div>
+
+            <div class="column">
+                <h2>به ما بپیوندید</h2>
+                <p class="tip">با پیوستن به رهنمون به کاربران زیادی در تمام نقاط دنیا دسترسی خواهید داشت.</p>
+                <p class="tip">می توانید از زمانهای خالی خود برای کسب درآمد استفاده کنید.</p>
+                <p class="tip">با ارائه خدمات مشاوره بصورت آنلاین در هزینه های خود صرفه جویی نمایید.</p>
+            </div>
+        </div>
+    </div>
+}

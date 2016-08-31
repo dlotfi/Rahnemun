@@ -1,0 +1,15 @@
+﻿@model MaritalStatus?
+           
+@{
+    var options = new List<SelectListItem>
+                      {
+                          new SelectListItem {Value = MaritalStatus.Single.ToString(), Text = "مجرد", Selected = Model == MaritalStatus.Single},
+                          new SelectListItem {Value = MaritalStatus.Married.ToString(), Text = "متاهل", Selected = Model == MaritalStatus.Married}
+                      };
+    if (!ViewData.ModelMetadata.IsRequired)
+    {
+        options.Insert(0, new SelectListItem {Value = null, Text = "", Selected = Model == null});
+    }
+}
+
+@Html.DropDownList("", options, new { @class="form-control" })

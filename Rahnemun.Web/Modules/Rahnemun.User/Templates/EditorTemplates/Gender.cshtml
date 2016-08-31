@@ -1,0 +1,15 @@
+﻿@model Gender?
+           
+@{
+    var options = new List<SelectListItem>
+                      {
+                          new SelectListItem {Value = Gender.Female.ToString(), Text = "زن", Selected = Model == Gender.Female},
+                          new SelectListItem {Value = Gender.Male.ToString(), Text = "مرد", Selected = Model == Gender.Male}
+                      };
+    if (!ViewData.ModelMetadata.IsRequired)
+    {
+        options.Insert(0, new SelectListItem {Value = null, Text = "", Selected = Model == null});
+    }
+}
+
+@Html.DropDownList("", options, new { @class="form-control" })

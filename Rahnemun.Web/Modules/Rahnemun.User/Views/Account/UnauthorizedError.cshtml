@@ -1,0 +1,40 @@
+﻿@using Rahnemun.UIContracts
+@using Rahnemun.UserContracts
+
+@model UnauthorizedErrorViewModel
+
+@{
+    if (Model.IsAuthenticated)
+    {
+        Response.StatusCode = (int)HttpStatusCode.Forbidden; //403
+    }
+    else
+    {
+        Response.StatusCode = (int)HttpStatusCode.Unauthorized; //401
+        // RFC7235 section 3.1: The server generating a 401 response MUST send a WWW-Authenticate header field.
+        // Although "Form" is not a defined scheme for http authentication but using it is not invalid.
+        Response.AddHeader("WWW-Authenticate",
+            "Form realm=\"Rahnemun\", form=\"{0}\"".FormatWith(Url.ConvertToAbsoluteUrl(Url.Route<ILogInRoute>().Get(null))));
+    }
+
+    this.SetUIInfo(new UIInfo
+    {
+        NavigationId = "UnauthorizedError",
+        PageTitle = "دسترسی غیر مجاز",
+        NoBanner = true
+    });
+    this.SetContentInfo(new ContentInfo
+    {
+        Title = "دسترسی غیر مجاز"
+    }, false);
+}
+
+@section ContentBody {
+
+
+    <div class="runtimeerror container status-error status-visible">
+        <h4>دسترسی غیر مجاز!</h4>
+        <p>@Model.ErrorMessage</p>
+        <p>اگر فکر می کنید اشتباهی صورت گرفته است از طریق فرم بازخورد و یا آدرس <a href="mailto:@Model.SupportEmail">@Model.SupportEmail</a> با پشتیبانی سایت تماس حاصل فرمایید.</p>
+    </div>
+}

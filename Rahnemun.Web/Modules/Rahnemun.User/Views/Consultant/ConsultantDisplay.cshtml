@@ -1,0 +1,88 @@
+﻿@using Rahnemun.MediaContracts
+@using Rahnemun.UIContracts
+@using Rahnemun.UserContracts
+
+@model ConsultantDisplayViewModel
+
+@{
+    this.SetUIInfo(new UIInfo
+    {
+        NavigationId = "ConsultantDisplay",
+        NavigationData = new { ConsultantId = Model.Id, CategoryId = Model.CategoryId },
+        PageTitle = Model.FullName,
+        PageSubtitle = Model.Title
+    });
+
+    string defaultProfilePicturePath;
+    switch (Model.Gender)
+    {
+        case Gender.Male: defaultProfilePicturePath = Content("~/Images/avatar-m.jpg"); break;
+        case Gender.Female: defaultProfilePicturePath = Content("~/Images/avatar-f.jpg"); break;
+        default: defaultProfilePicturePath = Content("~/Images/avatar-u.jpg"); break;
+    }
+    this.SetContentInfo(new ProfileContentInfo
+    {
+        Title = Model.FullName,
+        Description = "صفحه پروفایل " + Model.FullName + (Model.CategoryId == null ? "" : " در گروه مشاوره " + Model.CategoryCaption),
+        Url = Url.Route<IConsultantDisplayRoute>().Get(new ConsultantIdModel { ConsultantId = Model.Id, CategoryId = Model.CategoryId }),
+        ImageUrl = Url.Route<IImageRoute>().Get(new ImageRouteModel { Id = Model.ProfilePictureId, Size = ImageSize.Content, MaxFit = true, DefaultImagePath = defaultProfilePicturePath }),
+        FirstName = Model.FirstName,
+        LastName = Model.LastName,
+        Gender = Model.Gender
+    });
+}
+
+@section ContentBody {
+        
+    <div class="profile">
+
+        <section class="container">
+            @Html.ProfilePicture(Model.ProfilePictureId, Model.Gender, Model.FullName, ImageSize.Content, true)
+        </section>
+
+    </div>
+
+    <div class="details">
+        <div class="container">
+
+            <h2>اطلاعات فردی</h2>
+            <ul>
+                @if (Model.MaritalStatus != null)
+                {
+                    <li>@Html.FullDisplayFor(m => m.MaritalStatus)</li>
+                }
+                @if (Model.Age != null)
+                {
+                    <li>@Html.FullDisplayFor(m => m.Age)</li>
+                }
+                <li>@Html.FullDisplayFor(m => m.EducationLevel)</li>
+                @if (Model.More != null)
+                {
+                    <li>@Html.FullDisplayFor(m => m.More)</li>
+                }
+            </ul>
+
+            <h2>اطلاعات تخصصی</h2>
+            <ul>
+                <li>@Html.FullDisplayFor(m => m.Education)</li>
+                <li>@Html.FullDisplayFor(m => m.ProfessionalExperience)</li>
+                @if (Model.ProfessionalCertificates != null)
+                {
+                    <li>@Html.FullDisplayFor(m => m.ProfessionalCertificates)</li>
+                }
+                @if (Model.WorkAddress != null)
+                {
+                    <li>@Html.FullDisplayFor(m => m.WorkAddress)</li>
+                }
+                @if (Model.WorkPhoneNo != null)
+                {
+                    <li>@Html.FullDisplayFor(m => m.WorkPhoneNo)</li>
+                }
+            </ul>
+
+        </div>
+    </div><!-- // details -->
+
+    @(Html.WebPart<IUserCalltoActionWebPart>().Get(new ConsultantIdModel { ConsultantId = Model.Id, CategoryId = Model.CategoryId }))
+
+}

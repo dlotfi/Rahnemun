@@ -1,0 +1,87 @@
+﻿@using Rahnemun.HomeContracts
+@using Rahnemun.UIContracts
+
+@model ConsultantEditViewModel
+
+@{
+    this.SetUIInfo(new UIInfo
+    {
+        NavigationId = "ConsultantFinalRegister",
+        PageTitle = "استخدام مشاور",
+        PageSubtitle = "تشکیل پرونده"
+    });
+    this.SetContentInfo(new ContentInfo
+    {
+        Title = "تکمیل پرونده"
+    }, false);
+    var fullName = Model.FirstName + " " + Model.LastName;
+
+    RequireScript("jQuery-Validation-All");
+}
+
+@section ContentBody {
+
+    <div class="register two-column">
+        <div class="container">
+            @Html.MessageBoxWarning(fullName + " عزیز! پیش از ارائه خدمات مشاوره لازم است پرونده خود را کامل نمایید.", null)
+
+            @using (Html.BeginForm("", FormMethod.Post, new {enctype = "multipart/form-data", @class = "form-horizontal"}))
+            {
+                <div class="column">
+                    <fieldset>
+                        <legend>اطلاعات شخصی</legend>
+
+                        @Html.HiddenFor(m => m.Id)
+                        @Html.HiddenFor(m => m.Timestamp)
+                        @Html.HiddenFor(m => m.FirstName)
+                        @Html.HiddenFor(m => m.LastName)
+                        @Html.HiddenFor(m => m.SubscribedToNewsletter)
+
+                        @Html.FullEditorFor(m => m.BirthDate)
+                        @Html.FullEditorFor(m => m.Gender)
+                        @Html.FullEditorFor(m => m.EducationLevel, new { HigherEducationLevel = true })
+                        @Html.FullEditorFor(m => m.CellphoneNo)
+                        @Html.FullEditorFor(m => m.MaritalStatus)
+                        @Html.FullEditorFor(m => m.BankCardNo)
+                        @Html.FullEditorFor(m => m.BankAccountNo)
+                        @Html.FullEditorFor(m => m.BankName)
+                        @Html.FullEditorFor(m => m.More)
+                        @Html.FullEditorFor(m => m.ProfilePicture, null, "ProfilePicture", new
+                           {
+                               //CurrentPreviewImageUrl = null,
+                               //CurrentPreviewLinkUrl = null,
+                               //CurrentPreviewImageAlternative =  null,
+                               IsRequired = false,
+                               CurrentHiddenInputName = @Model.ProfilePictureId,
+                               CurrentHiddenInputValue = "value: null, visible: false",
+                           })
+
+                    </fieldset>
+
+                    <h3>سیاست های حفظ حریم خصوصی رهنمون</h3>
+                    <p class="tip">
+                        <a class="external" title="سیاست های حفظ حریم خصوصی رهنمون" href="@(Url.Route<IPrivacyRoute>().Get())">حریم خصوصی شما</a> برای رهنمون در اولویت اول است. اطلاعات شخصی و ایمیل شما نزد رهنمون محفوظ خواهند بود.
+                    </p>
+                </div>
+
+                <div class="column">
+                    <fieldset>
+                        <legend>اطلاعات تخصصی</legend>
+
+                        @Html.FullEditorFor(m => m.Title)
+                        @Html.FullEditorFor(m => m.ProfessionalExperience)
+                        @Html.FullEditorFor(m => m.Education)
+                        @Html.FullEditorFor(m => m.LicenseNumber)
+                        @Html.FullEditorFor(m => m.CategoriesIds, new { CategoriesIds = Model.CategoryListItems })
+                        @Html.FullEditorFor(m => m.ProfessionalCertificates)
+                        @Html.FullEditorFor(m => m.Capacity)
+                        @Html.FullEditorFor(m => m.WorkAddress)
+                        @Html.FullEditorFor(m => m.WorkPhoneNo)
+
+                        <button class="button default" type="submit">تشکیل پرونده</button>
+                    </fieldset>
+                </div>
+            }
+        </div>
+    </div>
+}

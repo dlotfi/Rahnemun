@@ -1,0 +1,36 @@
+﻿@using Rahnemun.UserContracts
+
+@{
+    Template = "MainTemplate";
+    var editor = new LoginViewModel();
+    ViewBag.CompactFullEditor = true;
+    RequireScript("jQuery");
+    RequireScript("jQuery-Form");
+    RequireScript("jQuery-Validation-All");
+    RequireScript("Knockout");
+    RequireScript("Rahnemun");
+    IncludeScript("Scripts/login.js");
+}
+
+
+<div id="login-dialog" data-login-url="@(Url.Route<ILogInRoute>().Get(null))">
+
+    @Html.MessageBox("<!--ko text: error--><!--/ko-->", null, "خطا", MessageBoxType.Error, MessageBoxMode.Inline, false, new { data_bind = "visible: error" })
+
+    @using (Html.BeginForm("", FormMethod.Post, new { data_bind = "submit: login", @class = "nolabel" }))
+    {
+        <fieldset>
+            @*<legend>ورود به سایت</legend>*@
+
+            @Html.FullEditorFor(m => editor.Email, null, "Email", null)
+            @Html.FullEditorFor(m => editor.Password, null, "Password", null)
+            @Html.FullEditorFor(m => editor.RememberMe, null, "RememberMe", null)
+
+            <p class="tip"><a href="@(Url.Route<IConfirmEmailRequestRoute>().Get())">ایمیل تایید را دریافت نکرده ام.</a></p>
+            <p class="tip"><a href="@(Url.Route<IPasswordResetRequestRoute>().Get())">کلمه عبورم را فراموش کرده ام.</a></p>
+
+            <button class="button default" type="submit">ورود</button>
+        </fieldset>
+    }
+
+</div>

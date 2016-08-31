@@ -1,0 +1,13 @@
+﻿@using Rahnemun.CategoryContracts
+
+@model CategoryModel
+
+<div class="calltoaction one-column">
+    <div class="container">
+
+        <div class="column">
+            <a class="button default block" title="بازگشت به لیست مشاوران گروه @(Model.Caption)" href=@(Url.Route<ICategoryDetailsRoute>().Get(Model.Id))>بازگشت به لیست مشاوران گروه @(Model.Caption)</a>
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,50 @@
+﻿@using Rahnemun.UIContracts
+@using Rahnemun.UserContracts
+
+@model UserBarWebPartViewModel
+
+@{
+    var dashboardUrl = Url.Route<IDashboardRoute>().Get();
+    WorkContext.EmbededDialogs().Add("login-dialog");
+}
+
+@if (Model.ResponsiveAlternative)
+{
+    if (!Model.UserLoggedIn)
+    {
+        <li class="signin"><a title="ورود به سایت" href="@(Url.Route<ILogInRoute>().Get(Request.RawUrl))"><span>ورود به سایت</span></a></li>
+        <li class="signup"><a title="استخدام به عنوان مشاور" href="@(Url.Route<IConsultantJoinUsRoute>().Get())"><span>استخدام به عنوان مشاور</span></a></li>
+    }
+    else
+    {
+        <li class="signout"><a title="خروج" href="@(Url.Route<ILogOutRoute>().Get(Request.RawUrl))"><span>خروج</span></a></li>
+        <li class="dashboard"><a title="صفحه کاربری" href="@dashboardUrl"><span>صفحه کاربری</span>
+            @if (Model.Notification.Count > 0)
+            {
+                <em title="@Model.Notification.Title">@Model.Notification.Count</em>
+            }
+        </a></li>
+    }
+}
+else
+{
+    <div class="container">
+        <ul class="links">
+            @if (!Model.UserLoggedIn)
+            {
+                <li class="links-login  links-active open-dialog" data-dialog="login-dialog;ورود به سایت"><a title="ورود به سایت" href="@(Url.Route<ILogInRoute>().Get(Request.RawUrl))">ورود به سایت</a></li>
+                <li class="links-register"><a title="استخدام به عنوان مشاور" href="@(Url.Route<IConsultantJoinUsRoute>().Get())">استخدام به عنوان مشاور</a></li>
+            }
+            else
+            {
+                <li class="links-logout links-active"><a title="خروج" href="@(Url.Route<ILogOutRoute>().Get(Request.RawUrl))">خروج</a></li>
+                <li class="links-dashboard"><a title="صفحه کاربری" href="@dashboardUrl">@Model.Name
+                    @if (Model.Notification.Count > 0)
+                    {
+                        <em title="@Model.Notification.Title">@Model.Notification.Count</em>
+                    }
+                </a></li>
+            }
+        </ul>
+    </div>
+}

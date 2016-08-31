@@ -1,0 +1,58 @@
+﻿@using Rahnemun.UIContracts
+@using Rahnemun.UserContracts
+
+@model SendEmailViewModel
+
+@{
+    var title = Model.Purpose == SendEmailPurpose.ConfirmEmail ? "ارسال لینک تایید" : "ارسال لینک تغییر کلمه عبور";
+    this.SetUIInfo(new UIInfo
+    {
+        NavigationId = Model.Purpose == SendEmailPurpose.ConfirmEmail ? "ConfirmEmailRequest" : "PasswordResetRequest",
+        PageTitle = title
+    });
+
+    this.SetContentInfo(new ContentInfo
+    {
+        Title = title,
+        Description = title,
+        Url = Model.Purpose == SendEmailPurpose.ConfirmEmail
+            ? Url.Route<IConfirmEmailRequestRoute>().Get()
+            : Url.Route<IPasswordResetRequestRoute>().Get()
+    });
+
+    var help = Model.Purpose == SendEmailPurpose.ConfirmEmail
+           ? "درصورتیکه ایمیل تایید را دریافت نکرده‌اید آدرس ایمیلی که با آن ثبت نام کرده‌اید را وارد کرده و دکمه ارسال را کلیک نمایید. پس از چند ثانیه ایمیل تایید مجددا برای شما ارسال می‌گردد. درصورتیکه این ایمیل را در پوشه Inbox خود مشاهده نکردید پوشه Spam را بررسی نمایید."
+           : "درصورتیکه کلمه عبور خود را فراموش کرده‌اید آدرس ایمیلی که با آن ثبت نام کرده‌اید را وارد کرده و دکمه ارسال را کلیک نمایید. پس از چند ثانیه ایمیلی حاوی لینکی برای تغییر کلمه عبور حساب کاربریتان برای شما ارسال می‌گردد. درصورتیکه این ایمیل را در پوشه Inbox خود مشاهده نکردید پوشه Spam را بررسی نمایید.";
+
+    RequireScript("jQuery-Validation-All");
+}
+
+@section ContentBody {
+    <div class="register two-column">
+        <div class="container">
+
+            <div class="column">
+                @using (Html.BeginForm("", FormMethod.Post, new {enctype = "multipart/form-data", @class = "form-horizontal"}))
+                {
+                    <fieldset>
+                        <legend>@title</legend>
+
+                        @Html.ValidationSummaryBox(true)
+
+                        @Html.FullEditorFor(m => m.Email)
+                        @Html.FullEditorFor(m => m.Captcha, new {CaptchaId = Model.CaptchaId, CaptchaIdName = "CaptchaId"})
+
+                        <button class="button default" type="submit">ارسال</button>
+
+                    </fieldset>
+                }
+            </div>
+
+            <div class="column">
+                <h2>راهنما</h2>
+                <p class="tip">@help</p>
+            </div>
+
+        </div>
+    </div>
+}

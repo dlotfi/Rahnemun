@@ -1,0 +1,43 @@
+﻿@using Rahnemun.UIContracts
+
+@model VerifyConfirmEmailViewModel
+
+@{
+    this.SetUIInfo(new UIInfo
+    {
+        NavigationId = "VerifyConfirmEmail",
+        PageTitle = "تایید ایمیل"
+    });
+    this.SetContentInfo(new ContentInfo
+    {
+        Title = "تایید ایمیل"
+    }, false);
+
+    RequireScript("jQuery-Validation-All");
+}
+
+@section ContentBody {
+    <div class="register two-column">
+        <div class="container">
+            <div class="column">
+                @using (Html.BeginForm("", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal" }))
+                {
+                    <fieldset>
+                        <legend>تایید ایمیل</legend>
+
+                        @Html.HiddenFor(m => m.FullName)
+                        @Html.HiddenFor(m => m.Nonce)
+                        @Html.FullEditorFor(m => m.Password)
+
+                        <button class="button default" type="submit">تایید</button>
+                    </fieldset>
+                }
+            </div>
+
+            <div class="column">
+                <h2>تقریبا کار به اتمام رسیده است!</h2>
+                <p class="tip">@Model.FullName عزیز! برای محفاظت از اطلاعات شما لازم است پیش از تایید ایمیل تان کلمه عبور خود را وارد نمایید.</p>
+            </div>
+        </div>
+    </div>
+}

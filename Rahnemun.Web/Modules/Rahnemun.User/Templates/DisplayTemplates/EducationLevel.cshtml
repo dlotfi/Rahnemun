@@ -1,0 +1,17 @@
+﻿@model EducationLevel
+
+@{
+    var caption = String.Empty;
+    switch (Model)
+    {
+        case EducationLevel.PrimarySchool: caption = "ابتدایی"; break;
+        case EducationLevel.MiddleSchool : caption = "سیکل"; break;
+        case EducationLevel.HighSchool   : caption = "دیپلم"; break;
+        case EducationLevel.Associate    : caption = "فوق دیپلم"; break;
+        case EducationLevel.Bachelor     : caption = "کارشناسی"; break;
+        case EducationLevel.Master       : caption = "کارشناسی ارشد"; break;
+        case EducationLevel.Doctorate    : caption = "دکتری"; break;
+    }
+}
+
+@caption

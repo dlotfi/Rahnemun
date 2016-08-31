@@ -1,0 +1,196 @@
+﻿@using Rahnemun.ContactUsContracts
+@using Rahnemun.HomeContracts
+@using Rahnemun.UIContracts
+@using Rahnemun.UserContracts
+
+@model JoinUsViewModel
+
+@{
+    this.SetUIInfo(new UIInfo
+    {
+        NavigationId = "JoinUs",
+        PageTitle = "به رهنمون بپیوندید",
+        PageSubtitle = "استخدام در رهنمون"
+    });
+    this.SetContentInfo(new ContentInfo
+    {
+        Title = "به رهنمون بپیوندید",
+        Description = "با پیوستن به موسسه مشاوره آنلاین رهنمون می توانید خدمات خود را از طریق جلسات راهنمایی و مشاوره آنلاین به متقاضیان ارائه نمایید.",
+        Url = Url.Route<IConsultantJoinUsRoute>().Get(),
+        ImageUrl = Content("~/Images/join-intro.jpg")
+    });
+
+    RequireScript("jQuery-Validation-All");
+}
+
+@section ContentBody {
+
+    <nav id="navigation-onepage">
+        <h5>منوی پیمایش صفحه</h5>
+        <ul class="container">
+            <li><a class="tooltip" title="چرا رهنمون؟" href="#joinus-intro">چرا رهنمون؟</a></li>
+            <li><a class="tooltip" title="پرسش های متداول" href="#joinus-faq">پرسشهای متداول</a></li>
+            <li><a class="tooltip" title="استخدام در رهنمون" href="#joinus-form">فرم تشکیل پرونده</a></li>
+            <li><a class="tooltip" title="نیاز به اطلاعات بیشتری دارید؟" href="#joinus-contact">اطلاعات بیشتر</a></li>
+        </ul>
+    </nav>
+
+    @if (!ViewData.ModelState.IsValid)
+    {
+        @Html.MessageBoxError("خطایی در فرم تشکیل پرونده وجود دارد. لطفا پس از بررسی فرم مجددا آن را ارسال نمایید.")
+    }
+
+    <div class="joinus-intro two-column two-one animate">
+        <div class="container">
+            <section><h2>به تیم متخصصان رهنمون بپیوندید</h2></section>
+            <section>
+                <p>موسسه مشاوره آنلاین رهنمون قصد دارد با جذب تعداد محدودی از مشاوران متخصص، فعال و پرتوان، وب سایت خود را راه اندازی نماید. رهنمون بستری فراهم آورده است تا متخصصانی که مایل به ارائه خدمات مشاوره هستند بتوانند خدمات خود را از طریق جلسات راهنمایی و مشاوره آنلاین به کاربران ارائه نمایند.</p>
+            </section>
+        </div>
+    </div>
+    <div class="joinus-benefits content-image alternative clearfix animate">
+        <section class="container">
+            <div class="image">
+                <img src="@Content("~/Images/Join/consultant01.jpg")" alt="در کسب و کار آنلاین پیشتاز باشید">
+            </div>
+            <div class="content">
+                <ul>
+                    <h2>در کسب و کار آنلاین پیشتاز باشید</h2>
+                    <li>کسب و کار مشاوره آنلاین خود را بدون صرف هزینه راه اندازی نمایید</li>
+                    <li>خود را به طیف وسیعی از مشتریان معرفی کنید</li>
+                    <li>از زمان های آزاد خود برای کسب درآمد استفاده نمایید</li>
+                    <li>در هرکجا و به آسانی مشاوره دهید</li>
+                </ul>
+            </div>
+        </section>
+    </div>
+    <div class="joinus-benefits content-image clearfix animate">
+        <section class="container">
+            <div class="image">
+                <img src="@Content("~/Images/Join/consultant02.jpg")" alt="از همکاران خود پیشی بگیرید">
+            </div>
+            <div class="content">
+                <ul>
+                    <h2>از همکاران خود پیشی بگیرید</h2>
+                    <li>جزو اولین مشاوران ما باشید</li>
+                    <li>از امتیازات ویژه مشاوران اولیه بهره مند شوید</li>
+                    <li>در راه اندازی شکل جدیدی از مشاوره آنلاین سهیم باشید</li>
+                </ul>
+            </div>
+        </section>
+    </div>
+
+    <div class="joinus-faq two-column two-one animate">
+        <div class="container">
+
+            <section><h2>پرسش های متداول</h2></section>
+
+            <section>
+
+                <div class="megapanel">
+
+                    <section class="panel collapsed">
+                        <header class="header"><h4>چگونه می توانم در رهنمون کسب درآمد ‌کنم؟</h4></header>
+                        <div class="contents">
+                            <p>هر مراجعه کننده می تواند با انتخاب مشاور مورد نظر خود و پرداخت هزینه مشاوره، یک جلسه مشاوره را با ایشان آغاز نماید. در طول این جلسه، مشاور و مراجعه کننده به منظور راهنمایی و حل چالشهای مراجعه کننده به گفتگوی متنی می پردازند. در پایان هر ماه مشاوران هزینه جلسات برگزار شده خود را دریافت خواهند نمود.</p>
+                        </div>
+                    </section>
+
+                    <section class="panel collapsed">
+                        <header class="header"><h4>حق الزحمه مشاوره چقدر است؟</h4></header>
+                        <div class="contents">
+                            <p>حق الزحمه مشاوره با توجه به گروه مشاوره، تحصیلات و سابقه مشاور متفاوت است. با توجه به اینکه در حال حاضر مشاوران محترم در گروه «روابط و سلامت روان» و «تحصیل و شغل» برای یک جلسه 45 دقیقه ای مشاوره متنی آنلاین (با استفاده از اپلیکیشن هایی مانند واتزاپ، تلگرام، وایبر و ...) حق الزحمه ای بین 13،000 الی 15،000 تومان دریافت می کنند به نظر می رسد که برای یک جلسه مشاوره متنی آفلاین حق الزحمه ای بین 10،000 الی 14،000 تومان مناسب خواهد بود. یادآوری می گردد که در مشاوره متنی آفلاین نیازی به آنلاین بودن دائمی مشاور و پاسخگویی آنی وجود ندارد. همچنین در حال حاضر هیچ کمیسیونی دریافت نمی گردد و کل مبلغ دریافت شده از مراجعه کنندگان به حساب مشاوران واریز می گردد.</p>
+                        </div>
+                    </section>
+
+                    <section class="panel collapsed">
+                        <header class="header"><h4>چگونه هزینه های جلسات مشاوره به من پرداخت می شود؟</h4></header>
+                        <div class="contents">
+                            <p>مشاوران در پایان هر ماه هزینه جلسات برگزار شده (خاتمه یافته) خود را دریافت خواهند نمود. این مبلغ به حساب کارت بانکی مشاور واریز خواهد شد.  توجه داشته باشید که از مشاوران اولیه رهنمون هیچگونه کمیسیونی دریافت نخواهد شد و کل مبلغ پرداخت شده توسط مراجعه کننده به حساب ایشان واریز می گردد.</p>
+                        </div>
+                    </section>
+
+                    <section class="panel collapsed">
+                        <header class="header"><h4>چگونه مشاوره دهم؟</h4></header>
+                        <div class="contents">
+                            <p>در این مرحله از فعالیت رهنمون، جلسات مشاوره بصورت متنی و آفلاین برگزار می گردد.</p>
+                            <p>هر زمان که یک مراجعه کننده جلسه مشاوره ای با شما تشکیل داده یا پیام جدیدی در جلسه در حال برگزاری ارسال نماید ما شما را از طریق ایمیل و بخش اعلان سایت آگاه می نماییم. برای مشاهده اعلان ها و پیامهای مراجعه کنندگان لازم است تا وارد سایت شده باشید. سپس کافیست به صفحه کاربری خود رفته و در قسمت جلسات خاتمه نیافته بر روی جلسه دارای اعلان کلیک نمایید. صفحه جلسه مربوطه برای شما نمایش داده خواهد شد که در این صفحه می توانید ضمن مشاهده پیام جدید مراجعه کننده به ایشان پاسخ داده و او را راهنمایی فرمایید. بهتر است در ساعات اولیه به مراجعه کننده پاسخ داده شود اما شما تا 24 ساعت فرصت دارید تا به ایشان پاسخ دهید. در غیر اینصورت جلسه لغو شده و مبلغ پرداختی به مراجعه کننده عودت داده خواهد شد.</p>
+                            <p>چنانچه به رایانه دسترسی ندارید یا کار با رایانه برای شما آسان نیست، می توانید با استفاده از گوشی هوشمند یا تبلت خود نیز به راحتی از امکانات سایت رهنمون استفاده نمایید.</p>
+                        </div>
+                    </section>
+
+                </div>
+
+            </section>
+
+        </div>
+    </div>
+
+    <div class="joinus-form two-column two-one animate">
+        <div class="container">
+
+            <section><h2>فرم تشکیل پرونده</h2></section>
+
+            <section>
+                @using (Html.BeginForm("", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    <fieldset>
+                        <legend>اطلاعات شخصی</legend>
+                        @Html.FullEditorFor(m => m.FirstName)
+                        @Html.FullEditorFor(m => m.LastName)
+                        @Html.FullEditorFor(m => m.Email)
+                        @Html.FullEditorFor(m => m.Password)
+                        @Html.FullEditorFor(m => m.ConfirmPassword)
+                        @Html.FullEditorFor(m => m.Gender)
+                        @Html.FullEditorFor(m => m.EducationLevel, new { HigherEducationLevel = true })
+                        @Html.FullEditorFor(m => m.CellphoneNo)
+                        @Html.FullEditorFor(m => m.BankCardNo)
+                        @Html.FullEditorFor(m => m.ProfilePicture, null, "ProfilePicture", new
+                        {
+                            //CurrentPreviewImageUrl = null,
+                            //CurrentPreviewLinkUrl = null,
+                            //CurrentPreviewImageAlternative =  null,
+                            IsRequired = false,
+                            CurrentHiddenInputName = @Model.ProfilePictureId,
+                            CurrentHiddenInputValue = "value: null, visible: false"
+                        })
+
+                        <legend>اطلاعات تخصصی</legend>
+                        @Html.FullEditorFor(m => m.Title)
+                        @Html.FullEditorFor(m => m.ProfessionalExperience)
+                        @Html.FullEditorFor(m => m.Education)
+                        @Html.FullEditorFor(m => m.CategoriesIds, new { CategoriesIds = Model.CategoryListItems })
+                        @Html.FullEditorFor(m => m.ProfessionalCertificates)
+
+                        @Html.FullEditorFor(m => m.SubscribedToNewsletter)
+                        @Html.FullEditorFor(m => m.Disclaimer, new { Toggle = "#join-submit;icon-warning;برای تشکیل پرونده تایید شرایط و قوانین رهنمون الزامی است" })
+
+                        <button id="join-submit" class="button default" type="submit">تشکیل پرونده</button>
+                    </fieldset>
+                }
+
+                <h3>سیاست های حفظ حریم خصوصی رهنمون</h3>
+                <p class="tip">
+                    <a class="external" title="سیاست های حفظ حریم خصوصی رهنمون" href="@(Url.Route<IPrivacyRoute>().Get())">حریم خصوصی شما</a> برای رهنمون در اولویت اول است. اطلاعات شخصی و ایمیل شما نزد رهنمون محفوظ خواهند بود.
+                </p>
+            </section>
+
+
+
+        </div>
+    </div>
+
+    <div class="joinus-contact two-column two-one animate">
+        <div class="container">
+
+            <section><h2>نیاز به اطلاعات بیشتری دارید؟</h2></section>
+
+            <section>
+                <p>در صورت وجود هرگونه سوال می توانید با ما از طریق صفحه تماس با ما و یا شماره تلفن <code><a href="tel:@Model.ContactTelNo" title="تلفن تماس: @Model.ContactTelTitle"><strong>@Model.ContactTelTitle</strong></a></code> ارتباط برقرار نمایید.</p>
+                <a class="button external" title="رهنمون چه خدماتی ارایه می دهد؟" href="@(Url.Route<IHowItWorksRoute>().Get())">درباره رهنمون بیشتر بدانید</a>
+                <a class="button default external" title="تماس با رهنمون" href="@(Url.Route<IContactUsRoute>().Get())">تماس با ما</a>
+            </section>
+
+        </div>
+    </div>
+}

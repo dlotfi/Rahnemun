@@ -1,0 +1,50 @@
+﻿@using Rahnemun.UIContracts
+
+@model DashboardViewModel
+
+@{
+    this.SetUIInfo(new UIInfo
+    {
+        NavigationId = "Dashboard",
+        PageTitle = "صفحه کاربری",
+        PageSubtitle = Model.CurrentUsername + "، خوش آمدید!"
+    });
+    this.SetContentInfo(new ContentInfo
+    {
+        Title = "صفحه کاربری"
+    }, false);
+}
+
+
+@section ContentBody {
+    
+    <div class="tab" id="tab1">
+
+        <ul class="container">
+            
+            @if (Model.DashboardItems.Any())
+            {
+                foreach (var dashboardItem in Model.DashboardItems)
+                {
+                    <li><a title="@dashboardItem.Title" href="#">@dashboardItem.Title</a></li>
+                }
+            }
+
+        </ul>
+
+        <ul>
+            
+            @if (Model.DashboardItems.Any())
+            {
+                    
+                foreach (var dashboardItem in Model.DashboardItems)
+                {
+                    <li>@dashboardItem.Html(Html)</li>
+                }
+
+            }
+
+        </ul>
+
+    </div><!-- // tab -->
+}

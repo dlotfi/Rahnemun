@@ -1,0 +1,25 @@
+﻿@model EducationLevel?
+
+@{
+    var options = new List<SelectListItem>
+                  {
+                      new SelectListItem {Value = EducationLevel.PrimarySchool.ToString(), Text = "ابتدایی", Selected = Model == EducationLevel.PrimarySchool},
+                      new SelectListItem {Value = EducationLevel.MiddleSchool.ToString(), Text = "سیکل", Selected = Model == EducationLevel.MiddleSchool},
+                      new SelectListItem {Value = EducationLevel.HighSchool.ToString(), Text = "دیپلم", Selected = Model == EducationLevel.HighSchool},
+                      new SelectListItem {Value = EducationLevel.Associate.ToString(), Text = "فوق دیپلم", Selected = Model == EducationLevel.Associate},
+                      new SelectListItem {Value = EducationLevel.Bachelor.ToString(), Text = "کارشناسی", Selected = Model == EducationLevel.Bachelor},
+                      new SelectListItem {Value = EducationLevel.Master.ToString(), Text = "کارشناسی ارشد", Selected = Model == EducationLevel.Master},
+                      new SelectListItem {Value = EducationLevel.Doctorate.ToString(), Text = "دکتری", Selected = Model == EducationLevel.Doctorate}
+                  };
+    if (ViewBag.HigherEducationLevel != null || (bool)ViewBag.HigherEducationLevel)
+    {
+        options.RemoveRange(0, 4);
+    }
+
+    if (!ViewData.ModelMetadata.IsRequired)
+    {
+        options.Insert(0, new SelectListItem { Value = null, Text = "", Selected = Model == null });
+    }
+}
+
+@Html.DropDownList("", options, new { @class = "form-control" })

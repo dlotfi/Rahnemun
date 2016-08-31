@@ -1,0 +1,72 @@
+﻿@using Rahnemun.CategoryContracts
+@using Rahnemun.EmailContracts
+@using Rahnemun.MediaContracts
+@using Rahnemun.UIContracts
+@using Rahnemun.UserContracts
+
+@model ConsultantIndexViewModel
+
+@{
+    var pageSubTitle = "گروه " + Model.CategoryGroupCaption + " - " + Model.CategoryCaption;
+    this.SetUIInfo(new UIInfo
+    {
+        NavigationId = "CategoryDetails",
+        NavigationData = new { Model.CategoryId },
+        PageTitle = "انتخاب مشاور",
+        PageSubtitle = "مشاوران " + pageSubTitle
+    });
+    this.SetContentInfo(new ContentInfo
+    {
+        Title = pageSubTitle,
+        Description = "لیست مشاوران " + pageSubTitle,
+        Url = Url.Route<ICategoryDetailsRoute>().Get(Model.CategoryId)
+    });
+}
+
+@section ContentBody {
+
+    <div class="consultant list two">
+
+        <section class="container">
+
+            <h2>@pageSubTitle</h2>
+
+            @if (Model.ConsultantsSummary.Any())
+            {
+                foreach (var consultant in Model.ConsultantsSummary)
+                {
+                    <article>
+
+                        <a title="مشاهده پروفایل @consultant.FullName" href="@consultant.ConsultantProfileUrl">@Html.ProfilePicture(consultant.ProfilePictureId, consultant.Gender, "تصویر مشاور", ImageSize.Comment)</a>
+
+                        <div class="contents">
+
+                            <header>
+                                <h3><a title="مشاهده پروفایل @consultant.FullName" href="@consultant.ConsultantProfileUrl">@consultant.FullName</a></h3>
+                            </header>
+
+                            <p>@consultant.Title</p>
+
+                        </div>
+
+                    </article>
+                }
+            }
+            else
+            {
+                <div class="newsletter jumbotron">
+                    <section class="container">
+                        <h3>مشاوری در این گروه ثبت نشده است</h3>
+                        <p>از اینکه رهنمون را برای حل چالش خود انتخاب نموده اید متشکریم. رهنمون به زودی مشاوران متخصص گروه "@(Model.CategoryGroupCaption + " - " + Model.CategoryCaption)" خود را به شما معرفی خواهد کرد. با عضویت در خبرنامه از پیوستن مشاوران جدید و اخبار مهم رهنمون مطلع شوید.</p>
+                        @(Html.WebPart<INewsletterSubscriptionWebPart>().Get(pageSubTitle))
+                    </section>
+                </div>
+            }
+
+
+
+        </section>
+
+    </div>
+
+}

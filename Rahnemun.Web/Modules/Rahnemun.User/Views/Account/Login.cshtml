@@ -1,0 +1,50 @@
+﻿@using Rahnemun.UIContracts
+@using Rahnemun.UserContracts
+
+@model LoginViewModel
+
+@{
+    this.SetUIInfo(new UIInfo
+    {
+        NavigationId = "Login",
+        PageTitle = "ورود به رهنمون"
+    });
+    this.SetContentInfo(new ContentInfo
+    {
+        Title = "ورود",
+        Description = "ورود به رهنمون",
+        Url = Url.Route<ILogInRoute>().Get(null)
+    });
+    RequireScript("jQuery-Validation-All");
+}
+
+@section ContentBody {
+    <div class="register two-column">
+        <div class="container">
+            <div class="column">
+                @using (Html.BeginForm("", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal" }))
+                {
+                    <fieldset>
+                        <legend>ورود به سایت</legend>
+
+                        @Html.ValidationSummaryBox(true)
+
+                        @Html.FullEditorFor(m => m.Email)
+                        @Html.FullEditorFor(m => m.Password)
+                        @Html.FullEditorFor(m => m.RememberMe)
+
+                        <button class="button default" type="submit">ورود</button>
+
+                    </fieldset>
+                }
+            </div>
+
+            <div class="column">
+                <h2>خوش آمدید!</h2>
+                <p class="tip">پس از ورود به سایت اطلاعات جلسات مشاوره شما در صفحه کاربری قابل مشاهده است.</p>
+                <p class="tip"><a href="@(Url.Route<IConfirmEmailRequestRoute>().Get())">ایمیل تایید را دریافت نکرده ام.</a></p>
+                <p class="tip"><a href="@(Url.Route<IPasswordResetRequestRoute>().Get())">کلمه عبورم را فراموش کرده ام.</a></p>
+            </div>
+        </div>
+    </div>
+}

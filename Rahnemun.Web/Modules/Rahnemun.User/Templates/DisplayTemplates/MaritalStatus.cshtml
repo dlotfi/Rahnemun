@@ -1,0 +1,12 @@
+﻿@model MaritalStatus
+
+@{
+    var caption = String.Empty;
+    switch (Model)
+    {
+        case MaritalStatus.Single : caption = "مجرد"; break;
+        case MaritalStatus.Married: caption = "متاهل"; break;
+    }
+}
+
+@caption

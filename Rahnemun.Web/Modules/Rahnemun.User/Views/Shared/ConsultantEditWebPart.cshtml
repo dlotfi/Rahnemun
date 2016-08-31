@@ -1,0 +1,114 @@
+﻿@using Rahnemun.HomeContracts
+@using Rahnemun.MediaContracts
+@using Rahnemun.UserContracts
+
+@model ConsultantEditViewModel
+
+@{
+    var fullName = Model.FirstName + " " + Model.LastName;
+    var profilePictureUrl = Model.ProfilePictureId == null ? null : Url.Route<IImageRoute>().Get(new ImageRouteModel { Id = Model.ProfilePictureId, Size = ImageSize.List });
+    RequireScript("jQuery");
+    RequireScript("jQuery-Form");
+    RequireScript("jQuery-Validation-All");
+    RequireScript("Knockout");
+    RequireScript("Rahnemun");
+    IncludeScript("Scripts/profile.js");
+}
+
+<div data-profile="@Html.ToFormattedJson(new
+                                         {
+                                             SubmitUrl = Url.Route<IConsultantEditRoute>().Get(),
+                                             ResultMessage = "اطلاعات شما با موفقیت دریافت شد. پرونده شما توسط کارشناسان رهنمون در اسرع وقت بررسی خواهد شد. اطلاعات جدید شما پس از تایید به نمایش در خواهد آمد.",
+                                             ResultMessageTitle = "موفقیت",
+                                             UpdatePending = Model.UpdatePending,
+                                             Timestamp = Model.Timestamp
+                                         })">
+
+    
+    <div class="notification container" data-bind="visible: updatePending">
+        @Html.MessageBoxInfo(fullName + " عزیز! تغییرات شما در انتظار تایید است. اطلاعات جدید پس از تایید به نمایش در خواهد آمد.", null)
+    </div>
+
+    <div class="notification container" data-bind="visible: error">
+        @Html.MessageBoxError("<!--ko text: error--><!--/ko-->")
+    </div>
+
+    @using (Html.BeginForm("", FormMethod.Post, new { enctype = "multipart/form-data", data_bind = "submit: save" }))
+    {
+        <div class="joinus-form two-column two-one">
+            <div class="container">
+                <section>
+                    <h2>اطلاعات شخصی</h2></section>
+                <section>
+                    <fieldset>
+                        <legend>اطلاعات شخصی</legend>
+                        @Html.HiddenFor(m => m.Id)
+                        @Html.HiddenFor(m => m.SubscribedToNewsletter)
+                        @Html.HiddenFor(m => m.More)
+                        @Html.HiddenFor(m => m.BankName)
+                        @Html.HiddenFor(m => m.BankAccountNo)
+
+                        @Html.FullEditorFor(m => m.FirstName)
+                        @Html.FullEditorFor(m => m.LastName)
+                        @Html.FullEditorFor(m => m.BirthDate)
+                        @Html.FullEditorFor(m => m.Gender)
+                        @Html.FullEditorFor(m => m.EducationLevel, new { HigherEducationLevel = true })
+                        @Html.FullEditorFor(m => m.CellphoneNo)
+                        @Html.FullEditorFor(m => m.MaritalStatus)
+                        @Html.FullEditorFor(m => m.BankCardNo)
+                        @Html.FullEditorFor(m => m.ProfilePicture, null, "ProfilePicture", new
+                        {
+                            CurrentPreviewImageUrl = profilePictureUrl,
+                            //CurrentPreviewLinkUrl = null,
+                            CurrentPreviewImageAlternative = fullName,
+                            IsRequired = false,
+                            CurrentHiddenInputName = "ProfilePictureId",
+                            CurrentHiddenInputValue = Model.ProfilePictureId
+                        })
+                    </fieldset>
+                </section>
+            </div>
+        </div>
+
+        <div class="joinus-form two-column two-one">
+            <div class="container">
+                <section>
+                    <h2>اطلاعات تخصصی</h2></section>
+                <section>
+                    <fieldset>
+                        <legend>اطلاعات تخصصی</legend>
+
+                        @Html.HiddenFor(m => m.Capacity)
+
+                        @Html.FullEditorFor(m => m.Title)
+                        @Html.FullEditorFor(m => m.ProfessionalExperience)
+                        @Html.FullEditorFor(m => m.Education)
+                        @Html.FullEditorFor(m => m.LicenseNumber)
+                        @Html.FullEditorFor(m => m.CategoriesIds, new { CategoriesIds = Model.CategoryListItems })
+                        @Html.FullEditorFor(m => m.ProfessionalCertificates)
+                        @Html.FullEditorFor(m => m.WorkAddress)
+                        @Html.FullEditorFor(m => m.WorkPhoneNo)
+
+                        <button class="button default" type="submit">ثبت اطلاعات پرونده</button>
+                    </fieldset>
+
+                    <h3>سیاست های حفظ حریم خصوصی رهنمون</h3>
+                    <p class="tip">
+                        <a class="external" title="سیاست های حفظ حریم خصوصی رهنمون" href="@(Url.Route<IPrivacyRoute>().Get())">حریم خصوصی شما</a> برای رهنمون در اولویت اول است. اطلاعات شخصی شما نزد رهنمون محفوظ خواهند بود.
+                    </p>
+                </section>
+            </div>
+        </div>
+    }
+
+
+</div>
+
+
+
+
+
+
+
+
+
