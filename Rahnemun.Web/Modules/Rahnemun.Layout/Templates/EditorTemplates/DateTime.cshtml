@@ -1,0 +1,13 @@
+﻿@using Edreamer.Framework.Localization
+
+@model DateTime?
+
+@{
+    RequireScript("jQuery");
+    IncludeScript("Scripts/zebra_datepicker.min.js", "Scripts/zebra_datepicker.js");
+    IncludeStyle("StyleSheets/zebra_datepicker/default.css").SetAttribute("media", "screen");
+    IncludeScript("Scripts/date.js", "Scripts/date.min.js");
+    var value = Model == null ? null : ((DateTime)Model).ToShortDateString();
+}   
+        
+@Html.TextBox("", value, new { @class = "form-control", placeholder = ViewData["Description"], data_dateculture = WorkContext.CurrentCulture() })

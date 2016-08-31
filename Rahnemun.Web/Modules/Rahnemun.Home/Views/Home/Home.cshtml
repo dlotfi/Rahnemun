@@ -1,0 +1,77 @@
+﻿@using Rahnemun.EmailContracts
+@using Rahnemun.UIContracts
+
+@model HomeViewModel
+
+@{
+    this.SetUIInfo(new UIInfo
+    {
+        NavigationId = "Home",
+        PageTitle = "رهنمون",
+        PageSubtitle = "صفحه اصلی سایت رهنمون",
+        ShowMenu = true,
+        NoBanner = true
+    });
+    this.SetContentInfo(new ContentInfo
+    {
+        Title = "رهنمون",
+        Description = "موسسه مشاوره آنلاین رهنمون",
+        Url = "/"
+    });
+}
+
+@section ContentBody {
+
+    @*-- Slide Widgets --*@
+    @if (Model.Slides.Any())
+    {
+        var frameIndex = 1;
+        <div class="slider">
+            <ul class="rslides">
+                @foreach (var slide in Model.Slides)
+                {
+                    var mobileImageUrl = slide.MobileImageUrl == null ? null : slide.MobileImageUrl(Url);
+                    <li class="@("frame" + frameIndex)" style="background-image: url(@slide.ImageUrl(Url))" @(String.IsNullOrEmpty(mobileImageUrl) ? "" : "data-mobile-image='{0}'".FormatWith(mobileImageUrl)) >
+                        <div class="jumbotron half-left">
+                            <section class="container">
+                                @slide.Html(Html)
+                            </section>
+                        </div>
+                    </li>
+                    frameIndex++;
+                }
+            </ul>
+        </div>
+    }
+
+    @*-- Intro Widgets --*@
+    @if (Model.Intros.Any())
+    {
+        <div class="intro grid three justified">
+            <section class="container">
+                <div class="wrapper">
+                    @foreach (var intro in Model.Intros.Take(3))
+                    {
+                        <article>
+                            @intro.Html(Html)
+                        </article>
+                    }
+                </div>
+            </section>
+        </div>
+    }
+
+    @*-- Widgets --*@
+    @foreach (var widget in Model.Widgets)
+    {
+        @widget.Html(Html)
+    }
+
+    <div class="newsletter jumbotron">
+        <section class="container">
+            <h2>عضویت در خبرنامه</h2>
+            <p>با عضویت در خبرنامه از جدیدترین امکانات و اخبار مهم رهنمون مطلع شوید.</p>
+            @(Html.WebPart<INewsletterSubscriptionWebPart>().Get(""))
+        </section>
+    </div>
+}

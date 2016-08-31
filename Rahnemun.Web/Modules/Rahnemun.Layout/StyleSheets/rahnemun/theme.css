@@ -1,0 +1,1749 @@
+﻿
+/*
+    eDreamer CSS framework V2.0 (93/4/24): Customized Theme CSS.
+    Copyright 2014 eDreamer Design, all rights reserved.
+    http://www.edreamer.ir
+*/
+
+/* 
+    Table of contents:
+
+    // site style
+    // page style
+    // typography
+    // layout
+        // content-image: form-holder
+        // footer
+    // media queries
+    // component
+        // banner
+        // slider
+        // profile
+        // calltoaction
+        // register
+        // dashboard
+        // chatbox
+        // sendbox
+        // feedback
+        // dialogbox
+        // button 
+        // status
+        // form
+        // team
+        // weblog
+        // load-more
+        // context
+        // userbar
+        // newsletter
+        // about
+        // team
+        // consultant
+        // joinus
+        // howtouse
+        // navigation-onepage
+        // blog-calltoaction
+        // sharebar
+        // navigation-onepage
+        // intro
+        // tooltip
+        // comment
+*/
+
+/*  // site style ________________________________________ */
+
+body {
+    color:#8a92a5;
+    /*background-color: #f3f6ff;*/
+    font-family: 'IranSans Ultra Light', Tahoma, Arial, serif;
+    font-weight: 500;
+}
+
+img {
+	background: transparent url('../../images/rahnemun/loading.gif') no-repeat scroll center center;
+    border-radius: 5px;
+}
+
+p {
+    line-height: 25px;
+}
+
+.overlay.loading {
+    background-image: url('../../images/rahnemun/loading.gif');
+}
+
+a {
+    color: #3989c9;
+}
+
+a:hover,
+a:focus,
+a:active {
+    color: #2a6496;
+    text-decoration: underline;
+}
+
+p a:link {
+    padding-bottom: 3px;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+
+p a:link:hover {
+    border-bottom-color: #3989c9;
+    text-decoration: none;
+}
+
+
+
+/*  // typography _________________________________________ */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'IranSans Medium', Tahoma, Arial, serif;
+    font-weight: 500;
+    line-height: 1.3;
+    color:#737c93;
+}
+
+h1 a,
+h2 a,
+h3 a,
+h4 a,
+h5 a,
+h6 a {
+    color: #3989c9;
+}
+
+h1 a:hover,
+h2 a:hover,
+h3 a:hover,
+h4 a:hover,
+h5 a:hover,
+h6 a:hover {
+    color: #2a6496;
+    text-decoration:none;
+}
+
+h2,
+h3 {
+    letter-spacing:-1px;
+}
+
+h2+h3 {
+    color:rgba(115, 124, 147, 0.7);
+}
+
+@font-face {
+	font-family: 'B Yekan';
+	src: url('../../fonts/rahnemun/BYekan.eot');
+	src: url('../../fonts/rahnemun/BYekan.eot?iefix') format('eot'),
+         url('../../fonts/rahnemun/BYekan.woff') format('woff'),
+         url('../../fonts/rahnemun/BYekan.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'IranSans';
+	src: url('../../fonts/rahnemun/iransans.woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'IranSans Medium';
+	src: url('../../fonts/rahnemun/iransans-medium.woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'IranSans Ultra Light';
+	src: url('../../fonts/rahnemun/iransans-ultra-light.woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+
+
+/*  // layout ________________________________________ */
+
+/*  // content-image: form-holder */
+
+.content-image.form-holder {
+    position: static;
+    /*background-color:#ccc;*/
+}
+
+.content-image.form-holder .container {
+    width: 100%;
+    padding: 0;
+}
+
+.content-image.form-holder .content {
+    /*position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;*/
+
+
+    padding: 0 30px;
+    /*background-color:lightgreen;*/
+}
+
+/*.content-image.form-holder .content p {
+    text-align: right;
+}*/
+
+.content-image.form-holder .image {
+    padding: 0 60px;
+    /*min-height:300px;*/
+    background-color: #3989c9;
+
+    /*height: 100%;*/
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+
+}
+
+.content-image.form-holder .image h1 {
+    color: #fff;
+    font-size: 60px;
+    margin-top: 150px;
+    width: 250px;
+}
+
+
+
+
+/*  // footer ________________________________________ */
+
+#footer-wrapper {
+    padding: 45px 0 45px 0;
+    background-color:#f1f2f2;
+}
+
+ul.social a {
+    background-color: transparent !important;
+}
+
+
+
+
+/* // component ________________________________________ */
+
+
+
+/*  // main navigation ________________________________________ */
+@media (min-width: 768px) {
+
+    /*#navigation > ul > li:last-child {
+        float:left;
+        background-color:#eaeaea;
+    }*/
+
+    #navigation {
+        background-color: #f1f2f2;
+    }   
+
+    #navigation li a.current {
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+        color: #fff;
+        background-color: #3989c9;
+    }
+
+    #navigation>ul>li, #navigation>ul>li>ul>li, #navigation>ul>li>ul>li>ul>li {
+        background-color: #f1f2f2;
+        border: none;
+    }
+
+    #navigation>ul>li>a, #navigation>ul>li>ul>li>a, #navigation>ul>li>ul>li>ul>li>a {
+        color: #8a92a5;
+    }
+
+    #navigation ul a:hover, #navigation ul a:active, #navigation ul a:focus {
+        color: #333;
+        background-color: #e7e7e7;
+    }
+
+    #navigation ul > li > ul > li:last-child {
+        border-bottom-left-radius:5px;
+        border-bottom-right-radius:5px;
+        /*background-color:red;*/
+    }
+
+    /*#navigation ul > li > ul li > ul > li:last-child {
+        border-top-left-radius:5px;
+        border-top-right-radius:5px;
+        background-color:green;
+    }*/
+}
+
+
+/*  // sliders ________________________________________ */
+
+.slider ul.rslides > li {
+    min-height:450px;
+}
+
+/*.slider .frame2 p  {
+    color:#000;
+}*/
+
+
+
+/*  // banner ________________________________________ */
+
+.banner {
+    padding: 30px 0;
+    background: transparent url('../../images/rahnemun/banner.png') no-repeat scroll 30% center;
+    background-color: #3989c9;
+}
+
+.banner h2 {
+    /*float:right*/
+    color: #fff;
+    /*font-size: 36px;*/
+}
+
+.banner h3 {
+    color: rgba(255, 255, 255,0.75);
+    /*margin-bottom: 30px;*/
+}
+
+.banner ul {
+    color: rgba(255, 255, 255,0.75);
+}
+
+.banner ul > li a {
+    color:#fff;
+}
+
+
+
+
+
+/*  // profile ________________________________________ */
+
+.profile {
+    padding: 60px 0 30px 0;
+    background-color:#f1f2f2;
+}
+
+
+
+/*  // calltoaction ________________________________________ */
+
+.calltoaction {
+    background-color:#f1f2f2;
+    text-align: center;
+    margin-top: 30px;
+    padding: 30px 0 30px 0;
+}
+
+/*  // register ________________________________________ */
+
+#contents-wrapper .register {
+    /*margin-top: 30px;*/
+    padding: 30px 0 30px 0;
+}
+
+.register .panel header {
+    margin-bottom: 30px;
+}
+
+.register .panel.collapsed header {
+    margin-bottom: 0;
+}
+
+
+
+/*  // sliders ________________________________________ */
+/*  // sliders: tab */
+
+.tab {
+    background-color: #f1f2f2;
+}
+
+.tab ul.rslides {
+    background-color:#fff;
+}
+
+.tab ul:nth-child(2) > li {
+    padding: 45px 0;
+}
+
+.tab ul:nth-child(2) > li h2 {
+    margin:0 0 30px 0;
+}
+
+.tab ul:first-child > li.rslides_here a {
+    color: #989faf;
+    background-color: #fff;
+    border-top: 5px solid #3989c9;
+}
+
+.tab ul:first-child > li {
+    border-left: none;
+}
+
+
+
+
+/*  // dashboard ________________________________________ */
+
+.list article {
+  /*background-color: #ccc;*/
+}
+
+.list header h2,
+.list header h3 {
+    margin: 0;
+}
+
+.list article.new {
+  background-color: #f1f2f2;
+  /*background-color: red;*/
+  padding:15px 30px 15px 30px;
+}
+
+
+
+/* category icon sizes */
+.tab .list article > a {
+    width: 75px;
+}
+
+.list article > a {
+    width: 75px;
+}
+
+
+
+/*  // chatbox ________________________________________ */
+
+.chatbox {
+    margin-top:30px;
+    /*max-height: 400px;
+    overflow-y: scroll;
+    overflow-x: hidden;*/
+    /*background-color:red;*/
+}
+
+.chatbox article {
+    padding:30px 30px;
+    border-radius: 5px;
+}
+
+.chatbox article.new {
+    background-color:#f1f2f2;
+}
+
+.chatbox article > a {
+    margin-left: 15px;
+}
+
+.chatbox article header h2 {
+    font-size:13px;
+    margin-bottom:5px;
+}
+
+.chatbox article footer ul {
+    float:right;
+}
+
+.chatbox article footer li:after {
+    display: none;
+}
+
+.chatbox article footer li.time {
+    color:#bbb;
+    font-size:11px;
+}
+
+.chatbox article.moraje {
+    /*background-color:green;*/
+}
+
+.chatbox article.moshaver {
+    /*background-color:red;*/
+}
+
+.chatbox article.moshaver > a {
+    float: left;
+    margin-left: 0;
+    margin-right: 15px;
+}
+
+.chatbox article.moshaver .contents p {
+    text-align:left;
+}
+
+.chatbox article.moshaver header h2 {
+    text-align:left;
+}
+
+.chatbox article.moshaver header ul {
+    text-align:left;
+}
+
+.chatbox article.moshaver footer ul {
+    text-align:left;
+    float:left;
+}
+
+.chatbox .divider {
+    text-align:center;
+    /*border-bottom:1px solid #ccc;*/
+    /*border-bottom:1px solid #3989c9;*/
+    /*color:#3989c9;*/
+    font-size:11px;
+    /*margin-bottom:15px;*/
+    padding:7px 0;
+    color:#fff;
+    background-color:#3989c9;
+}
+
+.chatbox .divider.affix {
+    width: 100% !important;
+    right:0;
+    left:0;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.26);
+}
+
+.chatbox article.confirm {
+    color:#fff;
+    background-color:#6dc067;
+    /*border:1px solid #ccc;*/
+}
+
+.chatbox article.confirm h2 a {
+    color:#fff;
+}
+
+.chatbox article.confirm .button.default {
+    background-color:#009D4B;
+}
+
+.chatbox article.confirm footer li.time {
+    color: rgba(255, 255, 255, 0.75);
+}
+
+.chatbox article.confirm footer ul {
+    float:left;
+}
+
+.chatbox article footer ul li.attachment {
+    background-color:#eee;
+    font-size:11px;
+    padding:2px 10px;
+    border-radius:5px;
+}
+
+.chatbox article.new footer ul li.attachment {
+    background-color:#fff;
+    border-radius:5px;
+}
+
+
+
+
+/*  // sendbox ________________________________________ */
+
+.sendbox {
+    /*border-top:1px solid #ccc;*/
+    padding:0 0 30px 0;
+    width: 100%;
+    /*background-color:green;*/
+}
+
+.sendbox textarea {
+    width: 100%;
+    resize:vertical;
+    overflow-x:hidden;
+}
+
+.sendbox .button {
+    margin: 0;
+}
+
+.sendbox .validator {
+    top: 0;
+}
+
+
+
+
+/*  // payment ________________________________________ */
+
+.payment .panel:not(.collapsed) .contents {
+    padding:30px;
+}
+
+
+/*  // feedback ________________________________________ */
+
+.feedback {
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.feedback .details li p {
+    font-size: 30px;
+    text-align: center;
+}
+
+.feedback h2 {
+    /*background-color: #3989c9;*/
+    background-color: #f58220;
+    letter-spacing:normal;
+}
+
+.feedback .button.default {
+    background-color: #f58220;
+}
+
+.feedback .details li a {
+    color: #f58220;
+}
+
+
+
+/*  // dialogbox ________________________________________ */
+
+.dialogbox {
+    border-radius: 5px;
+}
+
+.dialogbox.inline,
+.dialogbox.confirm  {
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.26);
+}
+
+.dialogbox.inline > .container {
+    padding: 0;
+}
+
+.dialogbox.inline .content {
+    padding: 0 45px 45px 45px;
+}
+
+.dialogbox.inline h1.title {
+    color: #FFF;
+    padding: 30px 45px;
+    background-color: #6dc067;
+}
+
+.dialogbox.photo img {
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.26);
+}
+
+.dialogbox.confirm h1.title, .dialogbox.message h1.title {
+    color: #3989c9;
+    letter-spacing:-2px;
+}
+
+
+
+
+
+/*  // button ________________________________________ */
+
+.button {
+    border-radius: 5px;
+}
+
+.button.default {
+    /*color: #fff;*/
+    background-color: #3989c9;
+}
+
+
+
+/*  // status ________________________________________ */
+
+.status {
+    border-radius: 5px;
+}
+
+
+.status code {
+    background-color: transparent;
+    padding: 0 5px;
+    font-size: 15px;
+}
+
+.status a:link {
+    color: #000;
+    font-weight: normal;
+}
+
+
+
+
+/*  // form ________________________________________ */
+
+.form-control {
+    border-radius: 5px;
+    padding: 10px 15px;
+}
+
+.textarea {
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.checklist > ul {
+    border-radius: 5px;
+}
+
+form.nolabel .success .validator,
+form.nolabel .warning .validator,
+form.nolabel .error .validator {
+    top: 7px;
+}
+
+.success .validator,
+.warning .validator,
+.error .validator {
+    top: 30px;
+}
+
+.antibot-image {
+    top: 27px;
+    left: 5px;
+}
+
+form.nolabel .antibot-image,
+.form-horizontal .antibot-image {
+    top: 5px;
+}
+
+
+
+
+/*  // team ________________________________________ */
+
+.team h2 {
+    margin-right: 15px;
+}
+
+.team article header h3 span {
+    display:block;
+    color:#989faf;
+    padding-top:5px;
+    font-size:13px;
+}
+
+
+
+
+/***/
+
+.video-container {
+    border-radius: 5px;
+}
+
+
+
+
+/*  // weblog ________________________________________ */
+
+.weblog {
+    padding:45px 0;
+    text-align:left;
+    /*background: #f1f2f2;*/
+    background: #f1f2f2;
+    /*border-top: 1px solid #e4e9ee;*/
+}
+
+.weblog h2 {
+    margin:0 0 30px 0;
+}
+
+.weblog.list article > a {
+    width: auto;
+}
+
+.content-sidebar {
+    padding:45px 0;
+}
+
+.content-sidebar .weblog {
+    padding:0;
+    background: transparent;
+    border:none;
+}
+
+.sidebar nav li a {
+    border-radius: 5px;
+}
+
+.sidebar nav li a.current {
+    color:#fff;
+    background-color: #3989c9;
+}
+
+.sidebar > h2:first-child {
+    margin:0 0 30px 0;
+}
+
+.tags ul li a {
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.tags ul li a em {
+    background-color: #3989c9;
+}
+
+
+
+
+/*  // load-more ________________________________________ */
+
+.load-more {
+    margin-bottom: 30px;
+}
+
+
+
+
+/*  // context ________________________________________ */
+
+article.context {
+    padding: 60px 0 30px 0;
+}
+
+article.context > img {
+    margin: 45px auto 45px auto;
+}
+
+
+
+
+/*  // userbar ________________________________________ */
+
+.userbar {
+    font-size:11px;
+    padding: 5px 0 0 0;
+    /*border-bottom: 1px solid #eee;*/
+    /*background-color:#ccc;*/
+}
+
+/*  // userbar: links */
+
+.userbar .links li.links-login a:before {
+    content: "\f090";
+}
+
+.userbar .links li.links-register a:before {
+    content: "\f234";
+}
+
+.userbar .links li a {
+    color:#b1bad0;
+    padding: 5px 15px;
+}
+
+.userbar .links li a:before {
+    /*padding: 0 0 0 10px ;
+    font-family: FontAwesome;
+    content: "\f053";*/
+    color:#3989c9;
+}
+
+.userbar li a:hover,
+.userbar li a:active,
+.userbar li a:focus {
+    color: #7e8aa7;
+    background-color:transparent;
+}
+
+.userbar .links li.links-active a {
+    /*color: #b1bad0;*/
+    /*background-color: #3989c9;*/
+    /*background-color: #a287d4;*/
+    background-color: #f58220;
+    border-radius:5px;
+    /*background-color: transparent;*/
+}
+
+/*.userbar .links li.links-active a:before {
+    color:#a287d4;
+}*/
+
+
+
+/*  // newsletter  ________________________________________ */
+
+.newsletter  {
+    color:#fff;
+    /*background-color: rgba(103, 126, 180, 0.2);*/
+    background-color:#6dc067;
+    padding: 15px 0;
+}
+
+.newsletter h2 {
+    margin-top:0;
+    color:#fff;
+}
+
+.newsletter .button {
+    /*color:#fff;*/
+    background-color:#009D4B;
+}
+
+
+
+/*  // context  ________________________________________ */
+.context {
+    padding: 45px 0 22px 0;
+}
+
+
+
+
+/*  // about  ________________________________________ */
+.about {
+    padding: 45px 0 22px 0;
+}
+
+/*  // team  ________________________________________ */
+.team {
+    padding: 22px 0 45px 0;
+}
+
+
+/*  // consultant  ________________________________________ */
+.consultant {
+    padding: 45px 0;
+}
+
+
+
+
+/*  // joinus  ________________________________________ */
+.joinus-intro,
+.joinus-benefits,
+.joinus-faq,
+.joinus-form,
+.joinus-contact,
+.joinus-howto,
+.joinus-calltoaction {
+    /*background-color: rgba(103, 126, 180, 0.2);*/
+    /*background-color: #f1f2f2;*/
+    padding: 45px 0;
+}
+
+.joinus-intro section:nth-child(1) h2,
+.joinus-faq section:nth-child(1) h2,
+.joinus-form section:nth-child(1) h2,
+.joinus-contact section:nth-child(1) h2,
+.joinus-howto section:nth-child(1) h2,
+.joinus-calltoaction section:nth-child(1) h2 {
+    text-align: left;
+    margin-top: 0;
+}
+
+.joinus-intro > section:nth-child(2),
+.joinus-faq > section:nth-child(2),
+.joinus-form > section:nth-child(2),
+.joinus-contact > section:nth-child(2) {
+    padding-top: 25px;
+}
+
+/*.joinus-intro section:nth-child(2) {
+    text-align:left;
+}*/
+
+.joinus-benefits {
+    background-color: #f1f2f2;
+    padding-top: 0;
+}
+
+.joinus-benefits.alternative {
+    padding-top: 45px;
+    /*padding-bottom: 0;*/
+}
+
+.joinus-benefits ul,
+.joinus-benefits ol {
+    padding-top: 45px;
+}
+
+.joinus-benefits ul li,
+.joinus-benefits ol li {
+    margin-top: 30px;
+    font-size: 20px;
+}
+
+.joinus-form legend {
+    display: none;
+}
+
+/*.joinus-form section:nth-child(2) {
+    text-align:left;
+}*/
+
+.joinus-faq {
+    background-color: #f1f2f2;
+}
+
+.joinus-faq .panel {
+    border: 0;
+    margin-bottom: 15px;
+}
+
+.joinus-faq .panel .header {
+    padding: 0;
+    background-color: transparent;
+}
+
+.joinus-faq .panel .header h4 {
+    color: #3989c9;
+    margin-bottom: 0;
+}
+
+.joinus-faq .panel p {
+    margin-bottom: 0;
+}
+
+.joinus-faq .status {
+    clear: both;
+    margin: 30px 0 0 0;
+}
+
+
+
+.joinus-contact {
+    background-color: #f1f2f2;
+}
+
+.joinus-contact code {
+    font-size: 18px;
+    padding: 5px 10px;
+    margin: 0 5px;
+    border-radius:5px;
+}
+
+/*.joinus-contact section:nth-child(2) {
+    text-align:left;
+}*/
+
+.checklist > ul .checklist-title {
+    color:#3989c9;
+    font-size:16px;
+}
+
+
+
+/*  // howtouse  ________________________________________ */
+.howtouse {
+    float: right;
+    background-color: transparent;
+}
+
+/*.howtouse section.container {
+    background-color: red;
+    width:100%;
+}*/
+
+.howtouse section.container img {
+    /*background-color: red;*/
+    width:100%;
+}
+
+.howtouse ul:first-child > li.rslides_here a {
+    color: #989faf;
+    /*background-color: #fff;*/
+    border: 0;
+}
+
+.howtouse ul:first-child > li.rslides_here span {
+    color: #989faf;
+}
+
+.howtouse ul:first-child li a:after {
+    position: absolute;
+    top: 0;
+    left: 0;
+    /*float: left;
+    display: block;*/
+    font-family: FontAwesome;
+    /*padding-left: 5px;*/
+    font-size: 75px;
+    content: "\f104";
+    line-height: 65px;
+    color: rgba(103, 126, 180, 0.2);
+
+    /*background-color: red;*/
+}
+
+.howtouse ul:first-child li:last-child a:after {
+    content: "";
+}
+
+.howtouse ul:first-child li a {
+    position: relative;
+    /*display: block;
+    float: right;*/
+    /*background-color: green;*/
+}
+
+.howtouse ul:first-child span {
+    color: #3989c9;
+    font-size: 50px;
+    font-weight: bold;
+    /*margin: 12px 0 0 10px;*/
+    line-height: 45px;
+    display: block;
+    /*float: right;*/
+}
+
+
+
+/*  // blog-calltoaction  ________________________________________ */
+
+.blog-calltoaction {
+    color:#fff;
+    margin-top: 30px;
+    padding: 15px 45px 45px 45px;
+    border-radius: 5px;
+    background: transparent url('../../images/rahnemun/banner.png') no-repeat scroll left center;
+    background-color: #3989c9;
+    text-align: left;
+    /*border:1px solid  #3989c9;*/
+}
+
+.blog-calltoaction.consultant  {
+    background-color: #6dc067;
+}
+
+.blog-calltoaction h2 a {
+    /*margin-bottom: 0;*/
+    color: #fff;
+}
+
+.blog-calltoaction .button {
+    background-color:#3177b0;
+    color: #fff;
+}
+
+.blog-calltoaction.consultant .button {
+    /* color: #fff; */
+    background-color: #009D4B;
+}
+
+.blog-highlight {
+    /*margin-top: 30px;*/
+    padding: 1px 30px 15px 30px;
+    border-radius: 5px;
+    /*text-align: left;*/
+    background-color: #f1f2f2;
+}
+
+.blog-highlight h2,
+.blog-highlight h3 {
+    color: #6dc067;
+}
+
+.blog-highlight h2:before,
+.blog-highlight h3:before {
+    font-family: FontAwesome;
+    padding-left: 5px;
+    font-size: medium;
+    color: #6dc067;
+    content: "\f00c";
+}
+
+
+
+
+/*  // sharebar  ________________________________________ */
+
+.sharebar {
+    margin-top: 30px;
+    padding: 15px 30px 15px 30px;
+    background-color: #f1f2f2;
+    border-radius: 5px;
+}
+
+.sharebar h3 {
+    float: right;
+    margin: 15px 0 0 15px;
+}
+
+.sharebar ul {
+    text-align: right;
+}
+
+
+
+
+/*  // navigation-onepage  ________________________________________ */
+#navigation-onepage li a.active {
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+#navigation-onepage > ul > li,
+#navigation > ul > li {
+    border: none;
+}
+
+#navigation-onepage li a.active {
+    color: #fff;
+    background-color: #3989c9;
+}
+
+
+
+
+/*  // intro  ________________________________________ */
+.intro {
+    margin:45px 0 45px 0;
+    /*z-index:2;*/
+    /*background-color:#ccc;*/
+}
+
+/*.intro > .container {
+    padding-top:45px;
+    border-top-right-radius:5px;
+    border-top-left-radius:5px;
+    background-color:#fff;
+}*/
+
+.list.justified>.container>div.wrapper, .grid.justified>.container>div.wrapper, .thumbnail.justified>.container>div.wrapper {
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+
+
+
+
+/*  // tooltip ________________________________________ */
+
+.tooltip-container {
+	border-radius:5px;
+}
+
+
+/*  // comment ________________________________________ */
+
+.comment {
+	margin-top:15px;
+}
+
+.list.comment .contents .reply a {
+    border-radius:5px;
+    background-color: #3989c9;
+}
+
+/* hide level 2 reply buttons */
+.list.comment .contents .contents .reply {
+    display: none;
+}
+
+.details ul {
+    /*list-style: none;
+    padding: 0;
+    margin: 0;
+    */
+    background-color: #f1f2f2;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.details li:before {
+    color: #3989c9;
+}
+
+.details li h4 {
+    font-family: inherit;
+}
+
+.details li.active {
+    background-color: #3989c9;
+}
+
+.details li.active h4 {
+    color: #fff;
+}
+
+
+
+/*  // media queries _____________________________________ */
+
+/*  medium and large devices only (medium desktops, large desktops and up) */
+@media only screen and (min-width: 992px) {
+    
+    *::-moz-selection {
+	    color:#fff;
+	    background-color: #3989c9;
+    }
+
+    *::selection {
+        color:#fff;
+        background-color: #3989c9;
+    }    
+    
+    ::-webkit-scrollbar {
+    width: 8px;
+    height:8px;
+    }
+
+    ::-webkit-scrollbar-track {
+        background: #f1f2f2;
+        border-radius: 5px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: #3989c9;
+        border-radius: 5px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: #3177b0;
+    }
+
+    
+}
+
+
+
+
+/*  small devices (tablets, 768px and up) */
+@media only screen and (max-width: 992px) and (min-width: 768px) {}
+
+
+
+
+/*  extra small devices (phones, less than 768px) */
+@media only screen and (max-width: 767px) {
+    
+    
+
+    
+    body {
+        background-color: #3989c9;
+    }
+
+
+
+
+    /*  // layout ________________________________________ */
+
+    #contents-wrapper { 
+        padding-top: 0;
+        margin-top: 0;
+        background-color: #fff;
+    }
+
+    .content-image.form-holder .image {
+        padding: 0 30px;
+        position: static;
+    }
+
+    .content-image.form-holder .image h1 {
+        width: auto;
+        margin-top: 30px;
+        font-size:22px;
+    }
+
+    #header {
+        box-shadow: 0 2px 5px rgba(0,0,0,0.26);
+        background-color:#3989c9;
+        /*background-color:transparent;*/
+    }
+
+    #header.noshadow {
+        background-color:transparent;
+        box-shadow: none;
+    }
+
+
+    /*  // chatbox ________________________________________ */
+
+    /*.chatbox {
+        max-height: 200px;
+        overflow-y: scroll;
+        overflow-x: hidden;
+    }*/
+
+    /*.chatbox article {
+        padding: 15px 0;
+
+    }*/
+
+    .chatbox article > a {
+        display: none;
+    }
+
+    .chatbox article.confirm footer ul {
+        float:none;
+    }
+
+    .chatbox article.confirm footer li.button {
+        display:block;
+    }
+
+
+    /*  // banner ________________________________________ */
+
+    #header h1 {
+        /*display: none;*/
+        font-size:18px;
+        margin:15px 30px 15px 0;
+    }
+
+    .banner {
+        position: relative;
+        /*background: transparent url('../../images/rahnemun/banner.png') no-repeat scroll 30% center;*/
+        min-height: 220px;
+    }
+
+    .banner h2 {
+        /*font-size:18px;*/
+
+        position: absolute;
+        bottom: 0;
+        margin:0 0 30px 0;
+    }
+
+    .banner h3 {
+        display:none;
+    }
+
+
+
+    
+    /*  // feedback ________________________________________ */
+
+    .feedback {
+        /*border-bottom-left-radius:0;
+        border-bottom-right-radius:0;*/
+        border-radius:0;
+    }
+
+
+
+
+    /*  // main navigation ________________________________________ */
+    /*  // main navigation: offcanvas */
+
+    #navigation {
+        /*padding:0;*/
+        background-color: #fff;
+    }
+
+    #navigation h5 {
+        display: block;
+        width: auto;
+        height: 106px;
+        padding: 0;
+        text-decoration: none;
+        white-space: nowrap;
+        text-indent: 100%;
+        overflow: hidden;
+        background-image: url('../../images/rahnemun/branding.png');
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center center;
+        margin: 0 auto 30px auto;
+    }
+
+
+    /*  // main navigation: menu */
+
+
+    #navigation li a.current {
+        color: #fff;
+        background-color: #3989c9;
+    }
+
+
+    /*#navigation li {*/
+    #navigation > ul > li,
+    #navigation > ul > li > ul > li,
+    #navigation > ul > li > ul > li > ul > li {
+        background-color:#fff;
+        border-bottom: 1px solid #eee;
+    }
+
+
+    /*#navigation ul li a {*/
+     #navigation > ul > li > a,
+    #navigation > ul > li > ul > li > a,
+    #navigation > ul > li > ul > li > ul > li > a {
+        color:#989faf;
+        border-radius: 5px;
+     }
+
+    #navigation ul a:hover,
+    #navigation ul a:active,
+    #navigation ul a:focus {
+        color: #989faf;
+        background-color:#e7e7e7;
+    }
+
+    /*  // main navigation: second level */
+
+
+    #navigation > ul > li > ul {
+        overflow: hidden;
+        border-radius: 5px;
+    }
+
+
+    /*#navigation ul li ul li {*/
+        #navigation > ul > li > ul > li {
+        background-color:#eee;
+        border-bottom: 1px solid #fff;
+    }
+
+
+
+    /*  // sliders ________________________________________ */
+
+    .slider {
+        margin-top:60px;
+    }
+    
+    .slider ul.rslides > li  {
+        min-height:350px;
+    }
+
+    .slider ul.rslides > li .jumbotron  {
+        /*display:none;*/
+        /*background-color: rgba(0,0,0,0.5);*/
+        background-color: rgba(255,255,255,0.75);
+
+        position: absolute;
+        height: 100%;
+        bottom: 0;
+    }
+
+    /*.slider ul.rslides h2  {
+        color:#fff;
+        text-shadow:1px 1px 1px #989faf;
+    }*/
+
+    /*.slider ul.rslides > li p {
+        color:#fff;
+        text-shadow:1px 1px 1px #989faf;
+    }*/
+
+    /*.slider ul.rslides > li p,
+    .slider ul.rslides > li .button  {
+        display:none;
+    }*/
+
+
+    /*  // newsletter  ________________________________________ */
+
+    .newsletter .button.default {
+        width:100%;
+        margin:0;
+    }
+
+
+
+    /*  // joinus  ________________________________________ */
+    /*.joinus-intro,
+    .joinus-benefits,
+    .joinus-form,
+    .joinus-contact {
+        padding: 45px 0;
+    }*/
+
+    .joinus-intro section:nth-child(1) h2,
+    .joinus-form section:nth-child(1) h2,
+    .joinus-contact section:nth-child(1) h2,
+    .joinus-howto section:nth-child(1) h2,
+    .joinus-faq section:nth-child(1) h2,
+    .joinus-calltoaction section:nth-child(1) h2 {
+        text-align: right;
+    }
+
+    .joinus-intro section:nth-child(2),
+    .joinus-form section:nth-child(2),
+    .joinus-contact section:nth-child(2) {
+        padding-top: 0;
+    }
+
+
+
+    /*  // blog-calltoaction  ________________________________________ */
+    .blog-calltoaction {
+        padding: 0 30px 30px 30px;
+        text-align: center;
+    }
+
+    .blog-calltoaction h2 {
+        text-align: center;
+    }
+
+    .blog-calltoaction p {
+        text-align: center;
+    }
+
+
+
+
+    /*  // context  ________________________________________ */
+
+        article.context > header ul {
+        display: none;
+    }
+
+    /*  // sharebar  ________________________________________ */
+
+    .sharebar {
+        padding-top: 1px;
+    }
+
+    .sharebar h3 {
+        float: none;
+        margin-bottom: 15px;
+    }
+
+    .sharebar ul {
+        text-align: center;
+    }
+
+
+
+
+    /*  // weblog ________________________________________ */
+
+    .weblog.list article footer {
+        display:none;
+    }
+
+
+
+
+    /*  // howtouse  ________________________________________ */
+    /*.howtouse {}*/
+
+    .howtouse ul:first-child li a:after {
+        display: none;
+    }
+
+    .howtouse ul:first-child span {
+        font-size: 25px;
+        /*padding:0 0 0 5px;*/
+        line-height: 20px;
+        /*display: inline;*/
+        float: none;
+    }
+
+    .howtouse ul:first-child li a {
+        padding: 12px 5px;
+    }
+
+    .howtouse .rslides_tabs li {
+        width: auto;
+    }
+
+    .howtouse ul:nth-child(2) > li {
+        padding: 0;
+    }
+
+
+
+    /*  // sliders ________________________________________ */
+    /*  // sliders: tab */
+
+    .tab .rslides_tabs li {
+        width: auto;
+    }
+
+    .tab ul:first-child > li.rslides_here a {
+        color: #fff;
+        background-color: #3989c9;
+        border: 0;
+        border-radius: 5px;
+    }
+
+    .tab ul:first-child > li {
+        float: none;
+    }
+
+    /* footer navigation */
+    .copyright nav ul li a {
+        border-radius:5px;
+        text-align: center;
+    }
+}
+
+
+
+
+/*  large desktops and up */
+@media (min-width: 1200px) {}
+
+
+
+
+
+/*  all - mobile */
+@media (min-width: 768px) {
+    
+    #header h1 {
+        height: 106px;
+        width: 207px;
+        white-space:nowrap;
+        text-indent:100%;
+        overflow:hidden;
+        margin:0 0 30px 0;
+        /*background-color:#ccc;*/
+    }
+
+    #header h1 a {
+        display: block;
+        width: 100%;
+        height: 100%;
+        background: transparent url('../../images/rahnemun/branding.png') no-repeat scroll center center;
+    }
+
+    #header h2 {
+        display: none;
+    }
+
+}
+
+
+
+
+/*  mobile and tablet only */
+@media (max-width: 992px) {
+
+
+
+
+    /*  // weblog ________________________________________ */
+
+    .weblog.list article > a {
+        float:none;
+        width: 100%;
+        margin-left: 0;
+        margin-bottom: 30px;
+    }
+    
+}
+
+
+
+
+/* ADDED */
+.joinus-form ul:nth-child(2) > li {
+    padding: 0;
+}

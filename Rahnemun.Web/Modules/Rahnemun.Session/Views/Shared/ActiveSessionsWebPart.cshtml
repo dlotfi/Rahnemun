@@ -1,0 +1,45 @@
+﻿@using Rahnemun.MediaContracts
+@using Rahnemun.UserContracts
+@model IEnumerable<ActiveSessionDashboardViewModel>
+
+<div class="list">
+
+	<section class="container">
+
+		<h1>جلسات خاتمه نیافته</h1>
+			
+			@if (Model.Any())
+			{
+				foreach (var item in Model)
+				{
+					<article>
+						
+						<a title="@item.FullName" href="@(String.IsNullOrEmpty(item.ProfileUrl) ? "#" : @item.ProfileUrl)">
+							@Html.ProfilePicture(item.ProfilePictureId, item.Gender, item.FullName, ImageSize.List)
+						</a>
+						
+						<div class="contents">
+
+							<header>
+								<h2><a title="جلسه با @item.FullName در گروه @item.CategoryCaption" href="@item.SessionUrl">@item.FullName</a></h2>
+							</header>
+
+							<p>در گروه @item.CategoryCaption</p>
+							@if (item.UnreadMessagesAmount > 0)
+							{
+								<p>@item.UnreadMessagesAmount پیام خوانده نشده</p>
+							}
+						</div>
+
+					</article>
+				}			
+			}
+			else
+			{
+				<p>جلسه خاتمه نیافته‌ای برای نمایش وجود ندارد.</p>
+			}
+	</section>
+
+</div><!-- // list -->
+
+

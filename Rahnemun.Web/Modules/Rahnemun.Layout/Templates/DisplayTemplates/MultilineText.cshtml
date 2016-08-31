@@ -1,0 +1,3 @@
+﻿@model string
+
+@Html.Raw(String.Join("<br/>", (Model ?? "").Split('\n').Select(l => Html.Encode(l))))

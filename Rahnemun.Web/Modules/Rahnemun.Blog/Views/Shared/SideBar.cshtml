@@ -1,0 +1,29 @@
+﻿@using Rahnemun.BlogContracts
+
+@model SidebarViewModel
+
+<aside class="sidebar">
+
+    <h2>گروه های وبلاگ</h2>
+
+    <nav>
+        <h5>منوی پیمایش گروه های وبلاگ</h5>
+        <ul>
+            <li><a href="@(Url.Route<IBlogRoute>().Get(null))" title="همه" @(Model.Categories.Any(c => c.Selected) ? "" : "class=current")>همه</a></li>
+            @foreach (var category in Model.Categories)
+            {
+                <li><a href="@(Url.Route<IBlogRoute>().Get(new BlogRouteModel {Category = category.Name}))" title="@category.Name" @(category.Selected ? "class=current" : "")>@category.Name</a></li>
+            }
+        </ul>
+    </nav>
+    <div class="tags">
+        <h2>برچسب ها</h2>
+        <ul>
+            @foreach (var tag in Model.Tags)
+            {
+                <li><a href="@(Url.Route<IBlogRoute>().Get(new BlogRouteModel {Tag = tag.Name}))" title="@tag.Name" @(tag.Selected ? "class=current" : "")>@tag.Name<em>@tag.PostsCount</em></a></li>
+            }
+        </ul>
+    </div>
+
+</aside><!-- // sidebar -->

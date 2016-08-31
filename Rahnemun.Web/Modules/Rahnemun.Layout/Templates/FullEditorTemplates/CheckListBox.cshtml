@@ -1,0 +1,48 @@
+﻿@{
+    var label = Html.LabelText("");
+    var id = ViewData.TemplateInfo.GetFullHtmlFieldId("");
+    var name = ViewData.TemplateInfo.HtmlFieldPrefix;
+    var description = (ViewData["Description"] ?? ViewData.ModelMetadata.Description) as string;
+    var errorClass = Html.CheckError("") ? " error" : "";
+    var mandatoryClass = Html.MarkFieldAsRequired() ? " mandatory" : "";
+    var options = Model as IEnumerable<SelectListItem> ?? ViewData[name] as IEnumerable<SelectListItem>;
+}
+
+<div class="@("checklist form-group" + mandatoryClass + errorClass)">
+    @if (ViewBag.CompactFullEditor == null || !(bool)ViewBag.CompactFullEditor)
+    {
+        <label class="control-label" for="@id">@label</label>
+    }
+
+    @if (options != null && options.Any())
+    {
+        <ul>
+            @foreach (var optionsGroup in options.GroupBy(o => o.Group))
+            {
+                if (optionsGroup.Key != null)
+                {
+                    <li class="checklist-title">@optionsGroup.Key.Name</li>
+                }
+                
+                foreach (var option in optionsGroup)
+                {
+                    <li>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" name="@name" value="@option.Value" @Html.Raw(option.Selected ? "checked=\"checked\"" : "")/>
+                                @option.Text
+                            </label>
+                        </div>
+                    </li>
+                }
+            }
+        </ul>
+    }
+
+    @Html.WrappedValidationMessage("", new { @class = "validator" })
+
+    @if (!String.IsNullOrEmpty(description)) 
+    {
+        <p class="tip">@description</p>
+    }
+</div>

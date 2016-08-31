@@ -1,0 +1,12 @@
+﻿@model CustomerMessageSubject
+
+@{
+    var options = new List<SelectListItem>
+                      {
+                          new SelectListItem {Value = CustomerMessageSubject.Suggestion.ToString(), Text = "پیشنهاد", Selected = Model == CustomerMessageSubject.Suggestion},
+                          new SelectListItem {Value = CustomerMessageSubject.Support.ToString(), Text = "پشتیبانی", Selected = Model == CustomerMessageSubject.Support},
+                          new SelectListItem {Value = CustomerMessageSubject.Other.ToString(), Text = "سایر موارد", Selected = Model == CustomerMessageSubject.Other},
+                      };
+}
+
+@Html.DropDownList("", options, new { @class = "form-control" })

@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{CA357F75-B9A3-49C8-8111-FEDF9DC55719}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Rahnemun.SessionContracts</RootNamespace>
+    <AssemblyName>Rahnemun.SessionContracts</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Edreamer.Framework">
+      <HintPath>..\..\..\lib\Edreamer.Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Interfaces\IMessageService.cs" />
+    <Compile Include="Interfaces\ISessionService.cs" />
+    <Compile Include="Models\MessageModel.cs" />
+    <Compile Include="Models\SessionModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Routes.cs" />
+    <Compile Include="WebParts.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Rahnemun.Common\Rahnemun.Common.csproj">
+      <Project>{bdcca5cd-e609-46cf-b713-f4b4ed284767}</Project>
+      <Name>Rahnemun.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Rahnemun.Domain\Rahnemun.Domain.csproj">
+      <Project>{3B242658-EA34-453A-A492-255E3150770D}</Project>
+      <Name>Rahnemun.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Rahnemun.CategoryContracts\Rahnemun.CategoryContracts.csproj">
+      <Project>{77bc5ee8-bf75-452e-ba92-79e377cf4a5d}</Project>
+      <Name>Rahnemun.CategoryContracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Rahnemun.PaymentContracts\Rahnemun.PaymentContracts.csproj">
+      <Project>{56bf0fe8-c014-4eae-811c-d3792087fbb6}</Project>
+      <Name>Rahnemun.PaymentContracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Rahnemun.UserContracts\Rahnemun.UserContracts.csproj">
+      <Project>{16f223f9-dd7f-4d92-bf57-913b31fbe6f8}</Project>
+      <Name>Rahnemun.UserContracts</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

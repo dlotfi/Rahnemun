@@ -1,0 +1,57 @@
+﻿@using Rahnemun.ContactUs
+
+@model FeedbackEditViewModel
+
+@{
+    Template = "MainTemplate";
+    ViewBag.CompactFullEditor = true;
+    RequireScript("jQuery");
+    RequireScript("jQuery-Form");
+    RequireScript("jQuery-Validation-All");
+    RequireScript("Knockout");
+    RequireScript("Rahnemun");
+    IncludeScript("Scripts/contact.js");
+}
+
+<div class="feedback">
+
+    <h2 title="ما را در بهبود رهنمون یاری دهید">فرم بازخورد رهنمون</h2>
+
+    <div class="contents" data-customermessage="@Html.ToFormattedJson(new { Model.AddUrl, Model.IsUserLoggedin, Model.ResultMessage, Model.ResultMessageTitle })">
+
+        <p>با ارسال نظرات، انتقادات و پیشنهادهایتان، ما را در بهبود رهنمون یاری کنید.</p>
+
+        @using (Html.BeginForm("", FormMethod.Post, new { id = "feedback-form", data_bind = "submit: send", @class = "nolabel" }))
+        {
+            <fieldset>
+                @*<legend>بازخورد شما</legend>*@
+
+                <!-- ko ifnot: isUserLoggedin -->
+                @*@Html.FullEditorFor(m => m.Name)*@
+                @Html.FullEditorFor(m => m.Email)
+                <!-- /ko -->
+
+                @Html.FullEditorFor(m => m.Message)
+                @*@Html.FullEditorFor(m => m.Captcha, new { CaptchaId = Model.CaptchaId, CaptchaIdName = "CaptchaId" })*@
+
+                @Html.Hidden("Subject", CustomerMessageSubject.Feedback)
+
+                <button class="button default" type="submit" title="ارسال پیام" data-bind="disable: processing">ارسال</button>
+
+            </fieldset>
+        }
+
+        <div class="details">
+
+            <ul>
+                <li class="phone">
+                    <a href="tel:@Model.ContactTelNo" title="تلفن تماس: @Model.ContactTelTitle">
+                        <h4>:تلفن تماس</h4>
+                        <p>@Model.ContactTelTitle</p>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+</div>

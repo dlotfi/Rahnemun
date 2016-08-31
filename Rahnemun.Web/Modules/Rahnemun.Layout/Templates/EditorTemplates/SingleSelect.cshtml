@@ -1,0 +1,8 @@
+﻿@{
+    var name = ViewData.TemplateInfo.HtmlFieldPrefix;
+    var options = ViewData[name] as IEnumerable<SelectListItem> ?? ViewData["Options"] as IEnumerable<SelectListItem>;
+}
+
+@Html.DropDownList("", options, new { @class = "form-control" })
+
+

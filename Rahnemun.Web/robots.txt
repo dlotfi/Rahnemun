@@ -1,0 +1,6 @@
+User-agent: *
+Disallow: /opt-out-tracking.htm
+Disallow: /403.htm
+Disallow: /404.htm
+Disallow: /500.htm
+Disallow: /~App_Offline.htm

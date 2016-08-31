@@ -1,0 +1,28 @@
+[
+  {
+    "outputFileName": "Scripts/edreamer.all.js",
+    "inputFiles": [
+      "Scripts/edreamer/audio-player.js",
+      "Scripts/edreamer/responsiveslides.min.js",
+      "Scripts/edreamer/doubletaptogo.min.js",
+      "Scripts/edreamer/jquery.smint.js",
+      "Scripts/edreamer/jquery.cookie.js",
+      "Scripts/edreamer/edreamer.min.js"
+    ],
+    "sourceMap": false
+  },
+  {
+    "outputFileName": "Scripts/rahnemun/scripts.js",
+    "inputFiles": [
+      "Scripts/rahnemun/scripts.js"
+    ],
+    "sourceMap": false
+  },
+  {
+    "outputFileName": "Scripts/date.js",
+    "inputFiles": [
+      "Scripts/date.js"
+    ],
+    "sourceMap": false
+  }
+]

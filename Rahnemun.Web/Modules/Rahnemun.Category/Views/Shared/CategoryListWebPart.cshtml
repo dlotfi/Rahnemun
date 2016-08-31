@@ -1,0 +1,63 @@
+﻿@using Rahnemun.CategoryContracts
+@using Rahnemun.MediaContracts
+
+@model IEnumerable<CategoryViewModel>
+
+@{
+    var categoryGroupCaptions = Model.Select(c => c.CategoryGroupCaption).Distinct();
+}
+
+<div class="tab" id="tab1">
+
+    <ul class="container">
+        
+        @foreach (var categoryGroupCaption in categoryGroupCaptions)
+        {
+            <li>
+                <a title="@(categoryGroupCaption)" href="">@(categoryGroupCaption)</a>
+            </li>
+        }
+        
+    </ul>
+
+    <ul>
+        @foreach (var categoryGroupCaption in categoryGroupCaptions)
+        {
+            <li>
+
+                <div class="list two">
+
+                    <section class="container">
+
+                        <h2>@categoryGroupCaption</h2>
+
+                        @foreach (var category in Model.Where(c => c.CategoryGroupCaption == categoryGroupCaption))
+                        {
+                            <article>
+                                
+                                <a title="@category.Caption" href="@(Url.Route<ICategoryDetailsRoute>().Get(category.Id))">@Html.Image(null, category.Caption, ImageSize.Comment, false, false, null, Content("~/Images/category.png"))</a>
+
+                                <div class="contents">
+
+                                    <header>
+                                        <h3><a title="@category.Caption" href="@(Url.Route<ICategoryDetailsRoute>().Get(category.Id))">@category.Caption</a></h3>
+                                    </header>
+
+                                    <p>@category.Description</p>
+
+                                </div>
+
+                            </article>
+
+                        }
+
+                    </section>
+
+                </div><!-- // list two -->
+
+            </li>
+        }
+
+    </ul>
+
+</div><!-- // tab -->

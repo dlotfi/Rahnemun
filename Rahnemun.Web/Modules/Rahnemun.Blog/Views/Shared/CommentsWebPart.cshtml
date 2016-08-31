@@ -1,0 +1,123 @@
+﻿@using Rahnemun.MediaContracts
+@using Rahnemun.UserContracts
+
+@model CommentsWebPartViewModel
+
+@{
+    RequireScript("jQuery");
+    RequireScript("jQuery-Validation-All");
+    RequireScript("Knockout");
+    RequireScript("Rahnemun");
+    IncludeScript("Scripts/comment.js");
+}
+
+@helper Comment(CommentViewModel comment)
+{
+    <!-- ko notBindToParent: true --> @* Prevent parent comment view-model to bind to child comments *@
+    <article data-comment="@Html.ToFormattedJson(new {comment.Id})">
+        <a title="@comment.AuthorName" href="@(comment.AuthorUrl ?? "#")">@Html.ProfilePicture(comment.AuthorProfilePictureId, comment.AuthorGender, comment.AuthorName, ImageSize.Comment)</a>
+        <div class="contents">
+            <header>
+                <h3><a title="@comment.AuthorName" href="@(comment.AuthorUrl ?? "#")">@comment.AuthorName</a></h3>
+                <ul>
+                    <li class="date"><time datetime="@comment.SentTime">@comment.SentTimeFormatted</time></li>
+                </ul>
+            </header>
+            <p>@comment.Text</p>
+            <footer>
+                <ul>
+                    <li class="reply" data-bind="click: toggleForm, css: { opened: displayForm }"><a title="پاسخ" href="#">پاسخ</a></li>
+                </ul>
+            </footer>
+
+            @*foreach binding is used because of Knockout limitation to call afterAdd and beforeRemove for if binding*@
+            <!-- ko template: { name: 'comment-form-template', foreach: formModels, afterAdd: animateForm, beforeRemove: animateForm } -->
+            <!-- /ko -->
+
+            @foreach (var reply in comment.Replies)
+            {
+                @Comment(reply)
+            }
+
+            <!-- ko template: { name: 'comment-template', foreach: newComments } -->
+            <!-- /ko -->
+        </div>
+    </article>
+    <!-- /ko -->
+}
+
+<div id="comments" class="comment list" data-comments="@Html.ToFormattedJson(new { Model.PostCommentUrl, Model.IsUserLoggedin, Model.Name, Model.Email })">
+    <section class="container">
+        <h2>دیدگاه ها</h2>
+
+        @foreach (var comment in Model.Comments)
+        {
+            @Comment(comment)
+        }
+
+        <!-- ko template: { name: 'comment-template', foreach: newComments } -->
+        <!-- /ko -->
+
+        <!-- ko template: { name: 'comment-form-template', foreach: formModels } -->
+        <!-- /ko -->
+    </section>
+</div><!-- // comment list -->
+
+
+
+<script type="text/html" id="comment-form-template">
+    <form class="form" data-bind="submit: postComment">
+        <fieldset>
+            <legend data-bind="text: (isReply ? 'پاسخ' : 'دیدگاه')"></legend>
+            <!-- ko ifnot: isUserLoggedin -->
+            <div class="two-column">
+                <div class="container">
+                    <div class="column form-group">
+                        <label class="control-label" for="input-name">نام</label>
+                        <input class="form-control" type="text" id="input-name" required="required" aria-required="true" data-bind="value: name" placeholder="نام"/>
+                        <span class="validator" title="title"></span>
+                    </div>
+                    <div class="column form-group">
+                        <label class="control-label" for="input-email">آدرس ایمیل</label>
+                        <input class="form-control" type="email" id="input-email" required="required" aria-required="true" data-bind="value: email" placeholder="ایمیل"/>
+                        <span class="validator" title="title"></span>
+                    </div>
+                </div>
+            </div>
+            <!-- /ko -->
+            <div class="form-group">
+                <label for="textareaExample">دیدگاه</label>
+                <textarea class="form-control" id="textareaExample" rows="4" data-bind="value: text"  placeholder="دیدگاه خود را وارد کنید"></textarea>
+            </div>
+
+            <button title="ارسال دیدگاه" type="submit" class="button default">ارسال</button>
+
+        </fieldset>
+    </form>
+</script>
+
+<script type="text/html" id="comment-template">
+    <article>
+        <a href="#" data-bind="attr: {href: authorUrl, title: authorName}, html: authorProfilePictureHtml"></a>
+        <div class="contents">
+            <header>
+                <h3><a href="#" data-bind="attr: {href: authorUrl, title: authorName}, text: authorName"></a></h3>
+                <ul>
+                    <li class="date"><time data-bind="attr: {datetime: sentTime}, text: sentTimeFormatted"></time></li>
+                </ul>
+            </header>
+            <p data-bind="text: text"></p>
+            <footer>
+                <ul>
+                    <li class="reply" data-bind="click: toggleForm, css: { opened: displayForm }"><a title="پاسخ" href="#">پاسخ</a></li>
+                </ul>
+            </footer>
+
+            <!-- ko template: { name: 'comment-form-template', foreach: formModels, afterAdd: animateForm, beforeRemove: animateForm } -->
+            <!-- /ko -->
+
+            <!-- ko template: { name: 'comment-template', foreach: newComments } -->
+            <!-- /ko -->
+        </div>
+    </article>
+</script>

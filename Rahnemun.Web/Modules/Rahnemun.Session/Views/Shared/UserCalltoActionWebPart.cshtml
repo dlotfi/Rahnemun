@@ -1,0 +1,49 @@
+﻿@using Rahnemun.CategoryContracts
+@using Rahnemun.SessionContracts
+@using Rahnemun.UserContracts
+
+@model UserCalltoActionWebPartViewModel
+
+@if (Model.UserState == UserState.ConsultantWhoViewHisProfile)
+{
+    <div class="calltoaction one-column">
+        <div class="container">
+            <div class="column">
+                <a class="button default block" title="بازگشت به لیست مشاوران گروه @(Model.CategoryCaption)" href=@(Url.Route<ICategoryDetailsRoute>().Get(Model.CategoryId))>بازگشت به لیست مشاوران گروه @(Model.CategoryCaption)</a>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <div class="calltoaction two-column">
+        <div class="container">
+
+            @if (Model.UserState == UserState.Consultant || Model.UserState == UserState.PreliminaryConsultant)
+            {
+                <p class="tip-warning">@("{0} عزیز! با حساب کاربری مشاور امکان دریافت خدمات مشاوره وجود ندارد. به منظور دریافت خدمات مشاوره از این حساب کاربری خارج شده و یک حساب کاربری غیرمشاور ایجاد نمایید.".FormatWith(Model.UserState == UserState.PreliminaryConsultant ? "مشاور" : Model.VisitorFullName))</p>
+                <div class="column">
+                    <span class="button default block disabled">آغاز جلسه مشاوره</span>
+                </div>
+            }
+            else if (Model.UserState == UserState.ConsulteeWithActiveSession)
+            {
+                <p class="tip">@("{0} عزیز! شما یک جلسه مشاوره خاتمه نیافته با {1} در گروه {2} دارید. چنانچه تمایل دارید جلسه جدیدی را ایجاد نمایید لطفا ابتدا این جلسه را خاتمه دهید.".FormatWith(Model.VisitorFullName, Model.ConsultantFullName, Model.CategoryCaption))</p>
+                <div class="column">
+                    <a class="button default block" title="ادامه جلسه مشاوره" href=@(Url.Route<ISessionRoute>().Get(Model.ActiveSessionId))>ادامه جلسه مشاوره</a>
+                </div>
+            }
+            else //Aanonymous or ConsulteeWithNoActiveSession
+            {
+                <div class="column">
+                    @*Todo [25081257]: Show an appropriate message when capacity is full*@
+                    <a class="button default block" title="آغاز جلسه مشاوره" href=@(Url.Route<IStartNewSessionRoute>().Get(new StartNewSessionRouteModel { ConsultantId = Model.ConsultantId, CategoryId = Model.CategoryId }))>آغاز جلسه مشاوره</a>
+                </div>
+            }
+
+            <div class="column">
+                <a class="button block" title="بازگشت به لیست مشاوران گروه @(Model.CategoryCaption)" href=@(Url.Route<ICategoryDetailsRoute>().Get(Model.CategoryId))>بازگشت به لیست مشاوران گروه @(Model.CategoryCaption)</a>
+            </div>
+        </div>
+    </div>
+}

@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{BDCCA5CD-E609-46CF-B713-F4B4ED284767}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Rahnemun.Common</RootNamespace>
+    <AssemblyName>Rahnemun.Common</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Edreamer.Framework, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\Edreamer.Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Mvc, Version=4.0.0.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\System.Web.WebPages.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Annotations\CurrencyAttribute.cs" />
+    <Compile Include="Annotations\AcceptExtensionsAttribute.cs" />
+    <Compile Include="CommonBootstrapper.cs" />
+    <Compile Include="DateTimeBinder.cs" />
+    <Compile Include="ErrorHandling\ErrorType.cs" />
+    <Compile Include="ErrorHandling\GlobalExceptionFilter.cs" />
+    <Compile Include="ErrorHandling\GlobalUnauthorizedFilter.cs" />
+    <Compile Include="ErrorHandling\IErrorHandler.cs" />
+    <Compile Include="Helpers\RequestInfoHelper.cs" />
+    <Compile Include="MetaDataProviding\MetaDataExtensions.cs" />
+    <Compile Include="MetaDataProviding\ContentInfo.cs" />
+    <Compile Include="MetaDataProviding\IMetaDataProvider.cs" />
+    <Compile Include="MetaDataProviding\MetaData.cs" />
+    <Compile Include="MetaDataProviding\MetaDataSetter.cs" />
+    <Compile Include="MetaDataProviding\Providers\FacebookMetaDataProvider.cs" />
+    <Compile Include="MetaDataProviding\IMetaDataSetter.cs" />
+    <Compile Include="MetaDataProviding\Providers\OpenGraphMetaDataProvider.cs" />
+    <Compile Include="MetaDataProviding\Providers\StandardMetaDataProvider.cs" />
+    <Compile Include="MetaDataProviding\Providers\TwitterMetaDataProvider.cs" />
+    <Compile Include="Results\FormattedJsonResult.cs" />
+    <Compile Include="Helpers\ValidationMessageExtensions.cs" />
+    <Compile Include="Localization\DateTimeLocalizationService.cs" />
+    <Compile Include="Localization\IDateTimeLocalizationService.cs" />
+    <Compile Include="Localization\LocalizationHttpModule.cs" />
+    <Compile Include="Enumerations.cs" />
+    <Compile Include="Annotations\FixedStringLengthAttribute.cs" />
+    <Compile Include="Annotations\MaxStringLengthAttribute.cs" />
+    <Compile Include="Helpers\FormatExtensions.cs" />
+    <Compile Include="Helpers\MvcHelperExtensions.cs" />
+    <Compile Include="Helpers\JsonExtensions.cs" />
+    <Compile Include="Helpers\MessageBoxExtensions.cs" />
+    <Compile Include="Logging\FileLogger.cs" />
+    <Compile Include="Logging\FileLoggerFactory.cs" />
+    <Compile Include="Models\IdModel.cs" />
+    <Compile Include="Models\ReturnUrlModel.cs" />
+    <Compile Include="Localization\PersianCulture.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Results\TransferResult.cs" />
+    <Compile Include="Tracking\GoogleAnalyticsTracker.cs" />
+    <Compile Include="Tracking\ITracker.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

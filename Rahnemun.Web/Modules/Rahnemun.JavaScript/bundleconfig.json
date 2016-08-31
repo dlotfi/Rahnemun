@@ -1,0 +1,17 @@
+[
+  {
+    "outputFileName": "Scripts/jquery.validate.all.js",
+    "inputFiles": [
+      "Scripts/jquery.validate.js",
+      "Scripts/jquery.validate-additionals.js",
+      "Scripts/jquery.validate.unobtrusive.js",
+      "Scripts/jquery.validate-extensions.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/rahnemun.js",
+    "inputFiles": [
+      "Scripts/rahnemun.js"
+    ]
+  }
+]

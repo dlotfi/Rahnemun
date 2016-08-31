@@ -1,0 +1,124 @@
+﻿@using Rahnemun.CategoryContracts
+@using Rahnemun.UIContracts
+@using Rahnemun.UserContracts
+
+@model NewSessionViewModel
+
+@{
+    this.SetUIInfo(new UIInfo
+    {
+        NavigationId = "StartNewSession",
+        NavigationData = new { Model.ConsultantId, Model.CategoryId },
+        PageTitle = "شروع جلسه جدید"
+    });
+    this.SetContentInfo(new ContentInfo
+    {
+        Title = "شروع جلسه جدید"
+    }, false);
+    var newSessionButtonTitle = Model.SessionFee > 0 ? "پرداخت و شروع جلسه" : "شروع جلسه";
+}
+
+@section ContentBody {
+
+    @using (Html.BeginForm("", FormMethod.Post, new { enctype = "multipart/form-data", id = "form-startNewSession" }))
+    {
+        <div class="disclaimer">
+            <div class="container">
+
+                @if (!Model.IsEmailConfirmed)
+                {
+                    @Html.MessageBoxWarning("ایمیل شما ({0}) هنوز تایید نشده است. با توجه به اینکه کلمه عبور تنها از طریق ایمیل قابل بازیابی است لذا توصیه می گردد در اسرع وقت ایمیلتان را تایید فرمایید. جهت ارسال مجدد لینک تایید به ایمیل شما از طریق صفحه <a class='external' href='{1}'>ارسال لینک تایید</a> اقدام نمایید."
+                        .FormatWith(Model.ConsulteeEmail, Url.Route<IConfirmEmailRequestRoute>().Get()), "توجه!")
+                }
+
+                @Html.ValidationSummaryBox(true)
+
+                <h2>قوانین و شرایط گروه مشاوره @Model.CategoryCaption</h2>
+
+                <p>
+                    <strong>@Model.ConsulteeFullName</strong> عزیز! به منظور شروع جلسه با <strong>@Model.ConsultantFullName</strong> در گروه مشاوره <strong>@Model.CategoryCaption</strong> متن سلب مسئولیت زیر را مطالعه و تایید نمایید.
+                </p>
+
+                <fieldset>
+
+                    <div class="form-group">
+                        <textarea class="form-control" id="textArea" placeholder="متن سلب مسئولیت" readonly="readonly" rows="10">@Model.CategoryTerms</textarea>
+                    </div>
+
+                    <div class="checkbox">
+                        <label>
+                            @Html.CheckBox("Disclaimer", new { @class = "toggle-others", data_toggle = "#newsession-submit;icon-warning;برای ادامه روند شروع جلسه متن سلب مسئولیت را تایید نمایید" })
+                            من متن سلب مسئولیت را مطالعه کرده و بندهای آن را می پذیرم.
+                        </label>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+
+        <div class="payment details">
+            <div class="container">
+                <h2>پرداخت</h2>
+                @if (Model.SessionFee > 0)
+                {
+                    <ul>
+                        <li>
+                            @*Todo [08101227]: Trust Code of ZarinPal must be improved*@
+                            @*<script type="text/javascript" src="https://www.zarinpal.com/webservice/TrustCode"></script><noscript><a href="https://www.zarinpal.com/users/receptive_websites">ZarinPal Receptive Websites</a></noscript>*@
+                            <a onclick="window.open('https://www.zarinpal.com/webservice/Trustlogo/rahnemun.com', null, 'width=656, height=400, scrollbars=no, resizable=no');" title="بررسی اعتبار درگاه پرداخت الکترونيک" href="javascript:;;">پرداخت از طریق درگاه زرین پال</a>
+                            @Html.Hidden("paymentProviderName", "زرین پال")
+                        </li>
+                        <li>
+                            @if (Model.SessionFeeWithoutDiscount != null)
+                            {
+                                <s>@Html.DisplayFor(m => m.SessionFeeWithoutDiscount)</s>
+                                @: &nbsp;باتخفیف:&nbsp;
+                            }
+                            @Html.DisplayFor(m => m.SessionFee)
+                        </li>
+
+                    </ul>
+                }
+                else
+                {
+                    <ul>
+                        @Html.Hidden("paymentProviderName", "رایگان")
+                        <li>رایگان</li>
+                    </ul>
+                }
+            </div>
+        </div>
+
+        <div class="calltoaction two-column">
+            <div class="container">
+
+                <div class="column">
+                    <button id="newsession-submit" class="button default block" type="submit" title="@newSessionButtonTitle">@newSessionButtonTitle</button>
+                </div>
+
+                <div class="column">
+                    <a class="button block" title="مشاهده مشاوران گروه @Model.CategoryCaption" href=@(Url.Route<ICategoryDetailsRoute>().Get(Model.CategoryId))>مشاهده مشاوران گروه @(Model.CategoryCaption)</a>
+                </div>
+            </div>
+        </div>
+    }
+}
+
+@section Help {
+    @*برداشته شده از لینک های ذیل :*@
+    @*http://www.nikpak.com/faq?id=24#روش های پرداخت هزینه سفارش*@
+    @*http://www.digikala.com/Page/Payment-terms*@
+    <h2>راهنمای پرداخت اینترنتی</h2>
+    
+    <h3>چگونگی پرداخت اینترنتی</h3>
+    <p>هنگام پرداخت اینترنتی اطلاعات زیر از شما پرسیده می‌شود که پس از وارد کردن آنها و تایید پرداخت، از موفقیت عملیات پرداخت خود مطلع می‌شوید.</p>
+    <p>1- شماره 16 رقمی کارت: این شماره در کارت همه بانک‏‌ها، بر روی کارت درج شده است.</p>
+    <p>2- رمز خرید اینترنتی یا رمز دوم: برای پرداخت اینترنتی لازم است قبلاْ رمز دوم (رمز خرید اینترنتی) کارت بانکی خود را فعال کرده باشید. رمز دوم (رمز خرید اینترنتی)، با رمزی که شما هنگام استفاده از دستگاه‌‏های خود پرداز وارد می‌کنید، تفاوت دارد. برخی از بانک‌ها مثل بانک سامان معمولاً رمز اینترنتی را هنگام صدور کارت تحویل می‌دهند، اما کارت بیشتر بانک‏‌ها در زمان تحویل، رمز خرید اینترنتی ندارند، برای فعال کردن رمز خرید اینترنتی، می‏‌توانید به دستگاه خودپرداز بانک صادر کننده کارت خود مراجعه و کارت خود را وارد کنید و بخش عملیات رمز را انتخاب کنید. سپس، در بخش رمز دوم یا رمز اینترنتی، رمز خود را انتخاب کنید.</p>
+    <p>3- کد CVV2: این کد یک عدد ۳ یا ۴ رقمی است که پشت یا روی کارت‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌های بانکی درج می‌شود و به‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌عنوان یک کد امنیتی در پرداخت‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌های اینترنتی کاربرد دارد. این کد روی کارت‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌‌ بانک‏‌های ملت، صادرات، پاسارگاد، سامان، پارسیان و... به صورت یک عدد 3 رقمی حک شده است یا در برخی کارت ها مانند بانک ملی 4 رقمی است.</p>
+    <p>4- تاریخ انقضا: تاریخ انقضا هم روی بیشتر کارت‌های بانکی حک شده است. اگر روی کارت شما تاریخ انقضاء وجود ندارد، می‏‌توانید از عدد 12 به جای ماه و از 99 به جای سال انقضای کارت استفاده کنید.</p>
+
+    <h3>مشکلات احتمالی پرداخت اینترنتی</h3>
+    <p>سیستم پرداخت اینترنتی توسط بانک های عامل به گونه ای طراحی شده است که هم ایمن باشد و هم ساده و کمترین نیاز به راهنمایی را برای خریدار ایجاد نماید. اما با این وجود برخی اوقات ممکن است مسائلی در هنگام خرید اینترنتی به وقوع بپیوندد.</p>
+    <p>مثلاً ممکن است در هنگام پرداخت شبکه بانکی قطع شود و پرداخت ناموفق انجام شود.</p>
+    <p>معمولاً بدترین حالتی که ممکن است به وقوع بپیوندد این است که پول از حساب شما کسر شود، ولی به حساب فروشنده واریز نشود. اما نگران نباشید. در این حالت معمولاً پول شما در حساب های حد واسط بانک است.</p>
+    <p>نهایتاً خود بانک می باید مغایرت ها را رفع کند. منتظر بمانید و اگر تا 48 ساعت پول به حسابتان برگشت نخورد، آنگاه با پشتیبانی سایت فروشنده و یا بانک عامل پرداخت اینترنتی تماس بگیرید تا مغایرت برطرف شود.</p>
+}

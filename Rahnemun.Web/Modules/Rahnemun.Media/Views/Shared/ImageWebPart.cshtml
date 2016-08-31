@@ -1,0 +1,36 @@
+﻿@using Rahnemun.Media
+@using Rahnemun.MediaContracts
+
+@model ImageWebPartModel
+
+@{
+    string width = null, height = null;
+    if (Model.Size != null)
+    {
+        var size = ((ImageSize) Model.Size).InPixels();
+        width = size.Width.ToString();
+        height = size.Height.ToString();
+    }
+}
+
+@if (Model.Id != null || String.IsNullOrEmpty(Model.DefaultImageResourceName))
+{
+    var imageUrl = Url.Route<IImageRoute>().Get(new ImageRouteModel {Id = Model.Id, Size = Model.Size, MaxFit = Model.MaxFit, DefaultImagePath = Model.DefaultImagePath});
+    if (width != null && Model.IncludeSize)
+    {
+        <img alt="@Model.Description" src="@imageUrl" width="@width" height="@height"/>
+    }
+    else
+    {
+        <img alt="@Model.Description" src="@imageUrl" />
+    }
+}
+else
+{
+    var resource = RequireResource("image", Model.DefaultImageResourceName).SetAttribute("alt", Model.Description);
+    if (width != null)
+    {
+        resource.SetAttribute("width", width).SetAttribute("height", height);
+    }
+    @resource.GetHtml()
+}

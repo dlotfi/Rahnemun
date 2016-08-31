@@ -1,0 +1,45 @@
+﻿@using Edreamer.Framework.Settings
+@using Rahnemun.EmailContracts
+
+@{
+    var supportEmail = Container.GetExportedValue<ISettingsService>().GetSupportEmail();
+}
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fa">
+
+<head>
+    <meta charset="utf-8" />
+    <title>رهنمون - ایمیل</title>
+</head>
+
+<body style="margin:0">
+
+    <div id="contents-wrapper" style="direction: rtl; background-color: #ddd; color: #333; font-family: tahoma, sans-serif; font-size: 12px; line-height: 20px; padding:60px 30px">
+    
+        <div class="contents" style="max-width: 600px; margin: 0 auto; background-color: #fff; border-radius: 5px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.26);">
+
+            <div style="background-color: #3989c9; color: #fff;">
+                <a title="موسسه مشاوره آنلاین رهنمون" href="#">
+                    <img alt="موسسه مشاوره آنلاین رهنمون" style="display: block; max-width: 100%; height: auto; vertical-align: middle;" src="@Url.ConvertToAbsoluteUrl(Content("~/Images/email-header.png"))"/>
+                </a>
+            </div>
+
+            <div align="justify" style="padding: 30px 30px;">
+                @RenderSection("ContentBody")
+            </div>
+
+
+            <div align="justify" style="background-color: #f8f8f8; padding: 30px 30px; font-size: 11px">
+                <p>لطفاً در صورت برخورد با هرگونه مشکل در کار با وب سایت، با پشتیبانی سایت به آدرس <a style="text-decoration: none; color: #3989c9;" href="mailto:@supportEmail">@supportEmail</a> تماس حاصل فرمایید.</p>
+                <p>با احترام،<br>از طرف مدیریت سایت رهنمون.</p>
+            </div>
+
+        </div>
+
+    </div><!-- // contents-wrapper -->
+
+</body>
+
+</html>

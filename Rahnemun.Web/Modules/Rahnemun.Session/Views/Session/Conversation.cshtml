@@ -1,0 +1,235 @@
+﻿@using Rahnemun.MediaContracts
+@using Rahnemun.UIContracts
+@using Rahnemun.UserContracts
+
+@model SessionViewModel
+
+@{
+    this.SetUIInfo(new UIInfo
+    {
+        NavigationId = "Session",
+        NavigationData = new { SessionId = Model.Id },
+        PageTitle = Model.ConsultantFullName,
+        PageSubtitle = "گروه " + Model.CategoryCaption
+    });
+    this.SetContentInfo(new ContentInfo
+    {
+        Title = "جلسه مشاوره"
+    }, false);
+
+    RequireScript("jQuery");
+    RequireScript("jQuery-Form");
+    RequireScript("jQuery-Validation-All");
+    RequireScript("jQuery-StickyKit");
+    RequireScript("Knockout");
+    RequireScript("Rahnemun");
+    IncludeScript("Scripts/session.js");
+}
+
+@section ContentBody {
+
+    <div class="content-sidebar">
+        <div class="container" data-session="@Html.ToFormattedJson(new { Model.SourceUrl, Model.SendUrl, Model.SetSeenUrl, Model.StopUrl })">
+
+            <section class="content">
+
+                <div class="chatbox">
+
+                    <div class="container">
+
+                        <div class="list" data-bind="visible: initialized" style="display: none">
+
+                            <section class="container" data-bind="foreach: messages">
+
+                                <!-- ko if: type === "Divider" -->
+                                <div class="divider">
+                                    <time data-bind="text: text"></time>
+                                </div>
+                                <!-- /ko -->
+
+                                <!-- ko if: type === "Consultee" -->
+                                <article class="moraje" data-bind="css: { new: unseen, confirm: stop }, attr: { id: 'msg-'+id }">
+                                    @if (String.IsNullOrEmpty(Model.ConsulteeUrl))
+                                    {
+                                        <a title="@Model.ConsulteeFullName" href="@Model.ConsulteeUrl">@Html.ProfilePicture(Model.ConsulteeProfilePictureId, Model.ConsulteeGender, Model.ConsulteeFullName, ImageSize.Comment)</a>
+                                    }
+                                    else
+                                    {
+                                        @Html.ProfilePicture(Model.ConsulteeProfilePictureId, Model.ConsulteeGender, Model.ConsulteeFullName, ImageSize.Comment)
+                                    }
+                                    <div class="contents">
+                                        <header>
+                                            @if (String.IsNullOrEmpty(Model.ConsulteeUrl))
+                                            {
+                                                <h2><a title="@Model.ConsulteeFullName" href="@Model.ConsulteeUrl">@Model.ConsulteeFullName</a></h2>
+                                            }
+                                            else
+                                            {
+                                                <h2>@Model.ConsulteeFullName</h2>
+                                            }
+                                        </header>
+                                        <p data-bind="text: text"></p>
+                                        <footer>
+                                            <ul>
+                                                <li class="time" title="زمان ارسال" data-bind="text: sentTime"></li>
+                                                <!-- ko if: mediaUrl -->
+                                                <li class="attachment icon-download"><a title="پیوست" target="_blank" href="#" data-bind="attr: { href: mediaUrl }">پیوست</a></li>
+                                                <!-- /ko -->
+                                            </ul>
+                                        </footer>
+                                    </div>
+                                </article>
+                                <!-- /ko --> @*End of consultee message template*@ 
+
+                                <!-- ko if: type === "Consultant" -->
+                                <article class="moshaver" data-bind="css: { new: unseen, confirm: stop }, attr: { id: 'msg-'+id }">
+                                    @if (String.IsNullOrEmpty(Model.ConsultantUrl))
+                                    {
+                                        <a title="@Model.ConsultantFullName" href="@Model.ConsultantUrl">@Html.ProfilePicture(Model.ConsultantProfilePictureId, Model.ConsultantGender, Model.ConsultantFullName, ImageSize.Comment)</a>
+                                    }
+                                    else
+                                    {
+                                        @Html.ProfilePicture(Model.ConsultantProfilePictureId, Model.ConsultantGender, Model.ConsultantFullName, ImageSize.Comment)
+                                    }
+                                    <div class="contents">
+                                        <header>
+                                            @if (String.IsNullOrEmpty(Model.ConsultantUrl))
+                                            {
+                                                <h2><a title="@Model.ConsultantFullName" href="@Model.ConsultantUrl">@Model.ConsultantFullName</a></h2>
+                                            }
+                                            else
+                                            {
+                                                <h2>@Model.ConsultantFullName</h2>
+                                            }
+                                        </header>
+                                        <p data-bind="text: text"></p>
+                                        <footer>
+                                            <ul>
+                                                <li class="time" title="زمان ارسال" data-bind="text: sentTime"></li>
+                                                <!-- ko if: mediaUrl -->
+                                                <li class="attachment icon-download"><a title="پیوست" target="_blank" href="#" data-bind="attr: { href: mediaUrl }">پیوست</a></li>
+                                                <!-- /ko -->
+                                                @if (Model.UserParticipationType == SessionParticipationType.Consultee)
+                                                {
+                                                    <!-- ko if: stop -->
+                                                    <li title="شروع جلسه جدید با @Model.ConsultantFullName">
+                                                        <a class="button default" title="شروع جلسه جدید با @Model.ConsultantFullName" href="@Model.NewSessionUrl">شروع جلسه جدید</a>
+                                                    </li>
+                                                    <!-- /ko -->
+                                                }
+                                            </ul>
+                                        </footer>
+                                    </div>
+                                </article>
+                                <!-- /ko --> @*End of consultant message template*@
+
+                                <!-- ko if: type === "System" -->
+                                <article data-bind="css: { new: unseen, confirm: stop }, attr: { id: 'msg-'+id }">
+                                    <div class="contents">
+                                        <header>
+                                            <h2>رهنمون</h2>
+                                        </header>
+                                        <p data-bind="text: text"></p>
+                                        <footer>
+                                            <ul>
+                                                <li class="time" title="زمان ارسال" data-bind="text: sentTime"></li>
+                                                @if (Model.UserParticipationType == SessionParticipationType.Consultee)
+                                                {
+                                                    <!-- ko if: stop -->
+                                                    <li title="شروع جلسه جدید با @Model.ConsultantFullName">
+                                                        <a class="button default" title="شروع جلسه جدید با @Model.ConsultantFullName" href="@Model.NewSessionUrl">شروع جلسه جدید</a>
+                                                    </li>
+                                                    <!-- /ko -->
+                                                }
+                                            </ul>
+                                        </footer>
+                                    </div>
+                                </article>
+                                <!-- /ko --> @*End of system message template*@
+
+                            </section>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                @if (!Model.Stopped && Model.UserParticipationType != SessionParticipationType.Other)
+                {
+                    <!-- ko ifnot: stopped -->
+                    <div class="sendbox two-column one-two">
+                        <div class="container">
+                            @using (Html.BeginForm("", FormMethod.Post, new { enctype = "multipart/form-data", data_bind = "submit: send" }))
+                            {
+                                <div class="column">
+                                    @Html.Partial("MessageForm", new MessageViewModel())
+                                </div>
+                                <div class="column">
+                                    <button type="submit" class="button default block" title="ارسال پیام" data-bind="enable: initialized">ارسال</button>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                    <hr/>
+                    <!-- /ko -->
+                }
+
+            </section>
+
+            <aside class="sidebar">
+
+                <h2>لینکهای مرتبط با جلسه</h2>
+                <ul class="list-unstyled">
+
+                    @if (!Model.Stopped && Model.UserParticipationType != SessionParticipationType.Other)
+                    {
+                        <!-- ko ifnot: stopped -->
+                        if (Model.UserParticipationType == SessionParticipationType.Consultant)
+                        {
+                            <!-- ko if: elapsedTime() >= 40 -->
+                            <li><a class="icon-chevron-left" title="اتمام جلسه" href="#" data-bind="click: stop">اتمام جلسه</a></li>
+                            <!-- /ko -->
+                        }
+                        else // Model.UserParticipationType == SessionParticipationType.Consultee
+                        {
+                            <li><a class="icon-chevron-left" title="اتمام جلسه" href="#" data-bind="click: stop">اتمام جلسه</a></li>
+                        }
+                        <!-- /ko -->
+                    }
+                </ul>
+
+                <h2>زمان گذشته از جلسه</h2>
+                <span data-bind="text: elapsedTime"></span>
+
+            </aside>
+
+        </div>
+    </div>
+}
+
+@section Help {
+    <h2>راهنمای جلسه</h2>
+
+    <h3>درج پیام</h3>
+    <p>متن پیام خود را در قسمت نوشتاری درج نمایید.</p>
+    <p>اگر متن شما طولانی است بهتر است ابتدا آن را در یک برنامه ویرایش متن مانند وورد (Microsoft Word) تایپ کنید و سپس متن خود را در این بخش جایگذاری (Paste) نمایید.</p>
+
+    <h3>الحاق فایل به پیام</h3>
+    <p>اگر می خواهید فایلی را به همراه پیام ارسال نمایید ، آن را از قسمت درج فایل انتخاب نمایید و سپس دکمه Open را بزنید. در غیر اینصورت این قسمت را خالی بگذارید.</p>
+    <p>دقت نمایید فایل انتخابی دارای پسوند gif ،png، jpeg، jpg یا pdf و حداکثر حجم 10 مگابایت باشد.</p>
+
+    <h3>ارسال پیام</h3>
+    <p>با زدن دکمه ارسال، پیام شما ارسال می شود و متن آن در بالای صفحه نمایش می یابد.</p>
+
+    <h3>لیست پیام ها</h3>
+    <p>پیام ها بر اساس تاریخ ارسال و دریافت، به ترتیب از بالا به پایین نمایش داده می شوند و پیام های جدید (مشاهده نشده) با پس زمینه خاکستری رنگ ظاهر می شوند.</p>
+
+    <h3>زمان جلسه</h3>
+    <p>مدت زمان جلسه 45 دقیقه است که میزان زمان سپری شده از آن در سمت راست صفحه قابل مشاهده است. این میزان زمان پس از درج پاسخ مشاور به روز رسانی می شود.</p>
+
+    <h3>خاتمه جلسه</h3>
+    <p>به منظور پایان دادن به جلسه، لینک "خاتمه جلسه" در قسمت بالا، سمت راست صفحه را انتخاب نمایید. تاییدیه ای از شما پرسیده خواهد شد که در صورت مثبت بودن پاسخ جلسه خاتمه می یابد.</p>
+    <p>در جلسات خاتمه یافته تنها امکان مشاهده جلسات میسر است و امکان درج پیام وجود نخواهد داشت.</p>
+    <p>مراجعه کنندگان می توانند در هر زمانی به جلسه پایان دهند اما مشاوران پس از گذشت حداقل 40 دقیقه از جلسه امکان پایان دادن به جلسه برای آن ها فعال می شود.</p>
+}

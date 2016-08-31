@@ -1,0 +1,257 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{87BCDE6F-6B62-4B61-87EC-5DABEF4B75DC}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Rahnemun.Layout</RootNamespace>
+    <AssemblyName>Rahnemun.Layout</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>4.0</OldToolsVersion>
+    <UseIISExpress>false</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UpgradeBackupLocation />
+    <MvcProjectUpgradeChecked>true</MvcProjectUpgradeChecked>
+    <TargetFrameworkProfile />
+    <UseGlobalApplicationHostFile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Edreamer.Framework, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\lib\Edreamer.Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System" />
+    <Reference Include="System.Web.Mvc, Version=4.0.0.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\lib\System.Web.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\lib\System.Web.WebPages.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\lib\System.Web.WebPages.Razor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="UIBootstrapper.cs" />
+    <Compile Include="Controllers\DialogController.cs" />
+    <Compile Include="Controllers\NavigationController.cs" />
+    <Compile Include="Layouts.cs" />
+    <Compile Include="Models\NavigationViewModel.cs" />
+    <Compile Include="Models\SiteMapNodeViewModel.cs" />
+    <Compile Include="Module.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Routes.cs" />
+    <Compile Include="Templates.cs" />
+    <Compile Include="ThemeManager\Extensions.cs" />
+    <Compile Include="ThemeManager\ThemeAwareResourceTagBuilder.cs" />
+    <Compile Include="ThemeManager\ThemeAwareViewLocationProvider.cs" />
+    <Compile Include="UIWorkContext.cs" />
+    <Compile Include="WebParts.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Images\default.png" />
+    <Content Include="Images\rahnemun\banner.png" />
+    <Content Include="Images\rahnemun\branding.png" />
+    <Content Include="Scripts\date.js" />
+    <Content Include="Scripts\date.min.js">
+      <DependentUpon>date.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\edreamer.all.js" />
+    <Content Include="Scripts\edreamer.all.min.js">
+      <DependentUpon>edreamer.all.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\edreamer\edreamer.min.js" />
+    <Content Include="Scripts\rahnemun\scripts.js" />
+    <Content Include="Scripts\rahnemun\scripts.min.js">
+      <DependentUpon>scripts.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\upload.js" />
+    <Content Include="Scripts\zebra_datepicker.js" />
+    <Content Include="Scripts\zebra_datepicker.min.js">
+      <DependentUpon>zebra_datepicker.js</DependentUpon>
+    </Content>
+    <Content Include="StyleSheets\debug.css" />
+    <Content Include="StyleSheets\zebra_datepicker\calendar-disabled.png" />
+    <Content Include="StyleSheets\zebra_datepicker\calendar.png" />
+    <Content Include="StyleSheets\zebra_datepicker\default.css" />
+    <Content Include="Templates\EditorTemplates\Text.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Fonts\fontawesome-webfont.svg" />
+    <Content Include="Images\rahnemun\apple-touch-icon-114x114.png" />
+    <Content Include="Images\rahnemun\apple-touch-icon-72x72.png" />
+    <Content Include="Images\rahnemun\apple-touch-icon.png" />
+    <Content Include="Images\rahnemun\favicon.ico" />
+    <Content Include="Images\rahnemun\loading.gif" />
+    <Content Include="Scripts\edreamer\audio-player.js" />
+    <Content Include="Scripts\edreamer\doubletaptogo.min.js" />
+    <Content Include="Scripts\edreamer\jquery.cookie.js" />
+    <Content Include="Scripts\edreamer\jquery.smint.js" />
+    <Content Include="Scripts\player.swf" />
+    <Content Include="Scripts\edreamer\responsiveslides.min.js" />
+    <Content Include="Scripts\selectivizr-min.js" />
+    <Content Include="StyleSheets\edreamer.css" />
+    <Content Include="StyleSheets\normalize.css" />
+    <Content Include="StyleSheets\rahnemun\theme.css" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Fonts\fontawesome-webfont.eot" />
+    <Content Include="Fonts\fontawesome-webfont.ttf" />
+    <Content Include="Fonts\fontawesome-webfont.woff" />
+    <Content Include="Fonts\FontAwesome.otf" />
+    <Content Include="Fonts\rahnemun\BYekan.eot" />
+    <Content Include="Fonts\rahnemun\BYekan.ttf" />
+    <Content Include="Fonts\rahnemun\BYekan.woff" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Layouts\MainLayout.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Templates\FullDisplayTemplates\Default.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Templates\FullEditorTemplates\Default.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Templates\EditorTemplates\MultilineText.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Templates\EditorTemplates\SingleSelect.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Contracts\Rahnemun.UIContracts\Rahnemun.UIContracts.csproj">
+      <Project>{cff90843-2bde-43d6-82f3-c4b57c272732}</Project>
+      <Name>Rahnemun.UIContracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Rahnemun.Common\Rahnemun.Common.csproj">
+      <Project>{bdcca5cd-e609-46cf-b713-f4b4ed284767}</Project>
+      <Name>Rahnemun.Common</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Templates\FullEditorTemplates\Upload.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Templates\EditorTemplates\Password.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Templates\FullEditorTemplates\Boolean.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\NavigationWebPart.cshtml" />
+    <Content Include="Views\_ViewStart.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\BreadcrumbWebPart.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Templates\EditorTemplates\DateTime.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Templates\DisplayTemplates\Currency.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Templates\FullEditorTemplates\CheckListBox.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Templates\DisplayTemplates\MultilineText.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Fonts\rahnemun\iransans-medium.woff" />
+    <Content Include="Fonts\rahnemun\iransans-ultra-light.woff" />
+    <Content Include="Fonts\rahnemun\iransans.woff" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\DialogsWebPart.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Fonts\fontawesome-webfont.woff2" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bundleconfig.json" />
+  </ItemGroup>
+  <ItemGroup />
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>5037</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>
+          </IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>True</UseCustomServer>
+          <CustomServerUrl>http://rahnemun.com</CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+</Project>

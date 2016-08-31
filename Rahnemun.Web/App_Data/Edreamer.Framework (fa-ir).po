@@ -1,0 +1,47 @@
+﻿# Edreamer.Framework resource strings for 'fa-ir' culture
+
+#: Edreamer.Framework.DataAnnotations.ShortStringAttribute
+#| msgid "The length of field {0} should not exceed 255 characters."
+msgid "The length of field {0} should not exceed 255 characters."
+msgstr "طول فیلد {0} نمی تواند از 255 کاراکتر بیشتر باشد"
+
+#: Edreamer.Framework.Security.Authorization.Authorizer
+#| msgid "{0}. Anonymous users do not have '{1}' permission."
+msgid "{0}. Anonymous users do not have '{1}' permission."
+msgstr "{0}. کاربران وارد نشده مجوز '{1}' را ندارند."
+
+#: Edreamer.Framework.Security.Authorization.Authorizer
+#| msgid "{0}. Current user, {2}, does not have '{1}' permission."
+msgid "{0}. Current user, {2}, does not have '{1}' permission."
+msgstr "{0}. کاربر جاری، {2}، مجوز '{1}' را ندارد"
+
+#: Edreamer.Framework.Mvc.Security.AccessFrontEndFilter
+#| msgid "Can't access this website"
+msgid "Can't access this website"
+msgstr "امکان دسترسی به سایت وجود ندارد"
+
+#: Edreamer.Framework.Mvc.Security.AdminAttribute
+#| msgid "Can't access the admin"
+msgid "Can't access the admin"
+msgstr "امکان دسترسی به بخش مدیریت وجود ندارد"
+
+#: Edreamer.Framework.Mvc.Validation.NumericValidator
+#| msgid "The field {0} must be a number."
+msgid "The field {0} must be a number."
+msgstr "مقدار فیلد {0} باید عددی باشد"
+
+#: Edreamer.Framework.Security.Permissions.StandardPermissions
+#| msgid "Access admin panel"
+msgid "Access admin panel"
+msgstr "دسترسی به پنل مدیریت"
+
+#: Edreamer.Framework.Security.Permissions.StandardPermissions
+#| msgid "Access site front-end"
+msgid "Access site front-end"
+msgstr "دسترسی به سایت"
+
+#: Edreamer.Framework.Security.Permissions.StandardPermissions
+#| msgid "Site Owners Permission"
+msgid "Site Owners Permission"
+msgstr "دسترسی مالکیت سایت"
+

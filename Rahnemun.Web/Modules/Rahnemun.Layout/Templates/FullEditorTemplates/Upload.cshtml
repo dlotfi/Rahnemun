@@ -1,0 +1,46 @@
+﻿@{
+    var label = Html.LabelText("");
+    var id = ViewData.TemplateInfo.GetFullHtmlFieldId("");
+    var description = (ViewData["Description"] ?? ViewData.ModelMetadata.Description) as string;
+    var errorClass = Html.CheckError("") ? " error" : "";
+    var mandatoryClass = Html.MarkFieldAsRequired() ? " mandatory" : "";
+
+    RequireScript("jQuery");
+    RequireScript("Rahnemun");
+    IncludeScript("Scripts/upload.js");
+}
+
+<div class="@("form-photo form-group" + mandatoryClass + errorClass)">
+    @if (ViewData["CurrentPreviewImageUrl"] != null)
+    {
+        if (ViewData["CurrentPreviewLinkUrl"] != null)
+        {
+            <a href="@(ViewData["CurrentPreviewLinkUrl"])">
+                <img src="@ViewData["CurrentPreviewImageUrl"]" alt="@ViewData["CurrentPreviewImageAlternative"]" width="150" height="150" />
+            </a>
+        }
+        else
+        {
+            <img src="@ViewData["CurrentPreviewImageUrl"]" alt="@ViewData["CurrentPreviewImageAlternative"]" width="150" height="150" />
+        }
+        if (ViewData["IsRequired"] == null || !(bool)ViewData["IsRequired"])
+        {
+            <a class="remove icon-remove" title="حذف تصویر پروفایل" href="#">حذف تصویر فعلی</a>
+        }
+        <input type="hidden" name="@ViewData["CurrentHiddenInputName"]" value="@(ViewData["CurrentHiddenInputValue"])" />
+    }
+    
+    <label class="control-label" for="@id">@label</label>
+
+    @Html.File("", null, new { @class = "form-control" })
+    @Html.WrappedValidationMessage("", new { @class = "validator" })
+
+    @if (!String.IsNullOrEmpty(description))
+    {
+        <p class="tip">@description</p>
+    }
+</div>
+
+
+
+

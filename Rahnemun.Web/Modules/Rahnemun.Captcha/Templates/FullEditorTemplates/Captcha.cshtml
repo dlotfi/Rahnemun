@@ -1,0 +1,29 @@
+﻿@using Rahnemun.CaptchaContracts
+
+@model string
+
+@{
+	var label = Html.LabelText("");
+	var id = ViewData.TemplateInfo.GetFullHtmlFieldId("");
+	var description = (string)(ViewData["Description"] ?? ViewData.ModelMetadata.Description);
+	var errorClass = Html.CheckError("") ? " error" : "";
+	var mandatoryClass = Html.MarkFieldAsRequired() ? " mandatory" : "";
+	var captchaId = (Guid)ViewData["CaptchaId"];
+	RequireScript("jQuery");
+	IncludeScript("Scripts/captcha.js");
+}
+
+<div class="@("antibot form-group" + mandatoryClass + errorClass)">
+	<input type="hidden" name="@ViewData["CaptchaIdName"]" value="@captchaId" />
+	@if (ViewBag.CompactFullEditor == null || !(bool) ViewBag.CompactFullEditor)
+	{
+		<label class="control-label" for="@id">@label</label>
+	}
+	@Html.TextBox("", Model, new {@class = "form-control", placeholder = label, autocomplete = "off"})
+	@if (!String.IsNullOrEmpty(description))
+	{
+		<p class="tip">@description</p>
+	}
+	@Html.WrappedValidationMessage("", new {@class = "validator"})
+	<img title="@label" class="antibot-image" src="@(Url.Route<ICaptchaImageRoute>().Get(captchaId))"/>
+</div>

@@ -1,0 +1,8 @@
+﻿@model NavigationViewModel
+
+<ul @(Model.Footer ? "" : "class=container") >
+    @foreach (var navigationItem in Model.NavigationItems)
+    {
+        <li>@navigationItem.Html(Html, navigationItem.NavigationId == Model.CurrentItemId)</li>
+    }
+</ul>

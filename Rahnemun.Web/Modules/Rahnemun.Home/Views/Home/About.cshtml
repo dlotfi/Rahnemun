@@ -1,0 +1,121 @@
+﻿@using Rahnemun.HomeContracts
+@using Rahnemun.UIContracts
+
+@{
+    this.SetUIInfo(new UIInfo
+    {
+        NavigationId = "About",
+        PageTitle = "درباره رهنمون",
+        PageSubtitle = "درباره رهنمون بیشتر بدانید",
+        ShowMenu = true
+    });
+    this.SetContentInfo(new ContentInfo
+    {
+        Title = "درباره",
+        Description = "درباره ماموریت، چشم انداز و تیم رهنمون بیشتر بدانید.",
+        Url = Url.Route<IAboutRoute>().Get()
+    });
+}
+
+@section ContentBody {
+
+    <div id="contents-wrapper">
+
+        <div class="about">
+            <div class="container">
+                <h2>درباره رهنمون بیشتر بدانید</h2>
+                <p>از طلوع تمدن، بشر با مشکلاتی در زندگی روبرو شده که با خرد خویش به تنهایی قادر به حل آن ها نبوده و نیاز به همفکری با دیگران داشته است. این نیاز در زندگی پرچالش امروزی پررنگ تر دیده می شود. بشر امروزی با استفاده از مشاوره با دوستان و نزدیکان و بهره گیری از خدمات موسسات مشاوره تلاش می کند به این نیاز پاسخ دهد ولی به دلیل هزینه های بالا، کمبود وقت و عدم دسترسی به مشاور متخصص نمی تواند به راحتی نیاز خود را برآورده سازد.</p>
+                <p>رهنمون با این هدف شکل گرفته است که به یاری مشاورانی متخصص به افراد کمک کند تا به آسانی پاسخی برای چالش های زندگی بیابند و از سویی بستری برای مشاوران فراهم آورد که با دسترسی به طیف گسترده ای از مراجعان کسب درآمد کنند.</p>
+                <p>در همین راستا رهنمون به عنوان یک موسسه مشاوره آنلاین به کمک تیمی از متخصصان متبحر و مشاورانی با تجربه تصمیم بر آن دارد که بر بستر فناوری اطلاعات و با فراهم آوردن امکان برگزاری جلسات مشاوره صوتی و تصویری همزمان، ماورای محدودیت های مکانی و زمانی، کیفیت مشاوره آنلاین را به حدی برساند که به مشاوره حضوری ترجیح داده شود و در نهایت جایگزین آن گردد.</p>
+
+                <h2>رهنمون در یک دقیقه</h2>
+                <div class="video-container video-16by9">
+                    <iframe class="video-item" src="http://www.aparat.com/video/video/embed/videohash/grubS/vt/frame" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" height="360" width="640"></iframe>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="team grid three!">
+            <section class="container">
+                <h2>تیم رهنمون</h2>
+
+                <div class="wrapper">
+
+                    <article>
+                        <a class="external" title="داریوش لطفی" href="http://www.linkedin.com/in/dlotfi"><img alt="داریوش لطفی" src="@Content("~/Images/Team/dariush_lotfi.jpg")" /></a>
+                        <div class="contents">
+                            <header>
+                                <h3>
+                                    <a class="external" title="پروفایل لینکدین داریوش لطفی" href="http://www.linkedin.com/in/dlotfi">
+                                        داریوش لطفی
+                                        <span>بنیانگذار، کارشناس توسعه وب</span>
+                                    </a>
+                                </h3>
+                            </header>
+                        </div>
+                    </article>
+
+                    <article>
+                        <a class="external" title="محمدحسین محمدی" href="http://www.linkedin.com/in/mhmohammadi83"><img alt="محمدحسین محمدی" src="@Content("~/Images/Team/mohammadhossein_mohammadi.jpg")" /></a>
+                        <div class="contents">
+                            <header>
+                                <h3>
+                                    <a class="external" title="پروفایل لینکدین محمدحسین محمدی" href="http://www.linkedin.com/in/mhmohammadi83">
+                                        محمدحسین محمدی
+                                        <span>بنیانگذار، کارشناس توسعه وب</span>
+                                    </a>
+                                </h3>
+                            </header>
+                        </div>
+                    </article>
+
+                    <article>
+                        <a class="external" title="مصطفی مقدم" href="http://www.linkedin.com/in/mostafamoghaddam"><img alt="مصطفی مقدم" src="@Content("~/Images/Team/mostafa_moghaddam.jpg")" /></a>
+                        <div class="contents">
+                            <header>
+                                <h3>
+                                    <a class="external" title="پروفایل لینکدین مصطفی مقدم" href="http://www.linkedin.com/in/mostafamoghaddam">
+                                        مصطفی مقدم
+                                        <span>بنیانگذار، کارشناس طراحی محصول و تجربه کاربری</span>
+                                    </a>
+                                </h3>
+                            </header>
+                        </div>
+                    </article>
+
+                    <article>
+                        <a class="external" title="سمیه شریف زاده" href="#"><img alt="سمیه شریف زاده" src="@Content("~/Images/Team/somaye_sharifzade.jpg")" /></a>
+                        <div class="contents">
+                            <header>
+                                <h3>
+                                    <a class="external" title="پروفایل لینکدین سمیه شریف زاده" href="#">
+                                        سمیه شریف زاده
+                                        <span>مسئول روابط عمومی، کارشناس تولید محتوا</span>
+                                    </a>
+                                </h3>
+                            </header>
+                        </div>
+                    </article>
+
+                    <article>
+                        <a title="به تیم رهنمون بپیوندید" href="mailto:jobs@rahnemun.com"><img alt="عضو بعدی تیم رهنمون" src="@Content("~/Images/Team/avatar.jpg")" /></a>
+                        <div class="contents">
+                            <header>
+                                <h3>
+                                    <a title="به تیم رهنمون بپیوندید" href="mailto:jobs@rahnemun.com">
+                                        به تیم رهنمون بپیوندید
+                                    </a>
+                                </h3>
+                            </header>
+                        </div>
+                    </article>
+
+                </div>
+
+            </section>
+        </div>
+
+    </div>
+
+}

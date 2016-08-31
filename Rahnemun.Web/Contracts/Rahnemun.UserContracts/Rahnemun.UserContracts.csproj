@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{16F223F9-DD7F-4D92-BF57-913B31FBE6F8}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Rahnemun.UserContracts</RootNamespace>
+    <AssemblyName>Rahnemun.UserContracts</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Edreamer.Framework">
+      <HintPath>..\..\..\lib\Edreamer.Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Mvc, Version=4.0.0.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\lib\System.Web.Mvc.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Extensions.cs" />
+    <Compile Include="Interfaces\IAccountService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Interfaces\IConsulteeService.cs" />
+    <Compile Include="Interfaces\IConsultantService.cs" />
+    <Compile Include="Interfaces\IDashboardItemProvider.cs" />
+    <Compile Include="Interfaces\IGuestService.cs" />
+    <Compile Include="Interfaces\IUserNotificationProvider.cs" />
+    <Compile Include="Interfaces\IUserService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Models\GuestModel.cs" />
+    <Compile Include="Models\StartNewSessionRouteModel.cs" />
+    <Compile Include="Models\ConsultantIdModel.cs" />
+    <Compile Include="Models\ConsulteeModel.cs" />
+    <Compile Include="Models\ConsultantModel.cs" />
+    <Compile Include="Models\ConsultantPreliminaryRegisterModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Models\ConsultantUpdateModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Models\ConsulteeUpdateModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Models\DashboardItemModel.cs" />
+    <Compile Include="Models\NonceRouteModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Models\UnauthorizedErrorRouteModel.cs" />
+    <Compile Include="Models\UserModel.cs" />
+    <Compile Include="Models\UserNotificationModel.cs" />
+    <Compile Include="Models\UserUpdateModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Routes.cs" />
+    <Compile Include="WebParts.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Rahnemun.Common\Rahnemun.Common.csproj">
+      <Project>{bdcca5cd-e609-46cf-b713-f4b4ed284767}</Project>
+      <Name>Rahnemun.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Rahnemun.CategoryContracts\Rahnemun.CategoryContracts.csproj">
+      <Project>{77bc5ee8-bf75-452e-ba92-79e377cf4a5d}</Project>
+      <Name>Rahnemun.CategoryContracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Rahnemun.EmailContracts\Rahnemun.EmailContracts.csproj">
+      <Project>{0242daa3-6823-48e3-9afd-fef5f7eb733f}</Project>
+      <Name>Rahnemun.EmailContracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Rahnemun.MediaContracts\Rahnemun.MediaContracts.csproj">
+      <Project>{82166f7f-3fe6-4772-b8af-795883c58ae9}</Project>
+      <Name>Rahnemun.MediaContracts</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,113 @@
+﻿@using Edreamer.Framework.Settings
+@using Rahnemun.BlogContracts
+@using Rahnemun.MediaContracts
+@using Rahnemun.UIContracts
+
+@model PostViewModel
+
+@{
+    this.SetUIInfo(new UIInfo
+    {
+        NavigationId = "Blog",
+        PageTitle = Model.Title,
+        PageSubtitle = Model.Subtitle
+    });
+    var postUrl = Url.Route<IBlogPostRoute>().Get(new BlogPostRouteModel { PostId = Model.Id, PostSlug = Model.Slug });
+    this.SetContentInfo(new ArticleContentInfo
+    {
+        Title = Model.Title,
+        Description = Model.Summary,
+        Url = postUrl,
+        ImageUrl = Url.Route<IImageRoute>().Get(new ImageRouteModel { Id = Model.CoverPictureId, Size = ImageSize.Cover }),
+        AuthorFirstName = Model.Author.FirstName,
+        AuthorLastName = Model.Author.LastName,
+        AuthorGender = Model.Author.Gender,
+        Category = Model.Category,
+        PublishTime = Model.PublishTime,
+        Tags = Model.Tags
+    });
+
+    var commentsCount = Model.CommentsCount == 0 ? "بدون دیدگاه" : (Model.CommentsCount + " دیدگاه");
+    string twitterUsername;
+    Container.GetExportedValue<ISettingsService>().TryGetSetting(new SettingEntryKey { Category = "Twitter", Name = "Username" }, out twitterUsername);
+    var postShortUrl = Url.Route<IBlogPostRoute>().Get(new BlogPostRouteModel { PostId = Model.Id });
+
+    var shareOnTwitterUrl = "https://twitter.com/intent/tweet?text={0}&url={1}&via={2}"
+        .FormatWith(Url.Encode(Model.Title), Url.Encode(Url.ConvertToAbsoluteUrl(postShortUrl)), twitterUsername ?? "");
+    var shareOnFacebookUrl = "https://www.facebook.com/sharer/sharer.php?u=" + Url.Encode(Url.ConvertToAbsoluteUrl(postUrl));
+    var shareOnLinkedInUrl = "https://www.linkedin.com/shareArticle?mini=true&url=" + Url.Encode(Url.ConvertToAbsoluteUrl(postUrl));
+    var shareOnGooglePlusUrl = "https://plus.google.com/share?url=" + Url.Encode(Url.ConvertToAbsoluteUrl(postUrl));
+    var shareViaTelegramUrl = "tg://msg?text=" + Model.Title + " " + Url.Encode(Url.ConvertToAbsoluteUrl(postShortUrl));
+    var shareViaEmiailUrl = "mailto:?subject={0}&body={0}%0D%0A{1}%0D%0A%0D%0A{2}".FormatWith(Model.Title, Model.Summary, Url.ConvertToAbsoluteUrl(postShortUrl));
+}
+
+@section ContentBody {
+
+<div class="content-sidebar">
+    <div class="container">
+
+        <section class="content">
+
+            <article class="context readingmode">
+                <a class="tooltip readingmode-trigger" title="سویچ به حالت مطالعه" href="#"><span>سویچ به حالت مطالعه</span></a>
+                <header>
+                    @Html.Image(Model.CoverPictureId, Model.Title, ImageSize.Cover)
+                    <h2>@Model.Title</h2>
+                    @if (!String.IsNullOrEmpty(Model.Subtitle))
+                    {
+                        <h3>@Model.Subtitle</h3>
+                    }
+                    <ul>
+                        <li class="grouping"><a title="گروه" href="@(Url.Route<IBlogRoute>().Get(new BlogRouteModel {Category = Model.Category}))">@Model.Category</a></li>
+                        <li class="author">@Model.AuthorFullName</li>
+                        <li class="date" title="تاریخ انتشار"><time datetime="@Model.PublishTime.ToIsoTime()">@Model.PublishTimeFormatted</time></li>
+                        <li class="opinion"><a href="#comments" title="@commentsCount">@commentsCount</a></li>
+                    </ul>
+                </header>
+
+                @Html.Raw(Model.Content)
+
+                <div class="sharebar">
+                    <div class="container">
+                        <h3>اشتراک گذاری:</h3>
+                        <ul>
+                            <li class="twitter"><a class="popup" title="اشتراک گذاری در توییتر" href="@shareOnTwitterUrl"><span>اشتراک گذاری در توییتر</span></a></li>
+                            <li class="facebook"><a class="popup" title="اشتراک گذاری در فیسبوک" href="@shareOnFacebookUrl"><span>اشتراک گذاری در فیسبوک</span></a></li>
+                            <li class="googleplus"><a class="popup" title="اشتراک گذاری در گوگل پلاس" href="@shareOnGooglePlusUrl"><span>اشتراک گذاری در گوگل پلاس</span></a></li>
+                            <li class="linkedin"><a class="popup" title="اشتراک گذاری در لینکدین" href="@shareOnLinkedInUrl"><span>اشتراک گذاری در لینکدین</span></a></li>
+                            <li class="telegram"><a title="اشتراک گذاری در تلگرام" href="@shareViaTelegramUrl"><span>اشتراک گذاری در تلگرام</span></a></li>
+                            <li class="email"><a title="ارسال لینک توسط ایمیل" href="@shareViaEmiailUrl"><span>ارسال لینک توسط ایمیل</span></a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                @if (!String.IsNullOrEmpty(Model.CallToAction))
+                {
+                    @Html.Raw(Model.CallToAction)
+                }
+            </article>
+
+            <div class="tags">
+                <div class="container">
+                    <h2>برچسب های مرتبط</h2>
+                    <ul>
+                        @foreach (var tag in Model.Tags)
+                        {
+                            <li><a href="@(Url.Route<IBlogRoute>().Get(new BlogRouteModel {Tag = tag}))" title="@tag">@tag</a></li>
+                        }
+                    </ul>
+                </div>
+            </div>
+
+            @(Html.WebPart<ICommentsWebPart>().Get(Model.Id))
+
+            <hr />
+
+        </section>
+
+        @Html.Action("SideBar", new { Model.Category })
+
+    </div>
+</div>
+
+}

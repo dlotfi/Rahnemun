@@ -1,0 +1,28 @@
+﻿@using Rahnemun.CategoryContracts
+
+@model CategoryMenuWebPartViewModel
+           
+<a @(Model.Active ? "class=current" : "") title="گروه های مشاوره" href="@(Url.Route<ICategoriesListRoute>().Get())"><span>گروه های مشاوره</span></a>
+<ul>
+    @foreach (var categoryMenuItem in Model.MenuItems)
+    {
+        <li>
+            @if (categoryMenuItem.SubItems == null || !categoryMenuItem.SubItems.Any())
+            {
+                <a title="@categoryMenuItem.Description" href="@categoryMenuItem.Url">@categoryMenuItem.Caption</a>
+            }
+            else
+            {
+                <a title="@categoryMenuItem.Description" href="#"><span>@categoryMenuItem.Caption</span></a>
+                <ul>
+                    @foreach (var categoryMenuSubItem in categoryMenuItem.SubItems)
+                    {
+                        <li><a title="@categoryMenuSubItem.Description" href="@categoryMenuSubItem.Url">@categoryMenuSubItem.Caption</a></li>
+                    }
+                </ul>
+            }
+        </li>
+    }
+</ul>
+
+

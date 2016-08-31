@@ -1,0 +1,93 @@
+﻿@using Rahnemun.ContactUs
+@using Rahnemun.ContactUsContracts
+@using Rahnemun.UIContracts
+
+@model ContactUsEditViewModel
+
+@{
+    this.SetUIInfo(new UIInfo
+    {
+        NavigationId = "ContactUs",
+        PageTitle = "تماس با رهنمون",
+        ShowMenu = true,
+        NoBanner = true
+    });
+    this.SetContentInfo(new ContentInfo { 
+        Title = "تماس",
+        Description = "اطلاعات و فرم تماس با رهنمون",
+        Url = Url.Route<IContactUsRoute>().Get()
+    });
+
+    RequireScript("jQuery");
+    RequireScript("jQuery-Form");
+    RequireScript("jQuery-Validation-All");
+    RequireScript("Knockout");
+    RequireScript("Rahnemun");
+    IncludeScript("Scripts/contact.js");
+}
+
+@section ContentBody {
+    <div class="map">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4146.609911708006!2d51.239674000000306!3d35.75603399851173!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzXCsDQ1JzIxLjciTiA1McKwMTQnMjIuOCJF!5e0!3m2!1sen!2sir!4v1439224260653" width="600" height="450" frameborder="0" style="border: 0" allowfullscreen></iframe>
+    </div>
+
+    <div class="register two-column">
+        <div class="container">
+            <section>
+                <div class="details">
+                    <div class="container">
+                        <h3>اطلاعات تماس با رهنمون</h3>
+                        <ul>
+                            <li class="address">
+                                <a class="external" href="https://goo.gl/maps/7yK5C" title="آدرس پستی: تهران، شهرک گلستان، بلوار کاج، سروستان دهم، ساختمان رهنمون">
+                                    <h4>آدرس پستی:</h4>
+                                    <p>تهران، شهرک گلستان، بلوار کاج، سروستان دهم، ساختمان رهنمون</p>
+                                </a>
+                            </li>
+                            <li class="phone">
+                                <a href="tel:@Model.ContactTelNo" title="تلفن تماس: @Model.ContactTelTitle">
+                                    <h4>:تلفن تماس</h4>
+                                    <p>شنبه تا چهارشنبه 9 الی 18 - @Model.ContactTelTitle</p>
+                                </a>
+                            </li>
+                            <li class="phone">
+                                <a href="fax:@Model.ContactTelNo" title="نمابر: @Model.ContactTelTitle">
+                                    <h4>:نمابر</h4>
+                                    <p>@Model.ContactTelTitle</p>
+                                </a>
+                            </li>
+                            <li class="email">
+                                <a class="external" href="mailto:info@rahnemun.com" title="پست الکترونیک: info@rahnemun.com">
+                                    <h4>پست الکترونیک:</h4>
+                                    <p>info@rahnemun.com</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </div><!-- // container -->
+                </div><!-- // details -->
+            </section>
+
+            <section data-customermessage="@Html.ToFormattedJson(new { Model.AddUrl, Model.IsUserLoggedin, Model.ResultMessage, Model.ResultMessageTitle })">
+                <h3>فرم تماس با ما</h3>
+
+                @using (Html.BeginForm("", FormMethod.Post, new { @class = "form-horizontal", id = "contactus-form", data_bind = "submit: send" }))
+                {
+                    <fieldset>
+                        @*<legend>تماس با ما</legend>*@
+
+                        <!-- ko ifnot: isUserLoggedin -->
+                        @Html.FullEditorFor(m => m.Name)
+                        @Html.FullEditorFor(m => m.Email)
+                        <!-- /ko -->
+
+                        @Html.FullEditorFor(m => m.Subject)
+                        @Html.FullEditorFor(m => m.Message)
+                        @Html.FullEditorFor(m => m.Captcha, new { CaptchaId = Model.CaptchaId, CaptchaIdName = "CaptchaId" })
+
+                        <button class="button default" type="submit">ارسال</button>
+                    </fieldset>
+                }
+            </section>
+        </div>
+    </div>
+}

@@ -1,0 +1,10 @@
+﻿@using Rahnemun.UIContracts
+
+@model IEnumerable<DialogModel>
+
+@foreach (var dialog in Model)
+{
+    @dialog.Html(Html)
+}
+
+

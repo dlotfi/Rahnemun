@@ -1,0 +1,62 @@
+﻿# Rahnemun resource strings for 'fa-ir' culture
+
+#: System.ComponentModel.DataAnnotations.RequiredAttribute
+#| msgid "The {0} field is required."
+msgid "The {0} field is required."
+msgstr "فیلد {0} حتما باید وارد شود"
+
+#: System.ComponentModel.DataAnnotations.RangeAttribute
+#| msgid "The field {0} must be between {1} and {2}."
+msgid "The field {0} must be between {1} and {2}."
+msgstr "مقدار فیلد {0} حتما باید بین {1} و {2} باشد"
+
+#: System.ComponentModel.DataAnnotations.EmailAddressAttribute
+#| msgid "The {0} field is not a valid e-mail address."
+msgid "The {0} field is not a valid e-mail address."
+msgstr "مقدار فیلد {0} باید یک آدرس ایمیل معتبر باشد"
+
+#: System.ComponentModel.DataAnnotations.CreditCardAttribute
+#| msgid "The {0} field is not a valid credit card number."
+msgid "The {0} field is not a valid credit card number."
+msgstr "مقدار فیلد {0} باید یک شماره کارت بانکی معتبر باشد"
+
+#: System.ComponentModel.DataAnnotations.FileExtensionsAttribute
+#| msgid "The {0} field only accepts files with the following extensions: {1}"
+msgid "The {0} field only accepts files with the following extensions: {1}"
+msgstr "فیلد {0} تنها می تواند فایلهای با پسوند {1} را بپذیرد"
+
+#: Rahnemun.Common.AcceptExtensionsAttribute
+#| msgid "The {0} field only accepts files with the following extensions: {1}"
+msgid "The {0} field only accepts files with the following extensions: {1}"
+msgstr "فیلد {0} تنها می تواند فایلهای با پسوند {1} را بپذیرد"
+
+#: Rahnemun.Common.FixedStringLengthAttribute
+#| msgid "The length of field {0} must be {1} characters."
+msgid "The length of field {0} must be {1} characters."
+msgstr "مقدار فیلد {0} حتما باید {1} حرف باشد"
+
+#: Rahnemun.Common.MaxStringLengthAttribute
+#| msgid "The length of field {0} should not exceed {1} characters."
+msgid "The length of field {0} should not exceed {1} characters."
+msgstr "طول فیلد {0} نباید بیشتر از {1} حرف باشد"
+
+#: Rahnemun.User.Annotations.CellphoneNoAttribute
+#| msgid "The value of the field {0} should be a valid cellphone number."
+msgid "The value of the field {0} should be a valid cellphone number."
+msgstr "مقدار فیلد {0} باید یک شماره موبایل معتبر باشد"
+
+
+#: Rahnemun.Common.GlobalExceptionFilter
+#| msgid "A security exception occurred."
+msgid "A security exception occurred."
+msgstr "یک خطای امنیتی رخ داده است. شاید این خطا به دلیل نداشتن مجوزهای لازم باشد."
+
+#: Rahnemun.Common.GlobalExceptionFilter
+#| msgid "A Concurrency exception occured"
+msgid "A Concurrency exception occured"
+msgstr "یک خطای همزمانی اتفاق افتاد. ممکن است کاربر دیگری در حال انجام تغییر در همین قسمت باشد. لطفا صفحه را مجددا بارگذاری نموده و دوباره تلاش نمایید."
+
+#: Rahnemun.Common.GlobalExceptionFilter
+#| msgid "An exception occured."
+msgid "An exception occured."
+msgstr "متاسفانه خطایی در برنامه اتفاق افتاد. لطفا یک بار دیگر تلاش نمایید."

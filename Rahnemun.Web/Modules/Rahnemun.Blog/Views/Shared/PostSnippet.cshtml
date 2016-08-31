@@ -1,0 +1,30 @@
+﻿@using Rahnemun.BlogContracts
+@using Rahnemun.MediaContracts
+
+@model PostViewModel
+
+@{
+    var postUrl = Url.Route<IBlogPostRoute>().Get(new BlogPostRouteModel { PostId = Model.Id, PostSlug = Model.Slug });
+    var commentsCount = Model.CommentsCount == 0 ? "بدون دیدگاه" : (Model.CommentsCount + " دیدگاه");
+}
+
+<article>
+    <a href="@postUrl" title="@Model.Title">@Html.Image(Model.ThumbnailPictureId, Model.Title, ImageSize.List)</a>
+
+    <div class="contents">
+        <header>
+            <h3>
+                <a href="@postUrl" title="@Model.Title">@Model.Title</a>
+            </h3>
+        </header>
+        <p>@Model.Summary</p>
+        <footer>
+            <ul>
+                <li class="grouping"><a title="گروه" href="@(Url.Route<IBlogRoute>().Get(new BlogRouteModel { Category = Model.Category }))">@Model.Category</a> </li>
+                <li class="author">@Model.AuthorFullName</li>
+                <li class="date"><time datetime="@Model.PublishTime.ToIsoTime()">@Model.PublishTimeFormatted</time></li>
+                <li class="opinion"><a href="@(postUrl + "#comments")" title="@commentsCount">@commentsCount</a></li>
+            </ul>
+        </footer>
+    </div>
+</article>

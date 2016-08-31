@@ -1,0 +1,29 @@
+﻿@using Rahnemun.UIContracts
+
+@model ErrorViewModel
+
+@{
+    Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+
+    this.SetUIInfo(new UIInfo
+    {
+        NavigationId = "Error",
+        PageTitle = "خطا",
+        NoBanner = true
+    });
+    this.SetContentInfo(new ContentInfo 
+    {
+        Title = "خطا"
+    }, false);
+}
+
+@section ContentBody {
+    <div class="runtimeerror">
+        <div class="container">
+            <h2>:(</h2>
+            <h3>خطا!</h3>
+            <p>@Model.ErrorMessage</p>
+            <p>در صورت مشاهده دوباره خطا از طریق فرم بازخورد، ایمیل <code><a href="mailto:@Model.SupportEmail"><strong>@Model.SupportEmail</strong></a></code> یا شماره تلفن <code><a href="mailto:@Model.ContactTelNo"><strong>@Model.ContactTelTitle</strong></a></code> با پشتیبانی سایت تماس حاصل فرمایید.</p>
+        </div>
+    </div>
+}

@@ -1,0 +1,16 @@
+﻿@{
+    var label = Html.LabelText("");
+    var id = ViewData.TemplateInfo.GetFullHtmlFieldId("");
+    var description = ViewData["Description"] ?? ViewData.ModelMetadata.Description ?? label;
+    var errorClass = Html.CheckError("") ? " error" : "";
+    var mandatoryClass = Html.MarkFieldAsRequired() ? " mandatory" : "";
+}
+
+<div class="@("form-group" + mandatoryClass + errorClass)">
+    @if (ViewBag.CompactFullEditor == null || !(bool)ViewBag.CompactFullEditor)
+    {
+        <label class="control-label" for="@id">@label</label>
+    }
+    @Html.Editor("", new { Description = description })
+    @Html.WrappedValidationMessage("", new { @class = "validator" })
+</div>

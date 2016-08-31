@@ -1,0 +1,22 @@
+﻿@using Rahnemun.CategoryContracts
+@using Rahnemun.UIContracts
+
+@{
+    this.SetUIInfo(new UIInfo
+    {
+        NavigationId = "Category",
+        PageTitle = "گروه‌های مشاوره",
+        PageSubtitle = "انتخاب گروه و زیر گروه",
+        ShowMenu = true
+    });
+    this.SetContentInfo(new ContentInfo
+    {
+        Title = "گروه‌های مشاوره",
+        Description = "گروه‌های مشاوره رهنمون. گروه مورد نظر خود را برای مشاهده لیست مشاوران آن گروه انتخاب نمایید.",
+        Url = Url.Route<ICategoriesListRoute>().Get()
+    });
+}
+
+@section ContentBody {
+    @(Html.WebPart<ICategoryListWebPart>().Get())
+}

@@ -1,0 +1,464 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Model.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2005" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="ModelTargetContainer">
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Model" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2009/11/edm" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
+        <EntityContainer Name="ModelContainer" annotation:LazyLoadingEnabled="true" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
+          <EntitySet Name="Categories" EntityType="Model.Category" />
+          <EntitySet Name="Users" EntityType="Model.User" />
+          <EntitySet Name="CategoryGroups" EntityType="Model.CategoryGroup" />
+          <AssociationSet Name="CategoryGroupCategory" Association="Model.CategoryGroupCategory">
+            <End Role="CategoryGroup" EntitySet="CategoryGroups" />
+            <End Role="Category" EntitySet="Categories" />
+          </AssociationSet>
+          <EntitySet Name="Sessions" EntityType="Model.Session" />
+          <EntitySet Name="Messages" EntityType="Model.Message" />
+          <AssociationSet Name="ConsulteeSession" Association="Model.ConsulteeSession">
+            <End Role="Consultee" EntitySet="Users" />
+            <End Role="Session" EntitySet="Sessions" />
+          </AssociationSet>
+          <AssociationSet Name="SessionMessage" Association="Model.SessionMessage">
+            <End Role="Session" EntitySet="Sessions" />
+            <End Role="Message" EntitySet="Messages" />
+          </AssociationSet>
+          <AssociationSet Name="CategorySession" Association="Model.CategorySession">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="Session" EntitySet="Sessions" />
+          </AssociationSet>
+          <EntitySet Name="Payments" EntityType="Model.Payment" />
+          <AssociationSet Name="PaymentUser" Association="Model.PaymentUser">
+            <End Role="Payment" EntitySet="Payments" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+          <EntitySet Name="CustomerMessages" EntityType="Model.CustomerMessage" />
+          <AssociationSet Name="SessionPayment" Association="Model.SessionPayment">
+            <End Role="Session" EntitySet="Sessions" />
+            <End Role="Payment" EntitySet="Payments" />
+          </AssociationSet>
+          <EntitySet Name="BlogPosts" EntityType="Model.BlogPost" />
+          <AssociationSet Name="UserBlogPost" Association="Model.UserBlogPost">
+            <End Role="User" EntitySet="Users" />
+            <End Role="BlogPost" EntitySet="BlogPosts" />
+          </AssociationSet>
+          <AssociationSet Name="CategoryConsultant" Association="Model.CategoryConsultant">
+            <End EntitySet="Categories" Role="Category" />
+            <End EntitySet="Users" Role="Consultant" />
+          </AssociationSet>
+          <AssociationSet Name="UserSession" Association="Model.UserSession">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Session" EntitySet="Sessions" />
+          </AssociationSet>
+          <EntitySet Name="Comments" EntityType="Model.Comment" />
+          <AssociationSet Name="BlogPostComment" Association="Model.BlogPostComment">
+            <End Role="BlogPost" EntitySet="BlogPosts" />
+            <End Role="Comment" EntitySet="Comments" />
+          </AssociationSet>
+          <AssociationSet Name="CommentReply" Association="Model.CommentReply">
+            <End Role="Comment" EntitySet="Comments" />
+            <End Role="Comment1" EntitySet="Comments" />
+          </AssociationSet>
+          <EntitySet Name="Guests" EntityType="Model.Guest" />
+          <AssociationSet Name="GuestComment" Association="Model.GuestComment">
+            <End Role="Guest" EntitySet="Guests" />
+            <End Role="Comment" EntitySet="Comments" />
+          </AssociationSet>
+          <AssociationSet Name="UserComment" Association="Model.UserComment">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Comment" EntitySet="Comments" />
+          </AssociationSet>
+          <AssociationSet Name="UserCustomerMessage" Association="Model.UserCustomerMessage">
+            <End Role="User" EntitySet="Users" />
+            <End Role="CustomerMessage" EntitySet="CustomerMessages" />
+          </AssociationSet>
+          <AssociationSet Name="GuestCustomerMessage" Association="Model.GuestCustomerMessage">
+            <End Role="Guest" EntitySet="Guests" />
+            <End Role="CustomerMessage" EntitySet="CustomerMessages" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Name="Caption" Type="String" Nullable="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="1000" />
+          <Property Name="DisplayOrder" Type="Byte" Nullable="false" />
+          <Property Name="Terms" Type="String" Nullable="false" />
+          <NavigationProperty Name="CategoryGroup" Relationship="Model.CategoryGroupCategory" FromRole="Category" ToRole="CategoryGroup" />
+          <Property Name="CategoryGroupId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="30" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="30" />
+          <Property Name="ProfilePictureId" Type="Int32" Nullable="true" />
+          <Property Name="Gender" Type="Byte" Nullable="true">
+            <Documentation>
+              <LongDescription>Gender Enumeration</LongDescription>
+            </Documentation>
+          </Property>
+          <Property Name="EducationLevel" Type="Byte" Nullable="true">
+            <Documentation>
+              <LongDescription>EducationLevel Enumeration</LongDescription>
+            </Documentation>
+          </Property>
+          <Property Name="MaritalStatus" Type="Byte" Nullable="true" >
+            <Documentation>
+              <LongDescription>MaritalStatus Enumeration</LongDescription>
+            </Documentation>
+          </Property>
+          <Property Name="CellphoneNo" Type="String" Nullable="true" MaxLength="11" FixedLength="true" />
+          <Property Name="BirthDate" Type="DateTime" Nullable="true" />
+          <Property Name="SubscribedToNewsletter" Type="Boolean" Nullable="true" />
+          <Property Name="More" Type="String" Nullable="true" MaxLength="2000" />
+          <Property Name="RegisterDate" Type="DateTime" Nullable="false" />
+          <Property Name="Timestamp" Type="Binary" Nullable="false" ConcurrencyMode="Fixed" />
+        </EntityType>
+        <EntityType Name="Consultant" BaseType="Model.User">
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="50" />
+          <Property Name="BankCardNo" Type="String" Nullable="false" MaxLength="16" FixedLength="true" />
+          <Property Name="BankAccountNo" Type="String" Nullable="true" MaxLength="30" />
+          <Property Name="BankName" Type="String" Nullable="true" MaxLength="50" />
+          <Property Name="Education" Type="String" Nullable="false" MaxLength="1000" />
+          <Property Name="ProfessionalExperience" Type="String" Nullable="false" MaxLength="1000" />
+          <Property Name="LicenseNumber" Type="String" Nullable="true" MaxLength="30" />
+          <Property Name="ProfessionalCertificates" Type="String" Nullable="true" MaxLength="1000" />
+          <Property Name="WorkAddress" Type="String" MaxLength="300" Nullable="true" />
+          <Property Name="WorkPhoneNo" Type="String" MaxLength="50" Nullable="true" />
+          <Property Name="Capacity" Type="Byte" Nullable="false" />
+          <Property Name="Approved" Type="Boolean" Nullable="true" />
+          <Property Name="ConsultantNewData" Type="String" Nullable="true" />
+          <Property Name="Fee" Type="Decimal" Nullable="false" />
+          <NavigationProperty Name="Categories" Relationship="Model.CategoryConsultant" FromRole="Consultant" ToRole="Category" />
+        </EntityType>
+        <EntityType Name="CategoryGroup">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Caption" Type="String" Nullable="false" />
+          <Property Name="DisplayOrder" Type="Byte" Nullable="false" />
+        </EntityType>
+        <Association Name="CategoryGroupCategory">
+          <End Type="Model.CategoryGroup" Role="CategoryGroup" Multiplicity="1" />
+          <End Type="Model.Category" Role="Category" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CategoryGroup">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Category">
+              <PropertyRef Name="CategoryGroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Session">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Consultee" Relationship="Model.ConsulteeSession" FromRole="Session" ToRole="Consultee" />
+          <Property Name="StartTime" Type="DateTime" Nullable="false" />
+          <Property Name="StopTime" Type="DateTime" Nullable="true" />
+          <Property Name="StopType" Type="Byte" Nullable="true" />
+          <Property Name="Rating" Type="Byte" Nullable="true" />
+          <Property Name="ConsulteeId" Type="Int32" Nullable="false" />
+          <Property Name="ConsultantId" Type="Int32" Nullable="false" />
+          <Property Name="CategoryId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Consultant" Relationship="Model.UserSession" FromRole="Session" ToRole="User" />
+          <NavigationProperty Name="Category" Relationship="Model.CategorySession" FromRole="Session" ToRole="Category" />
+          <NavigationProperty Name="Payment" Relationship="Model.SessionPayment" FromRole="Session" ToRole="Payment" />
+          <Property Name="PaymentId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Message">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ByConsultee" Type="Boolean" Nullable="false" />
+          <Property Name="Text" Type="String" Nullable="false" />
+          <Property Name="SentTime" Type="DateTime" Nullable="false" />
+          <Property Name="SeenTime" Type="DateTime" Nullable="true" />
+          <Property Name="MediaId" Type="Int32" Nullable="true" />
+          <NavigationProperty Name="Session" Relationship="Model.SessionMessage" FromRole="Message" ToRole="Session" />
+          <Property Name="SessionId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="ConsulteeSession">
+          <End Type="Model.User" Role="Consultee" Multiplicity="1" />
+          <End Type="Model.Session" Role="Session" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Consultee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Session">
+              <PropertyRef Name="ConsulteeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="SessionMessage">
+          <End Type="Model.Session" Role="Session" Multiplicity="1" />
+          <End Type="Model.Message" Role="Message" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Session">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Message">
+              <PropertyRef Name="SessionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CategorySession">
+          <End Type="Model.Category" Role="Category" Multiplicity="1" />
+          <End Type="Model.Session" Role="Session" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Session">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Payment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Amount" Type="Decimal" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="Model.PaymentUser" FromRole="Payment" ToRole="User" />
+          <Property Name="HandlerId" Type="String" Nullable="false" MaxLength="50" />
+          <Property Name="HandlerData" Type="String" Nullable="false" />
+          <Property Name="UserId" Type="Int32" Nullable="false" xmlns="http://schemas.microsoft.com/ado/2009/11/edm" />
+          <Property Name="Time" Type="DateTime" Nullable="false" />
+          <Property Name="ProviderName" Type="String" MaxLength="50" Nullable="true" />
+          <Property Name="RequestTime" Type="String" Nullable="true" />
+          <Property Name="RequestId" Type="String" MaxLength="50" Nullable="true" />
+          <Property Name="RefrencedId" Type="String" MaxLength="50" Nullable="true" />
+          <Property Name="RequestResult" Type="String" Nullable="true" MaxLength="5" FixedLength="true" />
+          <Property Name="VerificationTime" Type="DateTime" Nullable="true" />
+          <Property Name="VerificationResult" Type="String" Nullable="true" MaxLength="5" FixedLength="true" />
+        </EntityType>
+        <Association Name="PaymentUser">
+          <End Type="Model.Payment" Role="Payment" Multiplicity="*" />
+          <End Type="Model.User" Role="User" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Payment">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="CustomerMessage">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Subject" Type="Byte" Nullable="false" />
+          <Property Name="Message" Type="String" Nullable="false" MaxLength="2000" />
+          <Property Name="SentTime" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="Model.UserCustomerMessage" FromRole="CustomerMessage" ToRole="User" />
+          <Property Name="UserId" Type="Int32" Nullable="true" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <NavigationProperty Name="Guest" Relationship="Model.GuestCustomerMessage" FromRole="CustomerMessage" ToRole="Guest" />
+          <Property Name="GuestId" Type="Int32" Nullable="true" />
+        </EntityType>
+        <Association Name="SessionPayment">
+          <End Type="Model.Session" Role="Session" Multiplicity="0..1" />
+          <End Type="Model.Payment" Role="Payment" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="Payment">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Session">
+              <PropertyRef Name="PaymentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="BlogPost">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="255" />
+          <Property Name="Subtitle" Type="String" Nullable="true" MaxLength="255" />
+          <Property Name="Summary" Type="String" Nullable="false" MaxLength="1000" />
+          <Property Name="Content" Type="String" Nullable="false" />
+          <Property Name="CallToAction" Type="String" Nullable="false" />
+          <Property Name="PublishTime" Type="DateTime" Nullable="false" />
+          <Property Name="Category" Type="String" Nullable="false" MaxLength="255" />
+          <Property Name="Tags" Type="String" Nullable="true" MaxLength="512" />
+          <Property Name="Slug" Type="String" Nullable="false" MaxLength="100" />
+          <NavigationProperty Name="User" Relationship="Model.UserBlogPost" FromRole="BlogPost" ToRole="User" />
+          <Property Name="UserId" Type="Int32" Nullable="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Name="CoverPictureId" Type="Int32" Nullable="false" />
+          <Property Name="ThumbnailPictureId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="UserBlogPost">
+          <End Type="Model.User" Role="User" Multiplicity="1" />
+          <End Type="Model.BlogPost" Role="BlogPost" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BlogPost">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CategoryConsultant">
+          <End Type="Model.Category" Multiplicity="*" Role="Category" />
+          <End Type="Model.Consultant" Multiplicity="*" Role="Consultant" />
+        </Association>
+        <Association Name="UserSession">
+          <End Type="Model.User" Role="User" Multiplicity="1" />
+          <End Type="Model.Session" Role="Session" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Session">
+              <PropertyRef Name="ConsultantId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Comment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="BlogPost" Relationship="Model.BlogPostComment" FromRole="Comment" ToRole="BlogPost" />
+          <Property Name="Text" Type="String" Nullable="false" MaxLength="2000" />
+          <Property Name="SentTime" Type="DateTime" Nullable="false" />
+          <Property Name="BlogPostId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="RepliedComment" Relationship="Model.CommentReply" FromRole="Comment1" ToRole="Comment" />
+          <Property Name="RepliedCommentId" Type="Int32" Nullable="true" />
+          <NavigationProperty Name="User" Relationship="Model.UserComment" FromRole="Comment" ToRole="User" />
+          <NavigationProperty Name="Guest" Relationship="Model.GuestComment" FromRole="Comment" ToRole="Guest" />
+          <Property Name="UserId" Type="Int32" Nullable="true" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Name="GuestId" Type="Int32" Nullable="true" />
+        </EntityType>
+        <Association Name="BlogPostComment">
+          <End Type="Model.BlogPost" Role="BlogPost" Multiplicity="1" />
+          <End Type="Model.Comment" Role="Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BlogPost">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Comment">
+              <PropertyRef Name="BlogPostId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CommentReply">
+          <End Type="Model.Comment" Role="Comment" Multiplicity="0..1" />
+          <End Type="Model.Comment" Role="Comment1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Comment">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Comment1">
+              <PropertyRef Name="RepliedCommentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Guest">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" Type="Int32" />
+          <Property Name="Email" Nullable="true" MaxLength="255" Type="String" />
+          <Property Name="Name" Nullable="true" MaxLength="50" Type="String" />
+          <Property Name="UserAgent" Nullable="false" MaxLength="512" Type="String" />
+          <Property Name="UserIP" Nullable="false" Type="String" MaxLength="50" />
+        </EntityType>
+        <Association Name="GuestComment">
+          <End Type="Model.Guest" Role="Guest" Multiplicity="0..1" />
+          <End Type="Model.Comment" Role="Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Guest">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Comment">
+              <PropertyRef Name="GuestId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UserComment">
+          <End Type="Model.User" Role="User" Multiplicity="0..1" />
+          <End Type="Model.Comment" Role="Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Comment">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UserCustomerMessage">
+          <End Type="Model.User" Role="User" Multiplicity="0..1" />
+          <End Type="Model.CustomerMessage" Role="CustomerMessage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CustomerMessage">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="GuestCustomerMessage">
+          <End Type="Model.Guest" Role="Guest" Multiplicity="0..1" />
+          <End Type="Model.CustomerMessage" Role="CustomerMessage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Guest">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CustomerMessage">
+              <PropertyRef Name="GuestId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <Alias Key="Model" Value="Model" />
+        <Alias Key="Target" Value="Model.Store" />
+        <EntityContainerMapping CdmEntityContainer="ModelContainer" StorageEntityContainer="ModelTargetContainer">
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer>
+    <edmx:Connection>
+      <edmx:DesignerInfoPropertySet>
+        <edmx:DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </edmx:DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <edmx:DesignerInfoPropertySet>
+        <edmx:DesignerProperty Name="ValidateOnBuild" Value="False" />
+        <edmx:DesignerProperty Name="EnablePluralization" Value="True" />
+        <edmx:DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </edmx:DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="84ddbfc0fdfa4cb787900c5ce6bf2a44" Name="All" ZoomLevel="109" >
+        <EntityTypeShape EntityType="Model.Category" Width="1.625" PointX="3" PointY="6.125" IsExpanded="false" />
+        <EntityTypeShape EntityType="Model.User" Width="2.125" PointX="6" PointY="3.375" IsExpanded="false" FillColor="255, 128, 128" />
+        <EntityTypeShape EntityType="Model.Consultant" Width="2.125" PointX="6" PointY="6.125" IsExpanded="false" FillColor="255, 128, 128" />
+        <InheritanceConnector EntityType="Model.Consultant" ></InheritanceConnector>
+        <EntityTypeShape EntityType="Model.CategoryGroup" Width="1.625" PointX="0.5" PointY="6.125" IsExpanded="false" />
+        <AssociationConnector Association="Model.CategoryGroupCategory" />
+        <EntityTypeShape EntityType="Model.Session" Width="1.625" PointX="3.125" PointY="3.375" IsExpanded="false" FillColor="255, 255, 128" />
+        <EntityTypeShape EntityType="Model.Message" Width="1.625" PointX="0.5" PointY="3.375" IsExpanded="false" FillColor="255, 255, 128" />
+        <AssociationConnector Association="Model.SessionMessage" />
+        <AssociationConnector Association="Model.ConsulteeSession" />
+        <AssociationConnector Association="Model.CategorySession" />
+        <EntityTypeShape EntityType="Model.Payment" Width="1.625" PointX="4.75" PointY="0.75" IsExpanded="false" FillColor="128, 255, 128" />
+        <AssociationConnector Association="Model.PaymentUser" />
+        <AssociationConnector Association="Model.SessionPayment" />
+        <EntityTypeShape EntityType="Model.CustomerMessage" Width="1.625" PointX="9.375" PointY="6.125" FillColor="255, 128, 255" IsExpanded="false" />
+        <EntityTypeShape EntityType="Model.BlogPost" Width="1.5" PointX="9.375" PointY="0.75" IsExpanded="false" FillColor="128, 128, 255" />
+        <AssociationConnector Association="Model.UserBlogPost" />
+        <AssociationConnector Association="Model.CategoryConsultant" />
+        <AssociationConnector Association="Model.UserSession" />
+        <EntityTypeShape EntityType="Model.Comment" Width="1.5" PointX="9.375" PointY="2" IsExpanded="false" FillColor="128, 128, 255" />
+        <AssociationConnector Association="Model.BlogPostComment" />
+        <AssociationConnector Association="Model.CommentReply" />
+        <EntityTypeShape EntityType="Model.Guest" PointX="9.375" PointY="3.375" Width="1.625" IsExpanded="false" FillColor="255, 128, 128" />
+        <AssociationConnector Association="Model.GuestComment" />
+        <AssociationConnector Association="Model.UserComment" />
+        <AssociationConnector Association="Model.UserCustomerMessage" ManuallyRouted="false" >
+        </AssociationConnector>
+        <AssociationConnector Association="Model.GuestCustomerMessage" />
+      </Diagram>
+      <Diagram DiagramId="f9cd78cd80a04e18acc820900ac085b0" Name="Blog" >
+        <EntityTypeShape EntityType="Model.BlogPost" Width="1.875" PointX="1.375" PointY="2.75" FillColor="128, 128, 255" />
+        <EntityTypeShape EntityType="Model.User" Width="2.375" PointX="2.375" PointY="0.625" IsExpanded="false" FillColor="255, 128, 128" />
+        <AssociationConnector Association="Model.UserBlogPost" />
+        <EntityTypeShape EntityType="Model.Comment" Width="1.875" PointX="4.125" PointY="2.75" FillColor="128, 128, 255" />
+        <AssociationConnector Association="Model.BlogPostComment" />
+        <AssociationConnector Association="Model.CommentReply" />
+        <AssociationConnector Association="Model.UserComment" />
+        <EntityTypeShape EntityType="Model.Guest" Width="1.5" PointX="5.375" PointY="0.625" IsExpanded="false" FillColor="255, 128, 128" />
+        <AssociationConnector Association="Model.GuestComment" />
+      </Diagram>
+      <Diagram DiagramId="f2e44b96ce8f4011ad1c76e40886b4d2" Name="User" >
+        <EntityTypeShape EntityType="Model.User" Width="1.5" PointX="3.5" PointY="0.5" FillColor="255, 128, 128" />
+        <EntityTypeShape EntityType="Model.Consultant" Width="1.5" PointX="3.5" PointY="4.75" FillColor="255, 128, 128" />
+        <InheritanceConnector EntityType="Model.Consultant" />
+        <EntityTypeShape EntityType="Model.Guest" Width="1.5" PointX="6" PointY="0.5" FillColor="255, 128, 128" />
+        <EntityTypeShape EntityType="Model.Category" Width="1.5" PointX="6" PointY="6.5" IsExpanded="false" />
+        <AssociationConnector Association="Model.CategoryConsultant" />
+      </Diagram>
+      <Diagram DiagramId="a4a1d75aa91a4c39a33e8bd7a40b3686" Name="Category" >
+        <EntityTypeShape EntityType="Model.Category" Width="1.5" PointX="1.125" PointY="1.125" />
+        <EntityTypeShape EntityType="Model.CategoryGroup" Width="1.5" PointX="4" PointY="1.375" />
+        <AssociationConnector Association="Model.CategoryGroupCategory" />
+      </Diagram>
+      <Diagram DiagramId="5836155a7c4f45d687d6ea323e64c010" Name="Session" >
+        <EntityTypeShape EntityType="Model.Session" Width="1.5" PointX="4.875" PointY="1.375" FillColor="255, 255, 128" />
+        <EntityTypeShape EntityType="Model.Payment" Width="1.5" PointX="8.375" PointY="3.25" IsExpanded="false" FillColor="128, 255, 128" />
+        <AssociationConnector Association="Model.SessionPayment" />
+        <EntityTypeShape EntityType="Model.Message" Width="1.5" PointX="2.625" PointY="1.625" FillColor="255, 255, 128" />
+        <AssociationConnector Association="Model.SessionMessage" />
+        <EntityTypeShape EntityType="Model.User" Width="1.5" PointX="8.5" PointY="1.875" IsExpanded="false" FillColor="255, 128, 128" />
+        <AssociationConnector Association="Model.ConsulteeSession" />
+        <AssociationConnector Association="Model.PaymentUser" />
+        <AssociationConnector Association="Model.UserSession" />
+        <EntityTypeShape EntityType="Model.Category" Width="1.5" PointX="8.375" PointY="4.375" IsExpanded="false" />
+        <AssociationConnector Association="Model.CategorySession" />
+      </Diagram>
+      <Diagram DiagramId="a04896c32131417f8276c015c6ec999c" Name="Payment" >
+        <EntityTypeShape EntityType="Model.Payment" Width="1.5" PointX="1.375" PointY="1.5" IsExpanded="true" FillColor="128, 255, 128" />
+        <EntityTypeShape EntityType="Model.User" Width="1.5" PointX="5.5" PointY="1.625" IsExpanded="false" FillColor="255, 128, 128" />
+        <AssociationConnector Association="Model.PaymentUser" />
+      </Diagram>
+      <Diagram DiagramId="464e66daecea44809629758a322282f3" Name="ContactUs" >
+        <EntityTypeShape EntityType="Model.CustomerMessage" Width="1.5" PointX="2.375" PointY="2" FillColor="255, 128, 255" />
+        <EntityTypeShape EntityType="Model.User" Width="1.5" PointX="6.25" PointY="2.375" IsExpanded="false" FillColor="255, 128, 128" />
+        <AssociationConnector Association="Model.UserCustomerMessage" />
+        <EntityTypeShape EntityType="Model.Guest" Width="1.5" PointX="6.25" PointY="3.5" IsExpanded="false" FillColor="255, 128, 128" />
+        <AssociationConnector Association="Model.GuestCustomerMessage" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

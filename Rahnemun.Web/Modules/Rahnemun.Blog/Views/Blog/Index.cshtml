@@ -1,0 +1,60 @@
+﻿@using Rahnemun.BlogContracts
+@using Rahnemun.UIContracts
+
+@model IndexViewModel
+
+@{
+    var title = "آخرین پست ها";
+    if (Model.Category != null)
+    {
+        title = title + "ی گروه " + Model.Category;
+    }
+    else if (Model.Tag != null)
+    {
+        title = title + " با برچسب " + Model.Tag;
+    }
+
+    this.SetUIInfo(new UIInfo
+    {
+        NavigationId = "Blog",
+        PageTitle = "وبلاگ",
+        PageSubtitle = title
+    });
+    this.SetContentInfo(new ContentInfo
+    {
+        Title = "وبلاگ",
+        Description = title,
+        Url = Url.Route<IBlogRoute>().Get(new BlogRouteModel { Category = Model.Category, Tag = Model.Tag })
+    });
+}
+
+@section ContentBody {
+
+    <div class="content-sidebar">
+        <div class="container">
+            
+            <section class="content">
+                <div class="weblog list">
+                    <section class="container">
+                        <h2>@title</h2>
+
+                        @if (Model.Posts.Any())
+                        {
+                            foreach (var post in Model.Posts)
+                            {
+                                @Html.Partial("PostSnippet", post)
+                            }
+                        }
+                        else
+                        {
+                            @Html.MessageBoxInfo("پستی برای نمایش وجود ندارد", null)
+                        }
+                    </section>
+                </div>
+            </section>
+
+            @Html.Action("SideBar", new {Model.Category, Model.Tag})
+
+        </div>
+    </div>
+}

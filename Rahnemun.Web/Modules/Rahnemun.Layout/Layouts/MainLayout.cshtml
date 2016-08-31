@@ -1,0 +1,208 @@
+﻿@using Edreamer.Framework.Context
+@using Edreamer.Framework.UI.MetaData
+@using Edreamer.Framework.UI.Resources
+@using Rahnemun.Common
+@using Rahnemun.UIContracts
+
+@{
+    IncludeResource("script", "Html5Shiv", r => r.SetUrl(null).SetCdn("https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js")).AtHead().UseCondition("lt IE 9");
+    IncludeResource("script", "Respondjs", r => r.SetUrl(null).SetCdn("https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js")).AtHead().UseCondition("lt IE 9");
+    IncludeScript("Scripts/selectivizr-min.js").AtHead().UseCondition("lt IE 9");
+
+    RequireScript("jQuery");
+    IncludeScript("Scripts/edreamer.all.min.js");
+
+    IncludeStyle("StyleSheets/normalize.css").SetAttribute("media", "screen");
+    IncludeStyle("StyleSheets/edreamer.css").SetAttribute("media", "screen");
+    IncludeStyle("StyleSheets/{ThemeName}/theme.css").SetAttribute("media", "screen");
+    
+    var contentInfo = this.GetContentInfo();
+    var uiInfo = this.GetUIInfo();
+}
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fa">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="HandheldFriendly" content="True" />
+
+    @*-- Meta Entries --*@
+    @DeferRender(
+    @<text>
+        @MetaDataManager.GetAllMetaData()
+    </text>
+    )
+    
+    <title>@(contentInfo.Title == "رهنمون" ? "رهنمون" : contentInfo.Title + " | رهنمون")</title>
+    @if (contentInfo.Url != null)
+    {
+        <link rel="canonical" href="@Url.ConvertToAbsoluteUrl(contentInfo.Url)">
+    }
+    
+    <link rel="icon" href="@Content("~/images/rahnemun/favicon.ico")" />
+    <!--<link rel="shortcut icon" href="@Content("~/images/rahnemun/favicon.ico")" />-->
+    <link rel="apple-touch-icon" href="@Content("~/images/rahnemun/apple-touch-icon.png")" />
+    <link rel="apple-touch-icon" href="@Content("~/images/rahnemun/apple-touch-icon-72x72.png")" sizes="72x72" />
+    <link rel="apple-touch-icon" href="@Content("~/images/rahnemun/apple-touch-icon-114x114.png")" sizes="114x114" />
+
+    @*-- Stylesheets & Scripts at head --*@
+    @DeferRender(
+    @<text>
+        @ResourceManager.GetAllRequiredStyles()
+        @ResourceManager.GetAllRequiredScriptsAtHead()
+    </text>
+    )
+    <!--<link rel="stylesheet" href="@Content("~/stylesheets/debug.css")" media="all"/>-->
+    
+    @*-- Tracking Code --*@
+    @if (!WorkContext.CurrentHttpContext().IsDebuggingEnabled && Request.Cookies["disable_tracking"] == null)
+    {
+        var trackers = Container.GetExportedValues<ITracker>();
+        foreach (var tracker in trackers)
+        {
+            @Html.Raw(tracker.GetTrackingCode())
+        }
+    }
+</head>
+
+<body dir="rtl" class="top">
+
+    <div class="hidden">
+        <a title="پرش به محتوی سایت" href="#contents-wrapper" accesskey="2">پرش به محتوی</a>
+        <a title="پرش به منوی پیمایش اصلی سایت" href="#navigation">پرش به منوی پیمایش اصلی</a>
+    </div>
+
+    @*-- Header --*@
+    <div id="header-wrapper">
+
+        <header id="header" class="autohide container">
+            <h1><a title="موسسه مشاوره آنلاین رهنمون" href="/">@uiInfo.PageTitle</a></h1>
+            <h2>موسسه مشاوره آنلاین رهنمون</h2>
+            <ul>
+                @(Html.WebPart<IUserBarWebPart>().Get(true))
+                @if (uiInfo.ShowMenu)
+                {
+                    <li class="nav-trigger"><a title="نمایش منوی پیمایش" href="#"><span>منوی پیمایش</span></a></li>
+                }
+                else
+                {
+                    <li class="nav-trigger back"><a title="بازگشت به صفحه قبل" href="#"><span>بازگشت به صفحه قبل</span></a></li>
+                }
+            </ul>
+        </header>
+
+        <nav id="navigation">
+            <h5>منوی پیمایش سایت</h5>
+            @(Html.WebPart<INavigationWebPart>().Get(new NavigationWebPartModel { NavigationId = uiInfo.NavigationId }))
+        </nav>
+
+        <div class="userbar">
+            @(Html.WebPart<IUserBarWebPart>().Get(false))
+        </div>
+
+        <hr />
+    </div>
+
+    @*-- Contents --*@
+    <div id="contents-wrapper">
+
+        @if (!uiInfo.NoBanner)
+        {
+            <div class="banner">
+                <div class="container">
+                    <h2>@uiInfo.PageTitle</h2>
+                    <h3>@uiInfo.PageSubtitle</h3>
+                    @(Html.WebPart<IBreadcrumbWebPart>().Get(new BreadcrumbWebPartModel { NavigationId = uiInfo.NavigationId, NavigationData = uiInfo.NavigationData }))
+                </div>
+            </div>
+        }
+
+        <div class="notification container" data-notifications="@Html.ToFormattedJson(Notifications.Where(n => n.Type == NotifyType.Success || n.Type == NotifyType.Information))">
+            @foreach (var notification in Notifications)
+            {
+                switch (notification.Type)
+                {
+                    case NotifyType.Warning: @Html.MessageBoxWarning(notification.Message) break;
+                    case NotifyType.Error: @Html.MessageBoxError(notification.Message) break;
+                }
+            }
+        </div>
+        
+        @RenderSection("ContentBody")
+
+        @if (IsSectionDefined("Help"))
+        {
+            <div class="help">
+                <a class="help-trigger tooltip" title="راهنمای این بخش" href="#"><span>راهنما</span></a>
+                <div class="help-contents">
+                    @RenderSection("Help")
+
+                    @*<div class="help-feedback">
+                        <div class="help-feedback-question">
+                            آیا این راهنما مفید بود؟
+                            <a class="yes button" title="بلی" href="#">بلی</a>
+                            <a class="no button" title="خیر" href="#">خیر</a>
+                        </div>
+                        <div class="help-feedback-form">
+                            <!--چطور می توانیم این راهنما را بهبود ببخشیم؟-->
+                            <textarea class="form-control" rows="4" placeholder="چطور می توانیم این راهنما را بهبود ببخشیم؟"></textarea>
+                            <input class="button default" type="button" name="name" value="ارسال" />
+                        </div>
+                        <div class="help-feedback-thanks">
+                            <p class="icon-check-circle">از بازخورد شما سپاسگذاریم!</p>
+                        </div>
+                    </div>*@
+                </div>
+            </div>
+        }
+
+        @(Html.WebPart<IFeedbackWebPart>().Get())
+    </div>
+
+    @*-- Footer --*@
+    <div id="footer-wrapper">
+        <hr />
+        <div class="copyright">
+            <div class="container">
+                <ul class="social">
+                    <li><a class="twitter external" title="ما را در توییتر دنبال کنید" href="https://twitter.com/RahnemunCo"><span>twitter</span></a></li>
+                    <li><a class="facebook external" title="ما را در فیس بوک دنبال کنید" href="https://www.facebook.com/Rahnemun"><span>facebook</span></a></li>
+                    <li><a class="linkedin external" title="ما را در لینکدین دنبال کنید" href="https://www.linkedin.com/company/rahnemun"><span>linkedin</span></a></li>
+                    <li><a class="instagram external" title="ما را در اینستاگرام دنبال کنید" href="https://instagram.com/RahnemunCo"><span>instagram</span></a></li>
+                    <li><a class="email external" title="به ما ایمیل بزنید" href="mailto:info@rahnemun.com"><span>email</span></a></li>
+                </ul>
+                <nav>
+                    @(Html.WebPart<INavigationWebPart>().Get(new NavigationWebPartModel { NavigationId = uiInfo.NavigationId, Footer = true }))
+                </nav>
+
+                <p>&copy; 1394، تمام حقوق این سایت برای <a title="موسسه مشاوره آنلاین رهنمون" href="/">رهنمون</a> محفوظ است.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="debug">
+        <span class="largedesktop">large desktop</span><span class="desktop">desktop</span><span class="tablet">tablet</span><span class="phone">phone</span><noscript><span class="noscript"> &bull; script disabled </span></noscript><span class="watermark"> &copy; Royagar.com</span>
+    </div>
+
+    @*-- Embeded Dialogs --*@
+    <div class="dialogs-container hidden">
+        @(Html.WebPart<IDialogsWebPart>().Get())
+    </div>
+
+    @*-- Scripts at foot --*@
+    <div>
+        @{
+            // scripts.js adds some behaviors to other scripts if they have been defined.
+            // So it is needed to put it here in order to be the last referenced script.
+            IncludeScript("Scripts/{ThemeName}/scripts.min.js", "Scripts/{ThemeName}/scripts.js");
+        }
+        @ResourceManager.GetAllRequiredScriptsAtFoot()
+    </div>
+</body>
+
+</html>
+

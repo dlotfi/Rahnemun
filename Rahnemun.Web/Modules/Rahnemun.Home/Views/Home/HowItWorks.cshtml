@@ -1,0 +1,252 @@
+﻿@using Rahnemun.CategoryContracts
+@using Rahnemun.HomeContracts
+@using Rahnemun.UIContracts
+
+@model HowItWorksViewModel
+
+@{
+    this.SetUIInfo(new UIInfo
+    {
+        NavigationId = "HowItWorks",
+        PageTitle = "چرا رهنمون؟",
+        PageSubtitle = "درباره رهنمون بیشتر بدانید"
+    });
+    this.SetContentInfo(new ContentInfo
+    {
+        Title = "چرا رهنمون",
+        Description = "رهنمون چه خدماتی ارائه می دهد؟ چگونه از رهنمون استفاده کنید؟",
+        Url = Url.Route<IHowItWorksRoute>().Get(),
+        ImageUrl = Content("~/Images/how-intro.jpg")
+    });
+}
+
+@section ContentBody {
+
+    <nav id="navigation-onepage">
+        <h5>منوی پیمایش صفحه</h5>
+        <ul class="container">
+            <li><a class="tooltip" title="چرا رهنمون؟" href="#joinus-intro">چرا رهنمون؟</a></li>
+            <li><a class="tooltip" title="چگونه از رهنمون استفاده کنید؟" href="#joinus-howto">راهنمای استفاده</a></li>
+            <li><a class="tooltip" title="نیاز به اطلاعات بیشتری دارید؟" href="#joinus-faq">اطلاعات بیشتر</a></li>
+            <li><a class="tooltip" title="همین حالا شروع کنید!" href="#joinus-calltoaction">شروع کنید!</a></li>
+        </ul>
+    </nav><!-- // navigation-onepage -->
+
+    <div class="joinus-intro two-column two-one animate">
+        <div class="container">
+
+            <section><h2>چرا رهنمون؟</h2></section>
+
+            <section>
+                
+                @*<div class="video-container video-16by9 hidden">
+                    <iframe class="video-item" src="http://www.aparat.com/video/video/embed/videohash/xpB4s/vt/frame" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" height="360" width="640"></iframe>
+                </div>*@
+
+                <p>رهنمون با ارایه خدمات مشاوره در حوزه های گوناگون زندگی و دارا بودن مشاوران متخصص، این امکان را فراهم می سازد تا در هر زمان و در هر منطقه جغرافیایی که هستید از طریق جلسات راهنمایی و مشاوره آنلاین، با افراد متخصص گفتگو نمایید و نیازهای خود را مرتفع سازید. سهولت دسترسی به خدمات مشاوره تا آنجایی است که رهنمون در تبلت و گوشی های هوشمند نیز در خدمت شما خواهد بود.</p>
+
+            </section>
+
+        </div>
+    </div>
+
+    <div class="joinus-benefits content-image alternative clearfix animate">
+
+        <section class="container">
+
+            <div class="image">
+                <img src="@Content("~/Images/HowItWorks/privacy.jpg")" alt="حفظ حریم خصوصی شما">
+            </div>
+
+            <div class="content">
+
+                <h3>حریم خصوصی شما حفظ خواهد شد</h3>
+                <p>در رهنمون حفظ حریم خصوصی شما اولویت اول ما است. جلسات مشاوره رهنمون محرمانه است و جز خودتان هیچ کسی به محتوای جلسه، دسترسی نخواهد داشت. بعلاوه، شما می توانید با انتخاب نام مستعار در جلسات متنی، هویت خود را مخفی نگه دارید.</p>
+
+            </div>
+
+        </section>
+
+    </div>
+
+    <div class="joinus-benefits content-image clearfix animate">
+
+        <section class="container">
+
+            <div class="image">
+                <img src="@Content("~/Images/HowItWorks/lowcost.jpg")" alt="صرفه جویی در هزینه ها">
+            </div>
+
+            <div class="content">
+
+                <h3>در هزینه های خود صرفه جویی نمایید</h3>
+                <p>هزینه جلسات مشاوره رهنمون به مراتب کمتر از جلسه مشاوره حضوری است. تخفیف های دوره ای نیز در کاهش هزینه های شما موثر خواهد بود. رهنمون با استفاده از درگاه پرداخت آنلاین، امکان پرداخت سریع و مطمئن با کارت های عضو شبکه شتاب را فراهم آورده است. در صورت عدم رضایت از کیفیت جلسه مشاوره، امکان بازگشت هزینه پرداختی به حساب شما وجود دارد.</p>
+
+            </div>
+
+        </section>
+
+    </div>
+
+    <div class="joinus-benefits content-image alternative clearfix animate hidden">
+
+        <section class="container">
+
+            <div class="image">
+                <img src="@Content("~/Images/HowItWorks/consultatns.jpg")" alt="دستیابی به مشاورانی متخصص">
+            </div>
+
+            <div class="content">
+
+                <h3>دستیابی به مشاورانی متخصص</h3>
+                <p>رهنمون پشتیبان شما در تمامی عرصه های زندگی است و فرصتی است تا با دستیابی به مشاوران متخصص در زمینه های گوناگون به حل چالش ها و ارتقا سطح زندگی خود بپردازید. هدف از ارایه جلسه مشاوره بیان یک پرسش از سوی مراجعه کننده و دریافت یک پاسخ برای آن از سوی مشاور نیست، رهنمون جلساتی را ارایه می دهد که شما در آن با مشاور انتخابی خود محاوره داشته باشید و بتوانید تا دریافت پاسخ خود با ایشان گفتگو نمایید.</p>
+
+            </div>
+
+        </section>
+
+    </div>
+
+    <div class="joinus-howto two-column two-one animate">
+        <div class="container">
+
+            <section><h2>چگونه از رهنمون استفاده کنید؟</h2></section>
+
+            <section>
+
+                <div class="howtouse tab centered" id="tab1">
+
+                    <ul class="container">
+                        <li><a title="title" href="#"><span>1</span> انتخاب گروه</a></li>
+                        <li><a title="title" href="#"><span>2</span> انتخاب مشاور</a></li>
+                        <li><a title="title" href="#"><span>3</span> پرداخت</a></li>
+                        <li><a title="title" href="#"><span>4</span> شروع جلسه</a></li>
+
+                    </ul>
+
+                    <ul class="rslides">
+
+                        <li>
+
+                            <section class="container">
+
+                                <h3>انتخاب گروه</h3>
+                                <p>از طریق صفحه اصلی یا صفحه گروه های مشاوره، زیر گروه مناسب را انتخاب کنید.</p>
+
+                                <a class="photo" title="انتخاب گروه" href="@Content("~/Images/HowItWorks/01.jpg")">
+                                    <img alt="انتخاب گروه" src="@Content("~/Images/HowItWorks/01.jpg")">
+                                </a>
+
+                            </section>
+
+                        </li>
+
+                        <li>
+
+                            <section class="container">
+
+                                <h3>انتخاب مشاور</h3>
+                                <p>در صفحه انتخاب مشاور، لیستی از مشاوران زیر گروه انتخابی شما نمایش داده شده است. برای ادامه یا مشاهده اطلاعات بیشتر، مشاور مورد نظر خود را انتخاب کنید. برای شروع جلسه روی دکمه "آغاز جلسه مشاوره" کلیک کنید.</p>
+                                <p>در صفحه بعد با ورود نام، ایمیل و کلمه عبور دلخواه، یک حساب کاربری بسازید. در صورتیکه قبلاً حساب کاربری خود را ایجاد کرده باشید، در این مرحله با ورود ایمیل و کلمه عبور وارد سایت شوید.</p>
+
+                                <a class="photo" title="انتخاب مشاور" href="@Content("~/Images/HowItWorks/02.jpg")">
+                                    <img alt="انتخاب مشاور" src="@Content("~/Images/HowItWorks/02.jpg")">
+                                </a>
+
+                            </section>
+
+                        </li>
+
+                        <li>
+
+                            <section class="container">
+
+                                <h3>پرداخت</h3>
+                                <p>در صفحه "شروع جلسه جدید"، بعد از مطالعه و تایید قسمت "شرایط سلب مسئولیت"، دکمه "پرداخت و شروع جلسه را انتخاب کنید. به درگاه پرداخت هدایت می شوید. پس از پرداخت، به صفحه "جلسه" هدایت می شوید. </p>
+
+                                <a class="photo" title="پرداخت" href="@Content("~/Images/HowItWorks/03.jpg")">
+                                    <img alt="پرداخت" src="@Content("~/Images/HowItWorks/03.jpg")">
+                                </a>
+
+                            </section>
+
+                        </li>
+
+                        <li>
+
+                            <section class="container">
+
+                                <h3>شروع جلسه</h3>
+                                <p>جلسه خود را با درج متن در باکس پیام آغاز کنید.</p>
+
+                                <a class="photo" title="شروع جلسه" href="@Content("~/Images/HowItWorks/04.jpg")">
+                                    <img alt="شروع جلسه" src="@Content("~/Images/HowItWorks/04.jpg")">
+                                </a>
+
+                            </section>
+
+                        </li>
+
+                    </ul>
+
+                </div><!-- // tab -->
+
+            </section>
+
+        </div>
+    </div>
+
+    <div class="joinus-faq two-column two-one animate">
+        <div class="container">
+
+            <section><h2>نیاز به اطلاعات بیشتری دارید؟</h2></section>
+
+            <section>
+
+                @*<div class="megapanel">
+
+                    <section class="panel collapsed">
+
+                        <header class="header"><h4>متن سوال؟</h4></header>
+                        <div class="contents">
+                            <p>لورم ایپسوم متنی است که ساختگی برای لورم ایپسوم متنی است که ساختگی برای طراحی و چاپ آن مورد است. لورم ایپسوم متنی است که ساختگی برای لورم ایپسوم متنی است که ساختگی برای طراحی و چاپ آن مورد است.</p>
+                        </div>
+
+                    </section><!-- // panel -->
+
+                    <section class="panel collapsed">
+
+                        <header class="header"><h4>متن سوال؟</h4></header>
+
+                        <div class="contents">
+                            <p>لورم ایپسوم متنی است که ساختگی برای لورم ایپسوم متنی است که ساختگی برای طراحی و چاپ آن مورد است. لورم ایپسوم متنی است که ساختگی برای لورم ایپسوم متنی است که ساختگی برای طراحی و چاپ آن مورد است.</p>
+                        </div>
+
+                    </section><!-- // panel -->
+
+                </div>*@
+
+                @Html.MessageBox(null, "<p>در صورت وجود هرگونه سوال می توانید با ما از طریق صفحه تماس با ما و یا شماره تلفن " +
+                                       "<code><a href='tel:" + Model.ContactTelNo + "' title='تلفن تماس: " + Model.ContactTelTitle + "'><strong>" + Model.ContactTelTitle + "</strong></a></code>" +
+                                       " ارتباط برقرار نمایید.</p>", null, MessageBoxType.Info, MessageBoxMode.Expanded, false)
+
+            </section>
+
+        </div>
+    </div>
+
+    <div class="joinus-calltoaction two-column two-one animate">
+        <div class="container">
+
+            <section>
+                <h2>شروع کنید!</h2>
+            </section>
+
+            <section>
+                <p>همین حالا شروع کنید.</p>
+                <a class="button default external" title="انتخاب گروه مشاوره" href="@(Url.Route<ICategoriesListRoute>().Get())">انتخاب گروه مشاوره</a>
+            </section>
+
+        </div>
+    </div>
+}
